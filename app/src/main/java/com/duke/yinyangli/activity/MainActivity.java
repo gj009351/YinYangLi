@@ -26,9 +26,12 @@ import com.duke.yinyangli.base.BaseActivity;
 import com.duke.yinyangli.calendar.Lunar;
 import com.duke.yinyangli.constants.Constants;
 import com.duke.yinyangli.dialog.DialogUtils;
+import com.duke.yinyangli.utils.AdmobUtils;
 import com.duke.yinyangli.utils.DisplayUtils;
 import com.duke.yinyangli.utils.LogUtils;
 import com.duke.yinyangli.view.FloatViewBall;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.haibin.calendarview.group.GroupItemDecoration;
 import com.haibin.calendarview.library.Article;
 import com.haibin.calendarview.library.Calendar;
@@ -84,6 +87,7 @@ public class MainActivity extends BaseActivity implements
     private MainInfoAdapter mAdapter;
     private ListPopupWindow mSettingWindow;
     private HomeSettingAdapter mSettingAdapter;
+    private AdView mAdView;
 
     public static void show(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
@@ -136,6 +140,12 @@ public class MainActivity extends BaseActivity implements
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.addItemDecoration(new GroupItemDecoration<String, Article>());
         mRecyclerView.setAdapter(mAdapter = new MainInfoAdapter(this));
+
+        mAdView = findViewById(R.id.adView);
+        if (AdmobUtils.isInit()) {
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
+        }
     }
 
     private void requiresPermissions() {
