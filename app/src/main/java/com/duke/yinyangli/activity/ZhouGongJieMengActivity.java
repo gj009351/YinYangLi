@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.view.View;
 
 import com.duke.yinyangli.R;
-import com.duke.yinyangli.adapter.AllResultAdapter;
-import com.duke.yinyangli.adapter.ChooseAdapter;
 import com.duke.yinyangli.adapter.ChooseMeng1Adapter;
 import com.duke.yinyangli.base.BaseActivity;
 import com.duke.yinyangli.constants.Constants;

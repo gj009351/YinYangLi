@@ -27,7 +27,8 @@ public class BaseEvent {
         return bundle;
     }
 
-    public void setBundle(Bundle bundle) {
+    public BaseEvent setBundle(Bundle bundle) {
         this.bundle = bundle;
+        return this;
     }
 }
