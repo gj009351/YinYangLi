@@ -22,9 +22,12 @@ import com.duke.yinyangli.constants.Constants;
 import com.duke.yinyangli.constants.Event;
 import com.duke.yinyangli.dialog.DialogUtils;
 import com.duke.yinyangli.dialog.SimpleDialog;
+import com.duke.yinyangli.utils.AdmobUtils;
 import com.duke.yinyangli.utils.AppUtils;
 import com.duke.yinyangli.utils.JsonUtils;
 import com.duke.yinyangli.utils.LogUtils;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.gyf.immersionbar.ImmersionBar;
 import com.haibin.calendarview.library.Article;
 import com.tencent.mmkv.MMKV;
@@ -49,6 +52,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private SimpleDialog mDialog;
     private Dialog progressDialog;
     private Solar mSolar;
+    private AdView mBannerAdView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,6 +83,11 @@ public abstract class BaseActivity extends AppCompatActivity {
                     onBackPressed();
                 }
             });
+        }
+        mBannerAdView = findViewById(R.id.adView);
+        if (mBannerAdView != null && AdmobUtils.isInit()) {
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mBannerAdView.loadAd(adRequest);
         }
     }
 

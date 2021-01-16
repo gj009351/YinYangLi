@@ -1,5 +1,6 @@
 package com.duke.yinyangli.utils;
 
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +12,8 @@ import android.widget.Toast;
 import java.util.List;
 
 public class AppUtils {
+
+    private static long mExitTime;
 
     /**
      * 获取版本名称
@@ -104,6 +107,23 @@ public class AppUtils {
             context.startActivity(Intent.createChooser(intent, "请选择浏览器"));
         } else {
             Toast.makeText(context.getApplicationContext(), "请下载浏览器", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void exitApp(Activity activity) {
+        if ((System.currentTimeMillis() - mExitTime) > 2000) {
+            ToastUtil.show(activity, "再点一次，返回桌面");
+            mExitTime = System.currentTimeMillis();
+        } else {
+            // 直接关闭当前活动页面
+//            AppManager.getInstance().AppExit();
+            //方法1退回到桌面进入后台
+//            moveTaskToBack(false);
+            //方法2退回到桌面进入后台
+            Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+            homeIntent.addCategory(Intent.CATEGORY_HOME);
+            homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            activity.startActivity(homeIntent);
         }
     }
 

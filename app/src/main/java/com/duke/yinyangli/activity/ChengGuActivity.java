@@ -1,33 +1,27 @@
 package com.duke.yinyangli.activity;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
-import com.bigkoo.pickerview.view.TimePickerView;
 import com.duke.yinyangli.R;
 import com.duke.yinyangli.adapter.AllResultAdapter;
 import com.duke.yinyangli.base.BaseActivity;
-import com.duke.yinyangli.bean.ChengGuItem;
 import com.duke.yinyangli.constants.Constants;
 import com.duke.yinyangli.dialog.DialogUtils;
 import com.duke.yinyangli.dialog.SimpleDialog;
-import com.duke.yinyangli.interfaces.OnLoadListener;
 import com.duke.yinyangli.utils.core.ChengguUtils;
-import com.duke.yinyangli.view.spiderview.SpiderWebView;
 import com.haibin.calendarview.library.Article;
 
 import java.util.Calendar;
 import java.util.Date;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class ChengGuActivity extends BaseActivity {
 

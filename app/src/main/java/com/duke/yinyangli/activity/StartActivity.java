@@ -1,6 +1,5 @@
 package com.duke.yinyangli.activity;
 
-import android.content.Intent;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
@@ -40,6 +39,10 @@ public class StartActivity extends BaseActivity {
     @Override
     public void initView() {
         super.initView();
+        if (!isTaskRoot()) {
+            finish();
+            return;
+        }
         mHandler = new MyHandler(this);
         mHandler.postDelayed(new Runnable() {
             @Override
@@ -71,4 +74,5 @@ public class StartActivity extends BaseActivity {
             }
         });
     }
+
 }

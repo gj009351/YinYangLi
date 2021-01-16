@@ -4,9 +4,9 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -17,21 +17,28 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.duke.yinyangli.R;
 import com.duke.yinyangli.adapter.HomeSettingAdapter;
 import com.duke.yinyangli.adapter.MainInfoAdapter;
 import com.duke.yinyangli.base.BaseActivity;
+import com.duke.yinyangli.base.BaseEvent;
 import com.duke.yinyangli.calendar.Lunar;
 import com.duke.yinyangli.constants.Constants;
+import com.duke.yinyangli.constants.Event;
 import com.duke.yinyangli.dialog.DialogUtils;
 import com.duke.yinyangli.utils.AdmobUtils;
+import com.duke.yinyangli.utils.AppUtils;
 import com.duke.yinyangli.utils.DisplayUtils;
 import com.duke.yinyangli.utils.LogUtils;
 import com.duke.yinyangli.view.FloatViewBall;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.LoadAdError;
 import com.haibin.calendarview.group.GroupItemDecoration;
 import com.haibin.calendarview.library.Article;
 import com.haibin.calendarview.library.Calendar;
@@ -45,9 +52,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -87,7 +92,10 @@ public class MainActivity extends BaseActivity implements
     private MainInfoAdapter mAdapter;
     private ListPopupWindow mSettingWindow;
     private HomeSettingAdapter mSettingAdapter;
-    private AdView mAdView;
+
+    private InterstitialAd mInterstitialAd;
+    private boolean mInBack;
+    private boolean mGoToOther;
 
     public static void show(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
@@ -141,10 +149,49 @@ public class MainActivity extends BaseActivity implements
         mRecyclerView.addItemDecoration(new GroupItemDecoration<String, Article>());
         mRecyclerView.setAdapter(mAdapter = new MainInfoAdapter(this));
 
-        mAdView = findViewById(R.id.adView);
         if (AdmobUtils.isInit()) {
-            AdRequest adRequest = new AdRequest.Builder().build();
-            mAdView.loadAd(adRequest);
+            mInterstitialAd = new InterstitialAd(this);
+            mInterstitialAd.setAdUnitId(getResources().getString(R.string.admob_interstitial_test_unit_id));
+            mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            mInterstitialAd.setAdListener(new AdListener() {
+                @Override
+                public void onAdClosed() {
+                    if (AdmobUtils.isInit()) {
+                        // Load the next interstitial.
+                        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                    }
+                }
+
+                @Override
+                public void onAdFailedToLoad(LoadAdError loadAdError) {
+                    super.onAdFailedToLoad(loadAdError);
+                    if (AdmobUtils.isInit()) {
+                        // Load the next interstitial.
+                        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                    }
+                }
+
+            });
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mInBack && AdmobUtils.isInit() && mInterstitialAd != null && mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        }
+        mInBack = false;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mGoToOther) {
+            mInBack = false;
+            mGoToOther = false;
+        } else {
+            mInBack = true;
         }
     }
 
@@ -236,15 +283,12 @@ public class MainActivity extends BaseActivity implements
     @Override
     @OnClick({R.id.fab, R.id.action_settings})
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.fab:
-                ChooseActivity.start(this);
-                break;
-            case R.id.action_settings:
-                showSettingWindow(view);
-                break;
-            default:
-                break;
+        int id = view.getId();
+        if (id == R.id.fab) {
+            ChooseActivity.start(this);
+            mGoToOther = true;
+        } else if (id == R.id.action_settings) {
+            showSettingWindow(view);
         }
     }
 
@@ -310,6 +354,7 @@ public class MainActivity extends BaseActivity implements
                     showSelectDatePicker();
                 } else if (getResources().getString(R.string.setting).equals(text)) {
                     SettingActivity.start(MainActivity.this);
+                    mGoToOther = true;
                 }
             }
         });
@@ -328,10 +373,12 @@ public class MainActivity extends BaseActivity implements
         });
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode != KeyEvent.KEYCODE_BACK && keyCode != KeyEvent.KEYCODE_HOME) {
+            return super.onKeyDown(keyCode, event);
+        }
+        mInBack = true;
+        moveTaskToBack(true);
+        return true;
     }
 }

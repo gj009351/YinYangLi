@@ -2,15 +2,15 @@ package com.duke.yinyangli.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.duke.yinyangli.R;
 import com.duke.yinyangli.adapter.ChooseAdapter;
 import com.duke.yinyangli.base.BaseActivity;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 public class ChooseActivity extends BaseActivity {
