@@ -15,8 +15,6 @@ public class Article implements Serializable {
     private String imgUrl;
     private String desc;
     private String date;
-    private int count;
-    private float price;
     private int type;
     private int imgRes;
     private int logoRes;
@@ -163,21 +161,4 @@ public class Article implements Serializable {
         this.logoRes = logoRes;
     }
 
-    public int getCount() {
-        return count;
-    }
-
-    public Article setCount(int count) {
-        this.count = count;
-        return this;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public Article setPrice(float price) {
-        this.price = price;
-        return this;
-    }
 }

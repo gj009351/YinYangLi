@@ -24,6 +24,7 @@ import com.duke.yinyangli.calendar.Solar;
 import com.duke.yinyangli.calendar.util.LunarUtil;
 import com.duke.yinyangli.constants.Constants;
 import com.duke.yinyangli.constants.Event;
+import com.duke.yinyangli.utils.ChooseCostUtils;
 import com.duke.yinyangli.utils.StringUtils;
 import com.duke.yinyangli.utils.ToastUtil;
 import com.haibin.calendarview.library.Article;
@@ -51,25 +52,25 @@ public class ChooseAdapter extends RecyclerView.Adapter<ChooseAdapter.ViewHolder
 
     private void loadRes() {
         mData.add(Article.create("蓍草占卜", "", R.mipmap.zhanbushicao, R.mipmap.cao_black)
-                .setType(Constants.TYPE.TYPE_CAO).setCount(10).setPrice(1));
+                .setType(Constants.TYPE.TYPE_CAO));
         mData.add(Article.create("掷钱占卜", "", R.mipmap.qian, R.mipmap.qian_black)
-                .setType(Constants.TYPE.TYPE_QIAN).setCount(10).setPrice(1));
+                .setType(Constants.TYPE.TYPE_QIAN));
         mData.add(Article.create("称骨算命", "", R.mipmap.chenggu, R.mipmap.chenggu_black)
-                .setType(Constants.TYPE.TYPE_CHENGGU).setCount(10).setPrice(1));
+                .setType(Constants.TYPE.TYPE_CHENGGU));
         mData.add(Article.create("生辰八字", "", R.mipmap.bazipan, R.mipmap.bazi)
-                .setType(Constants.TYPE.TYPE_BAZI).setCount(3).setPrice(1f));
+                .setType(Constants.TYPE.TYPE_BAZI));
         mData.add(Article.create("姓名打分", "", R.mipmap.dafen, R.mipmap.dafen)
-                .setType(Constants.TYPE.TYPE_XINGMING).setCount(10).setPrice(1));
+                .setType(Constants.TYPE.TYPE_XINGMING));
         mData.add(Article.create("星座命运", "", R.mipmap.xingzuoyunshi, R.mipmap.xingzuoyunshi)
-                .setType(Constants.TYPE.TYPE_XINGZUOMINGYUN).setCount(3).setPrice(1));
+                .setType(Constants.TYPE.TYPE_XINGZUOMINGYUN));
         mData.add(Article.create("星座配对", "", R.mipmap.xingzuopeidui, R.mipmap.xingzuopeidui)
-                .setType(Constants.TYPE.TYPE_XINGZUOPEIDUI).setCount(10).setPrice(1));
+                .setType(Constants.TYPE.TYPE_XINGZUOPEIDUI));
         mData.add(Article.create("生肖配对", "", R.mipmap.shengxiaopeidui, R.mipmap.shengxiaopeidui)
-                .setType(Constants.TYPE.TYPE_SHENGXIAOPEIDUI).setCount(10).setPrice(1));
+                .setType(Constants.TYPE.TYPE_SHENGXIAOPEIDUI));
         mData.add(Article.create("诸葛神算", "", R.mipmap.zhugeshensuan, R.mipmap.zhugeshensuan)
-                .setType(Constants.TYPE.TYPE_ZHUGESHENSUAN).setCount(10).setPrice(1));
+                .setType(Constants.TYPE.TYPE_ZHUGESHENSUAN));
         mData.add(Article.create("周公解梦", "", R.mipmap.zhougongjiemeng, R.mipmap.zhougongjiemeng)
-                .setType(Constants.TYPE.TYPE_ZHOUGONGJIEMENG).setCount(10).setPrice(1));
+                .setType(Constants.TYPE.TYPE_ZHOUGONGJIEMENG));
         notifyDataSetChanged();
     }
 
@@ -85,65 +86,62 @@ public class ChooseAdapter extends RecyclerView.Adapter<ChooseAdapter.ViewHolder
         holder.imageView.setImageResource(article.getLogoRes());
         holder.titleView.setText(article.getTitle());
 //        holder.descView.setText("（限时免费）");
-        StringUtils.setTextTwoLast(mContext, holder.descView
-                , article.getCount() > 0 ? "（每天限免" + article.getCount() + "次，每次" : "（每次"
-                , Float.toString(article.getPrice()), "元）", R.color.red_D81B60);
+        if (ChooseCostUtils.getInstance().isVIP()) {
+            holder.descView.setText("免费");
+        } else {
+            int count = ChooseCostUtils.getInstance().getTodayCount(article);
+            if (count > 0) {
+                StringUtils.setTextTwoLast(mContext, holder.descView
+                        , "（今日剩余免费次数：", Integer.toString(count), "次）", R.color.red_D81B60);
+            }
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TimeCount timeCount = MMKV.defaultMMKV()
-                        .decodeParcelable(Constants.SP_KEY.CHOOSE_TYPE + article.getType()
-                                , TimeCount.class);
-                if (timeCount != null && timeCount.getYear() == mSolar.getYear()
-                        && timeCount.getMonth() == mSolar.getMonth()
-                        && timeCount.getDay() == mSolar.getDay()
-                        && timeCount.getCount() >= article.getCount()) {
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable(Constants.INTENT_KEY.KEY_MODEL, article);
-                    EventBus.getDefault().post(new BaseEvent(Event.CODE_PAY_OR_AD).setBundle(bundle));
-                    return;
-                }
-                switch (article.getType()) {
-                    case Constants.TYPE.TYPE_CAO:
-                    case Constants.TYPE.TYPE_QIAN:
-                        //占卜结果
-                        GuaResultActivity.start(mContext, article);
-                        break;
-                    case Constants.TYPE.TYPE_CHENGGU:
-                        //称骨算命
-                        ChengGuActivity.start(mContext, article);
-                        break;
-                    case Constants.TYPE.TYPE_BAZI:
-                        //八字算命
-                        BaZiResultActivity.start(mContext, article);
-                        break;
-                    case Constants.TYPE.TYPE_XINGMING:
-                        //姓名打分
-                        XingMingDaFenActivity.start(mContext, article);
-                        break;
-                    case Constants.TYPE.TYPE_XINGZUOMINGYUN:
-                        //星座命运
-                        XingZuoMingYunActivity.start(mContext, article);
-                        break;
-                    case Constants.TYPE.TYPE_XINGZUOPEIDUI:
-                        //星座配对
-                        XingZuoPeiDuiActivity.start(mContext, article);
-                        break;
-                    case Constants.TYPE.TYPE_SHENGXIAOPEIDUI:
-                        //生肖配对
-                        ShengXiaoPeiDuiActivity.start(mContext, article);
-                        break;
-                    case Constants.TYPE.TYPE_ZHUGESHENSUAN:
-                        //诸葛神算
-                        ZhuGeShenSuanActivity.start(mContext, article);
-                        break;
-                    case Constants.TYPE.TYPE_ZHOUGONGJIEMENG:
-                        //周公解梦
-                        ZhouGongJieMengActivity.start(mContext, article);
-                        break;
-                    default:
-                        ToastUtil.show(mContext, R.string.wait_open);
-                        break;
+                if (ChooseCostUtils.getInstance().isVIP()
+                        || ChooseCostUtils.getInstance().getTodayCount(article) > 0) {
+                    switch (article.getType()) {
+                        case Constants.TYPE.TYPE_CAO:
+                        case Constants.TYPE.TYPE_QIAN:
+                            //占卜结果
+                            GuaResultActivity.start(mContext, article);
+                            break;
+                        case Constants.TYPE.TYPE_CHENGGU:
+                            //称骨算命
+                            ChengGuActivity.start(mContext, article);
+                            break;
+                        case Constants.TYPE.TYPE_BAZI:
+                            //八字算命
+                            BaZiResultActivity.start(mContext, article);
+                            break;
+                        case Constants.TYPE.TYPE_XINGMING:
+                            //姓名打分
+                            XingMingDaFenActivity.start(mContext, article);
+                            break;
+                        case Constants.TYPE.TYPE_XINGZUOMINGYUN:
+                            //星座命运
+                            XingZuoMingYunActivity.start(mContext, article);
+                            break;
+                        case Constants.TYPE.TYPE_XINGZUOPEIDUI:
+                            //星座配对
+                            XingZuoPeiDuiActivity.start(mContext, article);
+                            break;
+                        case Constants.TYPE.TYPE_SHENGXIAOPEIDUI:
+                            //生肖配对
+                            ShengXiaoPeiDuiActivity.start(mContext, article);
+                            break;
+                        case Constants.TYPE.TYPE_ZHUGESHENSUAN:
+                            //诸葛神算
+                            ZhuGeShenSuanActivity.start(mContext, article);
+                            break;
+                        case Constants.TYPE.TYPE_ZHOUGONGJIEMENG:
+                            //周公解梦
+                            ZhouGongJieMengActivity.start(mContext, article);
+                            break;
+                        default:
+                            ToastUtil.show(mContext, R.string.wait_open);
+                            break;
+                    }
                 }
 
             }
@@ -155,7 +153,7 @@ public class ChooseAdapter extends RecyclerView.Adapter<ChooseAdapter.ViewHolder
         return mData.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{
 
         private TextView titleView;
         private TextView descView;

@@ -16,6 +16,7 @@ public class Constants {
         String MAIN_RIGHT = "MAIN_RIGHT";
         String MAIN_BOTTOM = "MAIN_BOTTOM";
         String CHOOSE_TYPE = "CHOOSE_TYPE";
+        String VIP = "VIP";
     }
 
     public interface TYPE {

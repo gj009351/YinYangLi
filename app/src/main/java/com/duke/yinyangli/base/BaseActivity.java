@@ -24,6 +24,7 @@ import com.duke.yinyangli.dialog.DialogUtils;
 import com.duke.yinyangli.dialog.SimpleDialog;
 import com.duke.yinyangli.utils.AdmobUtils;
 import com.duke.yinyangli.utils.AppUtils;
+import com.duke.yinyangli.utils.ChooseCostUtils;
 import com.duke.yinyangli.utils.JsonUtils;
 import com.duke.yinyangli.utils.LogUtils;
 import com.google.android.gms.ads.AdRequest;
@@ -186,20 +187,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param article
      */
     public void addTestCount(Article article) {
-        TimeCount timeCount = MMKV.defaultMMKV()
-                .decodeParcelable(Constants.SP_KEY.CHOOSE_TYPE + article.getType()
-                        , TimeCount.class);
-        if (timeCount != null && timeCount.getYear() == mSolar.getYear()
-                && timeCount.getMonth() == mSolar.getMonth()
-                && timeCount.getDay() == mSolar.getDay()) {
-            //同一天
-            if (timeCount.getCount() < article.getCount()) {
-                timeCount.setCount(timeCount.getCount() + 1);
-            }
-        } else {
-            timeCount = new TimeCount(mSolar.getYear(), mSolar.getMonth(), mSolar.getDay(), 1);
-        }
-        MMKV.defaultMMKV().encode(Constants.SP_KEY.CHOOSE_TYPE + article.getType(), timeCount);
+        ChooseCostUtils.getInstance().addCount(article);
     }
 
 
