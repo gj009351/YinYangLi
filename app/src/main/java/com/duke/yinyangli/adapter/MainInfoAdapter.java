@@ -92,6 +92,7 @@ public class MainInfoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         } else if (viewType == TYPE_BOTTOM_EMPTY_FOOTER) {
             return new FooterViewHolder(mInflater.inflate(R.layout.item_footer_view, parent, false));
         } else {
+            //TYPE_CURRENT_TIME
             return new CurrentTimeHolder(mInflater.inflate(R.layout.item_current_time, parent, false));
         }
     }
