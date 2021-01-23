@@ -11,7 +11,9 @@ import com.duke.yinyangli.base.BaseViewHolder;
 import com.duke.yinyangli.base.FooterViewHolder;
 import com.duke.yinyangli.bean.MainInfoModel;
 import com.duke.yinyangli.calendar.Lunar;
+import com.duke.yinyangli.constants.Constants;
 import com.haibin.calendarview.library.Article;
+import com.tencent.mmkv.MMKV;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +54,10 @@ public class MainInfoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     public void setLunar(Lunar lunar) {
         mLunar = lunar;
+        resetData();
+    }
+
+    public void resetData() {
         if (mData == null) {
             mData = new ArrayList<>();
         } else {
@@ -59,11 +65,21 @@ public class MainInfoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         }
         mData.add(new MainInfoModel(KEY_CURRENT_TIME, new ArrayList<>()));
         mData.add(new MainInfoModel(KEY_OTHER_DAY_INFO, new ArrayList<>()));
-        mData.add(new MainInfoModel("今日宜忌", create(0)));
-        mData.add(new MainInfoModel("时辰宜忌", create(1)));
-        mData.add(new MainInfoModel("吉神凶煞", create(2)));
-        mData.add(new MainInfoModel("星宿吉凶", create(3)));
-        mData.add(new MainInfoModel("彭祖百忌", create(4)));
+        if (MMKV.defaultMMKV().decodeBool(Constants.SP_KEY.MAIN_SHOW_JRYJ, true)) {
+            mData.add(new MainInfoModel("今日宜忌", create(0)));
+        }
+        if (MMKV.defaultMMKV().decodeBool(Constants.SP_KEY.MAIN_SHOW_SCYJ, true)) {
+            mData.add(new MainInfoModel("时辰宜忌", create(1)));
+        }
+        if (MMKV.defaultMMKV().decodeBool(Constants.SP_KEY.MAIN_SHOW_JSXS, true)) {
+            mData.add(new MainInfoModel("吉神凶煞", create(2)));
+        }
+        if (MMKV.defaultMMKV().decodeBool(Constants.SP_KEY.MAIN_SHOW_XXJX, true)) {
+            mData.add(new MainInfoModel("星宿吉凶", create(3)));
+        }
+        if (MMKV.defaultMMKV().decodeBool(Constants.SP_KEY.MAIN_SHOW_PZBJ, true)) {
+            mData.add(new MainInfoModel("彭祖百忌", create(4)));
+        }
         mData.add(new MainInfoModel(KEY_BOTTOM_EMPTY_FOOTER, new ArrayList<>()));
         notifyDataSetChanged();
     }

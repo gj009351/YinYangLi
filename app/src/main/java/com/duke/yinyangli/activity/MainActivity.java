@@ -381,4 +381,14 @@ public class MainActivity extends BaseActivity implements
         moveTaskToBack(true);
         return true;
     }
+
+    @Override
+    public void onReceiveEvent(BaseEvent event) {
+        if (event.getCode() == Event.CODE_CHANGE_SETTING_MAIN) {
+            mCalendarLayout.expand();
+            mAdapter.resetData();
+        } else {
+            super.onReceiveEvent(event);
+        }
+    }
 }

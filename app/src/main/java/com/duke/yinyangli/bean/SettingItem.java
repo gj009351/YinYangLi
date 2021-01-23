@@ -1,25 +1,25 @@
 package com.duke.yinyangli.bean;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
+import com.tencent.mmkv.MMKV;
 
 public class SettingItem implements MultiItemEntity{
 
     private int type;
     private String id;
     private String text;
-    private String value;
+    private boolean value;
 
-    public SettingItem(int type, String id, String text, String value) {
+    public SettingItem(int type, String id, String text, boolean value) {
         this.type = type;
         this.id = id;
         this.text = text;
-        this.value = value;
+        this.value = MMKV.defaultMMKV().decodeBool(id, value);
     }
 
-    public SettingItem(int type, String text, String value) {
+    public SettingItem(int type, String text) {
         this.type = type;
         this.text = text;
-        this.value = value;
     }
 
     public int getType() {
@@ -38,11 +38,11 @@ public class SettingItem implements MultiItemEntity{
         this.text = text;
     }
 
-    public String getValue() {
+    public boolean getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(boolean value) {
         this.value = value;
     }
 

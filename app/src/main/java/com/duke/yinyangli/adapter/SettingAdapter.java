@@ -1,12 +1,19 @@
 package com.duke.yinyangli.adapter;
 
+import android.text.TextUtils;
+import android.view.View;
+
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.duke.yinyangli.R;
+import com.duke.yinyangli.base.BaseEvent;
 import com.duke.yinyangli.bean.SettingItem;
 import com.duke.yinyangli.constants.Constants;
+import com.duke.yinyangli.constants.Event;
 import com.suke.widget.SwitchButton;
+import com.tencent.mmkv.MMKV;
 
+import org.greenrobot.eventbus.EventBus;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -26,21 +33,22 @@ public class SettingAdapter extends BaseMultiItemQuickAdapter<SettingItem, BaseV
 
     public void loadSetting() {
         List<SettingItem> list = new ArrayList<>();
-        list.add(new SettingItem(ITEM_TYPE_TITLE, "首页", null));
-        list.add(new SettingItem(ITEM_TYPE_TOGGLE, "今日宜忌", "1"));
-        list.add(new SettingItem(ITEM_TYPE_TOGGLE, "时辰宜忌", "1"));
-        list.add(new SettingItem(ITEM_TYPE_TOGGLE, "吉神凶煞", "1"));
-        list.add(new SettingItem(ITEM_TYPE_TOGGLE, "星宿吉凶", "1"));
-        list.add(new SettingItem(ITEM_TYPE_TOGGLE, "彭祖百忌", "1"));
-        list.add(new SettingItem(ITEM_TYPE_TITLE, "广告", null));
-        list.add(new SettingItem(ITEM_TYPE_NORMAL, Constants.SP_KEY.VIP, "获得永久版（去广告）", "0"));
-        list.add(new SettingItem(ITEM_TYPE_TITLE, "桌面插件", null));
-        list.add(new SettingItem(ITEM_TYPE_TOGGLE, "当前时辰", "1"));
-        list.add(new SettingItem(ITEM_TYPE_TOGGLE, "今日宜忌", "1"));
-        list.add(new SettingItem(ITEM_TYPE_TOGGLE, "时辰宜忌", "1"));
-        list.add(new SettingItem(ITEM_TYPE_TOGGLE, "吉神凶煞", "1"));
-        list.add(new SettingItem(ITEM_TYPE_TOGGLE, "星宿吉凶", "1"));
-        list.add(new SettingItem(ITEM_TYPE_TOGGLE, "彭祖百忌", "1"));
+        list.add(new SettingItem(ITEM_TYPE_TITLE, "首页"));
+        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_JRYJ, "今日宜忌", true));
+        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_SCYJ, "时辰宜忌", true));
+        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_JSXS, "吉神凶煞", true));
+        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_XXJX, "星宿吉凶", true));
+        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_PZBJ, "彭祖百忌", true));
+        list.add(new SettingItem(ITEM_TYPE_TITLE, "广告"));
+        list.add(new SettingItem(ITEM_TYPE_NORMAL, Constants.SP_KEY.VIP, "获得永久版（去广告）", false));
+        list.add(new SettingItem(ITEM_TYPE_TITLE, "桌面插件"));
+        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_TIME, "当前时辰", true));
+        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_JRYJ, "今日宜忌", true));
+        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_SCYJ, "时辰宜忌", true));
+        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_JSXS, "吉神凶煞", true));
+        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_XXJX, "星宿吉凶", true));
+        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_PZBJ, "彭祖百忌", true));
+        list.add(new SettingItem(ITEM_TYPE_TOGGLE, "", "   ", false));
         setNewInstance(list);
     }
 
@@ -58,7 +66,7 @@ public class SettingAdapter extends BaseMultiItemQuickAdapter<SettingItem, BaseV
             case ITEM_TYPE_NORMAL:
                 holder.setText(R.id.key, settingItem.getText());
                 if (Constants.SP_KEY.VIP.equals(settingItem.getId())) {
-                    if ("1".equals(settingItem.getValue())) {
+                    if (settingItem.getValue()) {
                         holder.setText(R.id.value, "永久VIP");
                         holder.setGone(R.id.arrow, true);
                     } else {
@@ -70,7 +78,19 @@ public class SettingAdapter extends BaseMultiItemQuickAdapter<SettingItem, BaseV
             case ITEM_TYPE_TOGGLE:
                 holder.setText(R.id.key, settingItem.getText());
                 SwitchButton toggle = holder.getView(R.id.toggle);
-                toggle.setChecked("1".equals(settingItem.getValue()));
+                if (!TextUtils.isEmpty(settingItem.getId())) {
+                    toggle.setVisibility(View.VISIBLE);
+                    toggle.setChecked(settingItem.getValue());
+                    toggle.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+                            MMKV.defaultMMKV().encode(settingItem.getId(), isChecked);
+                            EventBus.getDefault().post(new BaseEvent(Event.CODE_CHANGE_SETTING_MAIN));
+                        }
+                    });
+                } else {
+                    toggle.setVisibility(View.GONE);
+                }
                 break;
         }
     }

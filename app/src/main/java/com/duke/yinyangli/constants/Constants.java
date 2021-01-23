@@ -16,7 +16,22 @@ public class Constants {
         String MAIN_RIGHT = "MAIN_RIGHT";
         String MAIN_BOTTOM = "MAIN_BOTTOM";
         String CHOOSE_TYPE = "CHOOSE_TYPE";
+
+        String MAIN_SHOW_JRYJ = "MAIN_SHOW_JRYJ";
+        String MAIN_SHOW_SCYJ = "MAIN_SHOW_SCYJ";
+        String MAIN_SHOW_JSXS = "MAIN_SHOW_JSXS";
+        String MAIN_SHOW_XXJX = "MAIN_SHOW_XXJX";
+        String MAIN_SHOW_PZBJ = "MAIN_SHOW_PZBJ";
+
         String VIP = "VIP";
+
+        String WIDGET_SHOW_TIME = "WIDGET_SHOW_TIME";
+        String WIDGET_SHOW_JRYJ = "WIDGET_SHOW_JRYJ";
+        String WIDGET_SHOW_SCYJ = "WIDGET_SHOW_SCYJ";
+        String WIDGET_SHOW_JSXS = "WIDGET_SHOW_JSXS";
+        String WIDGET_SHOW_XXJX = "WIDGET_SHOW_XXJX";
+        String WIDGET_SHOW_PZBJ = "WIDGET_SHOW_PZBJ";
+
     }
 
     public interface TYPE {
