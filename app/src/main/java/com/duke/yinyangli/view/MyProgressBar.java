@@ -1,6 +1,7 @@
 package com.duke.yinyangli.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -21,18 +22,27 @@ public class MyProgressBar extends AppCompatImageView {
     private Drawable defaultDrawable = null;
     private int width = 0;
     private int height = 0;
+    private int mDegree;
+    private int mDuration;
 
     public MyProgressBar(Context context) {
         super(context);
-        init();
+        init(context, null);
     }
 
     public MyProgressBar(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(context, attrs);
     }
 
-    private void init() {
+    private void init(Context context, AttributeSet attrs) {
+        if (attrs != null) {
+            TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.progressBar);
+            defaultDrawable = ta.getDrawable(R.styleable.progressBar_bar_src);
+            mDegree = ta.getInteger(R.styleable.progressBar_bar_degree, 360);
+            mDuration = ta.getInteger(R.styleable.progressBar_bar_duration, 2000);
+            ta.recycle();
+        }
         paint = new Paint();
         paint.setAntiAlias(true);
         this.setFocusable(true);
@@ -42,9 +52,11 @@ public class MyProgressBar extends AppCompatImageView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.drawColor(Color.TRANSPARENT);
-        defaultDrawable = this.getBackground();
         if (defaultDrawable == null) {
-            defaultDrawable = getResources().getDrawable(R.mipmap.ic_launcher);
+            defaultDrawable = this.getBackground();
+            if (defaultDrawable == null) {
+                defaultDrawable = getResources().getDrawable(R.mipmap.ic_launcher);
+            }
         }
         if (width == 0) {
             width = this.getWidth();
@@ -58,9 +70,9 @@ public class MyProgressBar extends AppCompatImageView {
 
     public void show() {
         this.setVisibility(View.VISIBLE);
-        mRotateAnimation = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        mRotateAnimation = new RotateAnimation(0, mDegree * 1000, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
 
-        mRotateAnimation.setDuration(2000);
+        mRotateAnimation.setDuration(mDuration * 1000);
         mRotateAnimation.setInterpolator(new LinearInterpolator());
         mRotateAnimation.setFillAfter(true);
         startAnimation(mRotateAnimation);

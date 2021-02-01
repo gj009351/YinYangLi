@@ -10,9 +10,9 @@ import com.duke.yinyangli.view.MyProgressBar;
 
 public class LoadingDialog extends Dialog {
 
-    private MyProgressBar myProgressBar;
-
     private Context mContext;
+    private MyProgressBar myProgressBar;
+    private MyProgressBar myProgressBackground;
 
     public LoadingDialog(Context context) {
         super(context);
@@ -29,12 +29,14 @@ public class LoadingDialog extends Dialog {
     private void init(Context context) {
         setContentView(R.layout.comm_progress_layout);
         myProgressBar = (MyProgressBar) findViewById(R.id.progress);
+        myProgressBackground = (MyProgressBar) findViewById(R.id.progress_background);
     }
 
     @Override
     public void show() {
         if (!((Activity) mContext).isFinishing()) {
             myProgressBar.show();
+            myProgressBackground.show();
             super.show();
         }
     }
@@ -43,11 +45,13 @@ public class LoadingDialog extends Dialog {
     protected void onStop() {
         super.onStop();
         myProgressBar.stop();
+        myProgressBackground.stop();
     }
 
     @Override
     public void dismiss() {
         myProgressBar.stop();
+        myProgressBackground.stop();
         super.dismiss();
     }
 }

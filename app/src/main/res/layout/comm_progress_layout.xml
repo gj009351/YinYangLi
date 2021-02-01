@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
-    android:minWidth="90dp"
-    android:orientation="vertical"
-    android:paddingStart="10dp"
-    android:paddingEnd="10dp">
+    android:minWidth="@dimen/default_progress_bar_height"
+    android:orientation="vertical">
 
     <com.duke.yinyangli.view.MyProgressBar
         android:id="@+id/progress"
         android:layout_width="@dimen/default_progress_bar_width"
-        android:layout_height="@dimen/default_progress_bar_height" />
+        android:layout_height="@dimen/default_progress_bar_height"
+        app:bar_degree="360"
+        app:bar_duration="1000"
+        android:layout_centerInParent="true"
+        app:bar_src="@mipmap/ic_launcher"/>
 
-</LinearLayout>
+    <com.duke.yinyangli.view.MyProgressBar
+        android:id="@+id/progress_background"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        app:bar_degree="360"
+        app:bar_duration="8000"
+        app:bar_src="@mipmap/loading_background"/>
+
+</RelativeLayout>

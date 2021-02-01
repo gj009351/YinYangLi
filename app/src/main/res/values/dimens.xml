@@ -6,6 +6,6 @@
     <dimen name="guaxiang_width">40dp</dimen>
     <dimen name="guaxiang_height">1dp</dimen>
     <dimen name="guaxiang_width_item">18dp</dimen>
-    <dimen name="default_progress_bar_width">100dp</dimen>
-    <dimen name="default_progress_bar_height">100dp</dimen>
+    <dimen name="default_progress_bar_width">120dp</dimen>
+    <dimen name="default_progress_bar_height">120dp</dimen>
 </resources>
