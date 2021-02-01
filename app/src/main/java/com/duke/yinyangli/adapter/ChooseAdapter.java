@@ -93,6 +93,8 @@ public class ChooseAdapter extends RecyclerView.Adapter<ChooseAdapter.ViewHolder
             if (count > 0) {
                 StringUtils.setTextTwoLast(mContext, holder.descView
                         , "（今日剩余免费次数：", Integer.toString(count), "次）", R.color.red_D81B60);
+            } else {
+                holder.descView.setText("（今日免费次数已用光）");
             }
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -142,6 +144,10 @@ public class ChooseAdapter extends RecyclerView.Adapter<ChooseAdapter.ViewHolder
                             ToastUtil.show(mContext, R.string.wait_open);
                             break;
                     }
+                } else {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(Constants.INTENT_KEY.KEY_MODEL, article);
+                    EventBus.getDefault().post(new BaseEvent(Event.CODE_PAY_OR_AD).setBundle(bundle));
                 }
 
             }

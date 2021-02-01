@@ -53,6 +53,25 @@ public class ChooseCostUtils {
             timeCount = new TimeCount(mSolar.getYear(), mSolar.getMonth(), mSolar.getDay(), 1);
         }
         MMKV.defaultMMKV().encode(Constants.SP_KEY.CHOOSE_TYPE + article.getType(), timeCount);
+        EventBus.getDefault().post(new BaseEvent(Event.CODE_COUNT_CHANGE));
+    }
+
+    public void addPayCount(Article article) {
+        TimeCount timeCount = MMKV.defaultMMKV()
+                .decodeParcelable(Constants.SP_KEY.CHOOSE_TYPE + article.getType()
+                        , TimeCount.class);
+        if (timeCount != null && timeCount.getYear() == mSolar.getYear()
+                && timeCount.getMonth() == mSolar.getMonth()
+                && timeCount.getDay() == mSolar.getDay()) {
+            //同一天
+            if (timeCount.getCount() < getOriginCostMoney(article)) {
+                timeCount.setCount(timeCount.getCount() - 1);
+            }
+        } else {
+            timeCount = new TimeCount(mSolar.getYear(), mSolar.getMonth(), mSolar.getDay(), 0);
+        }
+        MMKV.defaultMMKV().encode(Constants.SP_KEY.CHOOSE_TYPE + article.getType(), timeCount);
+        EventBus.getDefault().post(new BaseEvent(Event.CODE_COUNT_CHANGE));
     }
 
     public int getTodayCount(Article article) {
@@ -63,9 +82,6 @@ public class ChooseCostUtils {
                 && timeCount.getMonth() == mSolar.getMonth()
                 && timeCount.getDay() == mSolar.getDay()) {
             if (timeCount.getCount() >= getOriginCostMoney(article)) {
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(Constants.INTENT_KEY.KEY_MODEL, article);
-                EventBus.getDefault().post(new BaseEvent(Event.CODE_PAY_OR_AD).setBundle(bundle));
                 return 0;
             } else {
                 return getOriginCostMoney(article) - timeCount.getCount();

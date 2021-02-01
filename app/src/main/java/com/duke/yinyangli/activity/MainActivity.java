@@ -151,7 +151,7 @@ public class MainActivity extends BaseActivity implements
 
         if (AdmobUtils.isInit()) {
             mInterstitialAd = new InterstitialAd(this);
-            mInterstitialAd.setAdUnitId(getResources().getString(R.string.admob_interstitial_test_unit_id));
+            mInterstitialAd.setAdUnitId(getString(R.string.admob_interstitial_unit_id));
             mInterstitialAd.loadAd(new AdRequest.Builder().build());
             mInterstitialAd.setAdListener(new AdListener() {
                 @Override

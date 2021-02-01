@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.duke.yinyangli.BuildConfig;
 import com.duke.yinyangli.R;
+import com.duke.yinyangli.activity.ChooseActivity;
+import com.duke.yinyangli.activity.MainActivity;
 import com.duke.yinyangli.bean.TimeCount;
 import com.duke.yinyangli.bean.VersionResponse;
 import com.duke.yinyangli.calendar.Solar;

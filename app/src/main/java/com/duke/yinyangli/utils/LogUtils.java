@@ -27,7 +27,7 @@ import java.util.Map;
 public class LogUtils {
 
     // 自定义Tag的前缀
-    public static String TAG_PREFIX = "zaixin";
+    public static String TAG_PREFIX = "yinyangli";
     //是否允许打印日志，默认是true，设置为false则不打印
     public static boolean ALLOW_LOG = Config.SHOW_LOG;
     // 是否把保存日志到SD卡中
@@ -35,7 +35,7 @@ public class LogUtils {
 
 
     //SD卡中的根目录
-    public static final String ROOT = Environment.getExternalStorageDirectory().getPath() + "/com.messcat.zaixin/";
+    public static final String ROOT = Environment.getExternalStorageDirectory().getPath() + "/com.duke.yinyangli/";
     private static final String PATH_LOG_INFO = ROOT + "log/";
 
     private LogUtils() {

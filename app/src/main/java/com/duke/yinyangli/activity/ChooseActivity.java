@@ -17,7 +17,10 @@ import com.duke.yinyangli.constants.Constants;
 import com.duke.yinyangli.constants.Event;
 import com.duke.yinyangli.dialog.CenterListDialog;
 import com.duke.yinyangli.utils.AdmobUtils;
+import com.duke.yinyangli.utils.ChooseCostUtils;
+import com.duke.yinyangli.utils.LogUtils;
 import com.duke.yinyangli.utils.ToastUtil;
+import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.rewarded.RewardItem;
@@ -40,27 +43,48 @@ public class ChooseActivity extends BaseActivity {
 
     private int mFailedCount = 0;
     private Article mChooseArticle;
+    private ChooseAdapter mChooseAdapter;
 
     private final RewardedAdLoadCallback mRewardLoadCallback = new RewardedAdLoadCallback() {
         @Override
         public void onRewardedAdLoaded() {
             // Ad successfully loaded.
+            LogUtils.d("chooseactivity:onRewardedAdLoaded");
         }
 
         @Override
         public void onRewardedAdFailedToLoad(LoadAdError adError) {
             // Ad failed to load.
+            LogUtils.d("chooseactivity:onRewardedAdFailedToLoad:" + mFailedCount + ", adError:" + adError);
             mFailedCount ++;
             if (mFailedCount < 3 && mRewardedAd != null && AdmobUtils.isInit()) {
+                mRewardedAd = new RewardedAd(ChooseActivity.this, getString(R.string.admob_reward_unit_id));
                 mRewardedAd.loadAd(new AdRequest.Builder().build(), mRewardLoadCallback);
             }
+        }
+
+        @Override
+        public void onRewardedAdFailedToLoad(int i) {
+            super.onRewardedAdFailedToLoad(i);
+            LogUtils.d("chooseactivity:onRewardedAdFailedToLoad:" + mFailedCount);
         }
     } ;
 
     private final RewardedAdCallback mRewardCallback = new RewardedAdCallback() {
         @Override
         public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
-            ToastUtil.show(ChooseActivity.this, "可测算次数+1 ！");
+            LogUtils.d("chooseactivity:onUserEarnedReward");
+            if (mChooseArticle != null) {
+                ChooseCostUtils.getInstance().addPayCount(mChooseArticle);
+                mChooseArticle = null;
+            }
+//            ToastUtil.show(ChooseActivity.this, "可测算次数+1 ！");
+        }
+
+        @Override
+        public void onRewardedAdFailedToShow(AdError adError) {
+            super.onRewardedAdFailedToShow(adError);
+            LogUtils.d("chooseactivity:onRewardedAdFailedToShow");
         }
     };
 
@@ -81,13 +105,14 @@ public class ChooseActivity extends BaseActivity {
         title.setText(R.string.select);
         right.setVisibility(View.INVISIBLE);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new ChooseAdapter(this));
+        recyclerView.setAdapter(mChooseAdapter = new ChooseAdapter(this));
     }
 
     @Override
     public void initData() {
         super.initData();
-        mRewardedAd = new RewardedAd(this, getString(R.string.admob_reward_test_unit_id));
+        LogUtils.d("chooseactivity:initData");
+        mRewardedAd = new RewardedAd(this, getString(R.string.admob_reward_unit_id));
         mRewardedAd.loadAd(new AdRequest.Builder().build(), mRewardLoadCallback);
     }
 
@@ -118,6 +143,10 @@ public class ChooseActivity extends BaseActivity {
             })
                     .setList(list)
                     .showDialog();
+        } else if (event.getCode() == Event.CODE_COUNT_CHANGE) {
+            if (mChooseAdapter != null) {
+                mChooseAdapter.notifyDataSetChanged();
+            }
         } else {
             super.onReceiveEvent(event);
         }
