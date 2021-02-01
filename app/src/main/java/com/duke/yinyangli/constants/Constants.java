@@ -15,7 +15,6 @@ public class Constants {
         String MAIN_TOP = "MAIN_TOP";
         String MAIN_RIGHT = "MAIN_RIGHT";
         String MAIN_BOTTOM = "MAIN_BOTTOM";
-        String CHOOSE_TYPE = "CHOOSE_TYPE";
 
         String MAIN_SHOW_JRYJ = "MAIN_SHOW_JRYJ";
         String MAIN_SHOW_SCYJ = "MAIN_SHOW_SCYJ";
@@ -24,6 +23,7 @@ public class Constants {
         String MAIN_SHOW_PZBJ = "MAIN_SHOW_PZBJ";
 
         String VIP = "VIP";
+        String COST_COUNT = "COST_COUNT";
 
         String WIDGET_SHOW_TIME = "WIDGET_SHOW_TIME";
         String WIDGET_SHOW_JRYJ = "WIDGET_SHOW_JRYJ";

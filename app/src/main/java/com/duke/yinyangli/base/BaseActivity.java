@@ -189,7 +189,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param article
      */
     public void addTestCount(Article article) {
-        ChooseCostUtils.getInstance().addCount(article);
+        ChooseCostUtils.getInstance().addCount();
     }
 
 

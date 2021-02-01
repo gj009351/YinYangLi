@@ -2,8 +2,8 @@ package com.duke.yinyangli.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,7 +13,6 @@ import com.duke.yinyangli.R;
 import com.duke.yinyangli.adapter.ChooseAdapter;
 import com.duke.yinyangli.base.BaseActivity;
 import com.duke.yinyangli.base.BaseEvent;
-import com.duke.yinyangli.constants.Constants;
 import com.duke.yinyangli.constants.Event;
 import com.duke.yinyangli.dialog.CenterListDialog;
 import com.duke.yinyangli.utils.AdmobUtils;
@@ -27,7 +26,8 @@ import com.google.android.gms.ads.rewarded.RewardItem;
 import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.gms.ads.rewarded.RewardedAdCallback;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
-import com.haibin.calendarview.library.Article;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,57 +38,57 @@ public class ChooseActivity extends BaseActivity {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.tips)
+    TextView tips;
+
     private RewardedAd mRewardedAd;
     private CenterListDialog mPayDialog;
 
     private int mFailedCount = 0;
-    private Article mChooseArticle;
-    private ChooseAdapter mChooseAdapter;
+    private boolean mWillShowReward;
 
     private final RewardedAdLoadCallback mRewardLoadCallback = new RewardedAdLoadCallback() {
         @Override
         public void onRewardedAdLoaded() {
             // Ad successfully loaded.
-            LogUtils.d("chooseactivity:onRewardedAdLoaded");
+            LogUtils.d("onRewardedAdLoaded");
+            if (mWillShowReward) {
+                mRewardedAd.show(ChooseActivity.this, mRewardCallback);
+                mWillShowReward = false;
+                dismissProgressDialog();
+            }
         }
 
         @Override
         public void onRewardedAdFailedToLoad(LoadAdError adError) {
             // Ad failed to load.
-            LogUtils.d("chooseactivity:onRewardedAdFailedToLoad:" + mFailedCount + ", adError:" + adError);
+            LogUtils.d("onRewardedAdFailedToLoad:" + mFailedCount + ", adError:" + adError);
             mFailedCount ++;
             if (mFailedCount < 3 && mRewardedAd != null && AdmobUtils.isInit()) {
-                mRewardedAd = new RewardedAd(ChooseActivity.this, getString(R.string.admob_reward_unit_id));
-                mRewardedAd.loadAd(new AdRequest.Builder().build(), mRewardLoadCallback);
+                loadNewRewardAd();
+            } else {
+                dismissProgressDialog();
             }
         }
 
-        @Override
-        public void onRewardedAdFailedToLoad(int i) {
-            super.onRewardedAdFailedToLoad(i);
-            LogUtils.d("chooseactivity:onRewardedAdFailedToLoad:" + mFailedCount);
-        }
     } ;
 
     private final RewardedAdCallback mRewardCallback = new RewardedAdCallback() {
         @Override
         public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
-            LogUtils.d("chooseactivity:onUserEarnedReward");
-            if (mChooseArticle != null) {
-                ChooseCostUtils.getInstance().addPayCount(mChooseArticle);
-                mChooseArticle = null;
-            }
-//            ToastUtil.show(ChooseActivity.this, "可测算次数+1 ！");
+            LogUtils.d("onUserEarnedReward");
+            ChooseCostUtils.getInstance().addPayCount();
+            ToastUtil.show(ChooseActivity.this, "恭喜可测算次数+1 ！");
+            EventBus.getDefault().post(new BaseEvent(Event.CODE_COUNT_CHANGE));
+            loadNewRewardAd();
         }
 
         @Override
         public void onRewardedAdFailedToShow(AdError adError) {
             super.onRewardedAdFailedToShow(adError);
-            LogUtils.d("chooseactivity:onRewardedAdFailedToShow");
+            LogUtils.d("onRewardedAdFailedToShow");
         }
     };
-
-
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, ChooseActivity.class));
@@ -102,31 +102,30 @@ public class ChooseActivity extends BaseActivity {
     @Override
     public void initView() {
         super.initView();
+        setTips();
         title.setText(R.string.select);
         right.setVisibility(View.INVISIBLE);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        ChooseAdapter mChooseAdapter;
         recyclerView.setAdapter(mChooseAdapter = new ChooseAdapter(this));
     }
 
     @Override
     public void initData() {
         super.initData();
-        LogUtils.d("chooseactivity:initData");
-        mRewardedAd = new RewardedAd(this, getString(R.string.admob_reward_unit_id));
-        mRewardedAd.loadAd(new AdRequest.Builder().build(), mRewardLoadCallback);
+        LogUtils.d("initData");
+        loadNewRewardAd();
     }
 
     @Override
     public void onReceiveEvent(BaseEvent event) {
         if (event.getCode() == Event.CODE_PAY_OR_AD) {
-            Bundle bundle = event.getBundle();
-            mChooseArticle = (Article) bundle.getSerializable(Constants.INTENT_KEY.KEY_MODEL);
             List<String> list = new ArrayList<>();
             list.add("去付费");
             list.add("去看广告");
             list.add("取消");
             mPayDialog = CenterListDialog.init(this, "提示"
-                    , "您今日该项测算服务免费次数已用光，请付费或观看广告增加次数。"
+                    , "您今日剩余免费次数已用光，请付费或观看广告增加次数。"
                     , new CenterListDialog.OnItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
@@ -134,8 +133,13 @@ public class ChooseActivity extends BaseActivity {
                         //付费
                     } else if (position == 1) {
                         //看广告
-                        if (AdmobUtils.isInit() && mRewardedAd != null && mRewardedAd.isLoaded()) {
-                            mRewardedAd.show(ChooseActivity.this, mRewardCallback);
+                        if (AdmobUtils.isInit() && mRewardedAd != null) {
+                            if (mRewardedAd.isLoaded()) {
+                                mRewardedAd.show(ChooseActivity.this, mRewardCallback);
+                            } else {
+                                mWillShowReward = true;
+                                showProgressDialog();
+                            }
                         }
                     }
                     mPayDialog.dismiss();
@@ -144,11 +148,22 @@ public class ChooseActivity extends BaseActivity {
                     .setList(list)
                     .showDialog();
         } else if (event.getCode() == Event.CODE_COUNT_CHANGE) {
-            if (mChooseAdapter != null) {
-                mChooseAdapter.notifyDataSetChanged();
-            }
+            setTips();
         } else {
             super.onReceiveEvent(event);
+        }
+    }
+
+    private void loadNewRewardAd() {
+        mRewardedAd = new RewardedAd(ChooseActivity.this, getString(R.string.admob_reward_unit_id));
+        mRewardedAd.loadAd(new AdRequest.Builder().build(), mRewardLoadCallback);
+    }
+
+    private void setTips() {
+        if (ChooseCostUtils.getInstance().isVIP()) {
+            tips.setText("尊贵的VIP用户，祝您大吉大利，万事如意！");
+        } else {
+            tips.setText("今日剩余免费次数：" + ChooseCostUtils.getInstance().getTodayCount() + "次");
         }
     }
 }

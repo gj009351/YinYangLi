@@ -1,13 +1,11 @@
 package com.duke.yinyangli.utils;
 
-import android.os.Bundle;
-
 import com.duke.yinyangli.base.BaseEvent;
 import com.duke.yinyangli.bean.TimeCount;
 import com.duke.yinyangli.calendar.Solar;
+import com.duke.yinyangli.constants.Config;
 import com.duke.yinyangli.constants.Constants;
 import com.duke.yinyangli.constants.Event;
-import com.haibin.calendarview.library.Article;
 import com.tencent.mmkv.MMKV;
 
 import org.greenrobot.eventbus.EventBus;
@@ -28,66 +26,56 @@ public class ChooseCostUtils {
         final static ChooseCostUtils instance = new ChooseCostUtils();
     }
 
-    public int getOriginCostMoney(Article article) {
-        switch (article.getType()) {
-            case Constants.TYPE.TYPE_BAZI:
-            case Constants.TYPE.TYPE_XINGZUOMINGYUN:
-                return 3;
-            default:
-                return 10;
-        }
-    }
-
-    public void addCount(Article article) {
+    public void addCount() {
         TimeCount timeCount = MMKV.defaultMMKV()
-                .decodeParcelable(Constants.SP_KEY.CHOOSE_TYPE + article.getType()
-                        , TimeCount.class);
+                .decodeParcelable(Constants.SP_KEY.COST_COUNT, TimeCount.class);
         if (timeCount != null && timeCount.getYear() == mSolar.getYear()
                 && timeCount.getMonth() == mSolar.getMonth()
                 && timeCount.getDay() == mSolar.getDay()) {
             //同一天
-            if (timeCount.getCount() < getOriginCostMoney(article)) {
+            if (timeCount.getCount() < Config.DEFAULT_MAX_COUNT) {
                 timeCount.setCount(timeCount.getCount() + 1);
             }
         } else {
             timeCount = new TimeCount(mSolar.getYear(), mSolar.getMonth(), mSolar.getDay(), 1);
         }
-        MMKV.defaultMMKV().encode(Constants.SP_KEY.CHOOSE_TYPE + article.getType(), timeCount);
+        MMKV.defaultMMKV().encode(Constants.SP_KEY.COST_COUNT, timeCount);
         EventBus.getDefault().post(new BaseEvent(Event.CODE_COUNT_CHANGE));
+        LogUtils.d("addCount:" + timeCount);
     }
 
-    public void addPayCount(Article article) {
+    public void addPayCount() {
         TimeCount timeCount = MMKV.defaultMMKV()
-                .decodeParcelable(Constants.SP_KEY.CHOOSE_TYPE + article.getType()
-                        , TimeCount.class);
+                .decodeParcelable(Constants.SP_KEY.COST_COUNT, TimeCount.class);
         if (timeCount != null && timeCount.getYear() == mSolar.getYear()
                 && timeCount.getMonth() == mSolar.getMonth()
                 && timeCount.getDay() == mSolar.getDay()) {
             //同一天
-            if (timeCount.getCount() < getOriginCostMoney(article)) {
+            if (timeCount.getCount() <= Config.DEFAULT_MAX_COUNT) {
                 timeCount.setCount(timeCount.getCount() - 1);
             }
         } else {
             timeCount = new TimeCount(mSolar.getYear(), mSolar.getMonth(), mSolar.getDay(), 0);
         }
-        MMKV.defaultMMKV().encode(Constants.SP_KEY.CHOOSE_TYPE + article.getType(), timeCount);
+        MMKV.defaultMMKV().encode(Constants.SP_KEY.COST_COUNT, timeCount);
         EventBus.getDefault().post(new BaseEvent(Event.CODE_COUNT_CHANGE));
+        LogUtils.d("addPayCount:" + timeCount);
     }
 
-    public int getTodayCount(Article article) {
+    public int getTodayCount() {
         TimeCount timeCount = MMKV.defaultMMKV()
-                .decodeParcelable(Constants.SP_KEY.CHOOSE_TYPE + article.getType()
-                        , TimeCount.class);
+                .decodeParcelable(Constants.SP_KEY.COST_COUNT, TimeCount.class);
+        LogUtils.d("getTodayCount:" + timeCount);
         if (timeCount != null && timeCount.getYear() == mSolar.getYear()
                 && timeCount.getMonth() == mSolar.getMonth()
                 && timeCount.getDay() == mSolar.getDay()) {
-            if (timeCount.getCount() >= getOriginCostMoney(article)) {
+            if (timeCount.getCount() >= Config.DEFAULT_MAX_COUNT) {
                 return 0;
             } else {
-                return getOriginCostMoney(article) - timeCount.getCount();
+                return Config.DEFAULT_MAX_COUNT - timeCount.getCount();
             }
         } else {
-            return getOriginCostMoney(article);
+            return Config.DEFAULT_MAX_COUNT;
         }
     }
 

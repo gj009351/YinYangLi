@@ -82,4 +82,14 @@ public class TimeCount implements Parcelable {
             return new TimeCount[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "TimeCount{" +
+                "year=" + year +
+                ", month=" + month +
+                ", day=" + day +
+                ", count=" + count +
+                '}';
+    }
 }

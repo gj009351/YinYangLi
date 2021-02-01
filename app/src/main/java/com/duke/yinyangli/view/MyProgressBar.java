@@ -11,9 +11,9 @@ import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 
-import com.duke.yinyangli.R;
-
 import androidx.appcompat.widget.AppCompatImageView;
+
+import com.duke.yinyangli.R;
 
 public class MyProgressBar extends AppCompatImageView {
     private RotateAnimation mRotateAnimation;
@@ -30,13 +30,6 @@ public class MyProgressBar extends AppCompatImageView {
     public MyProgressBar(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
-    }
-
-    public MyProgressBar(Context context, boolean isCreate) {
-        super(context);
-        init();
-        width = (int) getResources().getDimension(R.dimen.default_progress_bar_width);
-        height = (int) getResources().getDimension(R.dimen.default_progress_bar_height);
     }
 
     private void init() {
@@ -65,9 +58,9 @@ public class MyProgressBar extends AppCompatImageView {
 
     public void show() {
         this.setVisibility(View.VISIBLE);
-        mRotateAnimation = new RotateAnimation(0, 360 * 1000000, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        mRotateAnimation = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
 
-        mRotateAnimation.setDuration(1400 * 1000000);
+        mRotateAnimation.setDuration(2000);
         mRotateAnimation.setInterpolator(new LinearInterpolator());
         mRotateAnimation.setFillAfter(true);
         startAnimation(mRotateAnimation);
