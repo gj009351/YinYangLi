@@ -16,6 +16,7 @@ import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.duke.yinyangli.MyApplication;
 import com.duke.yinyangli.R;
+import com.duke.yinyangli.activity.AboutActivity;
 
 import java.util.Calendar;
 
@@ -115,4 +116,15 @@ public class DialogUtils {
         return dialog;
     }
 
+    public static void showAboutDialog(Context context) {
+        Dialog dialog = new SimpleDialog(context
+                , context.getString(R.string.noduty)
+                , context.getString(R.string.noduty_content)
+                , new SimpleDialog.OnClickListener() {
+            @Override
+            public void onConfirm() {
+            }
+        });
+        dialog.show();
+    }
 }

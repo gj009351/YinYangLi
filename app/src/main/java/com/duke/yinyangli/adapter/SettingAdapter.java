@@ -33,22 +33,20 @@ public class SettingAdapter extends BaseMultiItemQuickAdapter<SettingItem, BaseV
 
     public void loadSetting() {
         List<SettingItem> list = new ArrayList<>();
-        list.add(new SettingItem(ITEM_TYPE_TITLE, "首页"));
+        list.add(new SettingItem(ITEM_TYPE_TITLE, "首页显示开关"));
         list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_JRYJ, "今日宜忌", true));
         list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_SCYJ, "时辰宜忌", true));
         list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_JSXS, "吉神凶煞", true));
         list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_XXJX, "星宿吉凶", true));
         list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_PZBJ, "彭祖百忌", true));
-        list.add(new SettingItem(ITEM_TYPE_TITLE, "广告"));
-        list.add(new SettingItem(ITEM_TYPE_NORMAL, Constants.SP_KEY.VIP, "获得永久版（去广告）", false));
-        list.add(new SettingItem(ITEM_TYPE_TITLE, "桌面插件"));
-        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_TIME, "当前时辰", true));
-        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_JRYJ, "今日宜忌", true));
-        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_SCYJ, "时辰宜忌", true));
-        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_JSXS, "吉神凶煞", true));
-        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_XXJX, "星宿吉凶", true));
-        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_PZBJ, "彭祖百忌", true));
-        list.add(new SettingItem(ITEM_TYPE_TOGGLE, "", "   ", false));
+//        list.add(new SettingItem(ITEM_TYPE_TITLE, "桌面插件"));
+//        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_TIME, "当前时辰", true));
+//        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_JRYJ, "今日宜忌", true));
+//        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_SCYJ, "时辰宜忌", true));
+//        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_JSXS, "吉神凶煞", true));
+//        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_XXJX, "星宿吉凶", true));
+//        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_PZBJ, "彭祖百忌", true));
+//        list.add(new SettingItem(ITEM_TYPE_TOGGLE, "", "   ", false));
         setNewInstance(list);
     }
 

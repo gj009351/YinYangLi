@@ -355,6 +355,9 @@ public class MainActivity extends BaseActivity implements
                 } else if (getResources().getString(R.string.setting).equals(text)) {
                     SettingActivity.start(MainActivity.this);
                     mGoToOther = true;
+                } else {
+                    AboutActivity.start(MainActivity.this);
+                    mGoToOther = true;
                 }
             }
         });

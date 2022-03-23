@@ -161,7 +161,7 @@ public class ChooseActivity extends BaseActivity {
 
     private void setTips() {
         if (ChooseCostUtils.getInstance().isVIP()) {
-            tips.setText("尊贵的VIP用户，祝您大吉大利，万事如意！");
+            tips.setText("尊贵的一卦用户，祝您大吉大利，万事如意！");
         } else {
             tips.setText("今日剩余免费次数：" + ChooseCostUtils.getInstance().getTodayCount() + "次");
         }

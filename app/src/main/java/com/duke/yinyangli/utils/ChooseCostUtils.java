@@ -80,6 +80,7 @@ public class ChooseCostUtils {
     }
 
     public boolean isVIP() {
-        return MMKV.defaultMMKV().decodeBool(Constants.SP_KEY.VIP, false);
+//        return MMKV.defaultMMKV().decodeBool(Constants.SP_KEY.VIP, false);
+        return true;
     }
 }

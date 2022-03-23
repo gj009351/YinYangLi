@@ -8,15 +8,29 @@
     <string name="select">选择</string>
     <string name="slogen">一卦，一天一卦</string>
     <string name="tips_main">本应用仅用于弘扬交流传统文化，切勿迷信传播</string>
+    <string name="app_email">gj009351@email.com</string>
+    <string name="app_descript">这是一款关于万年历、阴历、算命、八卦等的工具软件，感谢您的使用。仅用于弘扬交流传统文化，切勿迷信传播！</string>
     <string name="update">更新</string>
     <string name="cancel">取消</string>
     <string name="go_download">去下载</string>
     <string name="loading">加载中</string>
     <string name="date_scroll">日期跳转</string>
+    <string name="noduty">免责声明</string>
+    <string name="noduty_content">这是一款关于万年历、阴历、算命、八卦等的工具软件，旨在为广大中国传统文化爱好者提供一种方便、快捷、舒适的查阅体验。
+        \n当您在生活中做任何事情或决定时，如有参考本应用中的意见或指导而导致的任何结果，一卦概不负责，亦不承担任何法律责任。
+        \n如您在一卦中通过广告而接触到其他内容，此系广告服务商提供的内容，一卦概不负责，亦不承担任何法律责任。
+        \n一卦不做任何形式的保证，不保证关于万年历、阴历、阳历、算命、八卦等相关内容能满足您的要求，不保证应用内广告内容能满足您的要求，不保证以上内容的安全性，正确性，及时性，合法性。
+        \n一卦尊重并保护所有使用一卦的用户的个人隐私权，非经您亲自许可或根据相关法律、法规的强制性规定，一卦不会主动地将您的个人隐私泄露给第三方。
+        \n一卦希望广大中国传统文化爱好者通过本应用学到一定的知识，通过本应用的使用及交流使自己的生活更方便、舒适、快捷，并能主动地弘扬中国传统文化。
+        \n任何单位或个人如有在未告知作者及应用所有人的情况下，利用一卦非法牟利，一卦概不负责，亦不承担任何法律责任，并且一卦有权向其追究法律责任。
+        \n任何单位或个人如有认为一卦应用内的内容可能涉嫌侵犯其信息网络传播权或知识产权，应该及时向一卦提出书面通知，并提供身份证明、权属证明及详细侵权情况证明。一卦在收到上述内容后，将及时做出依法整改相关内容。
+        \n最后告诫用户：本应用仅用于弘扬交流传统文化，切勿迷信传播！</string>
     <string name="setting">设置</string>
+    <string name="about">关于</string>
     <string-array name="setting_list" >
         <item>@string/date_scroll</item>
         <item>@string/setting</item>
+        <item>@string/about</item>
     </string-array>
     <string name="tip_shicaozhanbu">首先，筮者要准备五十根蓍草，取出一根，横放在正前方，代表“太极”
         ，在整个运算过程中保持不动。真正进行运算的，是为四十有九(大衍之数五十，其用四十有九)。然后默念心中所问。
@@ -154,7 +168,7 @@
     <string name="admob_banner_choose_unit_id">@string/admob_banner_test_unit_id</string>
     <string name="admob_banner_result_unit_id">@string/admob_banner_test_unit_id</string>
 
-<!--  =============================  release  ==========================       -->
+    <!--  =============================  release  ==========================       -->
 <!--    <string name="admob_reward_unit_id">ca-app-pub-9923626397118153/6215617469</string>-->
 <!--    <string name="admob_interstitial_unit_id">ca-app-pub-9923626397118153/4463552092</string>-->
 <!--    <string name="admob_banner_main_unit_id">ca-app-pub-9923626397118153/1777038370</string>-->
