@@ -6,13 +6,13 @@
     <permission
         android:name="com.duke.yinyangli.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature" />
+
     <uses-permission android:name="com.duke.yinyangli.permission.JPUSH_MESSAGE" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
@@ -36,6 +36,16 @@
         tools:targetApi="q">
 
         <meta-data
+            android:name="com.parse.SERVER_URL"
+            android:value="@string/back4app_server_url" />
+        <meta-data
+            android:name="com.parse.APPLICATION_ID"
+            android:value="@string/back4app_app_id" />
+        <meta-data
+            android:name="com.parse.CLIENT_KEY"
+            android:value="@string/back4app_client_key" />
+
+        <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/admob_app_id"/>
 
@@ -54,11 +64,14 @@
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name"
+            android:exported="false"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".activity.ChooseActivity" />
+        <activity android:name=".activity.ChooseActivity"
+            android:exported="false" />
         <activity android:name=".activity.GuaResultActivity" />
-        <activity android:name=".activity.StartActivity" >
+        <activity android:name=".activity.StartActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -85,14 +98,14 @@
         <provider
             android:name="cn.jpush.android.service.DataProvider"
             android:authorities="com.duke.yinyangli.DataProvider"
-            android:exported="true" />
+            android:exported="false" />
 
         <!-- since 1.8.0 option 可选项。用于同一设备中不同应用的 JPush 服务相互拉起的功能。 -->
         <!-- 若不启用该功能可删除该组件，或把 enabled 设置成 false ；App 不会被其他 App 拉起，但会拉起其他的 App。 -->
         <service
             android:name="cn.jpush.android.service.DaemonService"
             android:enabled="true"
-            android:exported="true">
+            android:exported="false">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.DaemonService" />
                 <category android:name="com.duke.yinyangli" />
@@ -103,12 +116,13 @@
         <provider
             android:name="cn.jpush.android.service.DownloadProvider"
             android:authorities="com.duke.yinyangli.DownloadProvider"
-            android:exported="true" />
+            android:exported="false" />
 
         <!-- Required SDK 核心功能-->
         <receiver
             android:name="cn.jpush.android.service.PushReceiver"
-            android:enabled="true">
+            android:enabled="true"
+            android:exported="false">
             <intent-filter android:priority="1000">
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
                 <category android:name="com.duke.yinyangli" />
@@ -157,7 +171,7 @@
         <activity
             android:name="cn.jpush.android.service.DActivity"
             android:enabled="true"
-            android:exported="true"
+            android:exported="false"
             android:taskAffinity="jpush.custom"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
@@ -180,7 +194,8 @@
         </service>
 
         <!-- Required SDK 核心功能-->
-        <receiver android:name="cn.jpush.android.service.AlarmReceiver" />
+        <receiver android:name="cn.jpush.android.service.AlarmReceiver"
+            android:exported="false"/>
 
         <!-- Required since 3.0.7 -->
         <!-- 新的 tag/alias 接口结果返回需要开发者配置一个自定的广播 -->
@@ -224,7 +239,7 @@
         <!--Required SDK核心功能 since 3.3.0-->
         <activity
             android:name="cn.jpush.android.service.JNotifyActivity"
-            android:exported="true"
+            android:exported="false"
             android:taskAffinity="jpush.custom"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
@@ -232,18 +247,29 @@
                 <category android:name="com.duke.yinyangli" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ChengGuActivity" />
-        <activity android:name=".activity.SettingActivity" />
-        <activity android:name=".activity.BaZiResultActivity" />
+        <activity android:name=".activity.ChengGuActivity"
+            android:exported="false"/>
+        <activity android:name=".activity.SettingActivity"
+            android:exported="false"/>
+        <activity android:name=".activity.BaZiResultActivity"
+            android:exported="false"/>
         <activity android:name=".activity.XingMingDaFenActivity"
-            android:windowSoftInputMode="stateVisible"/>
-        <activity android:name=".activity.XingZuoMingYunActivity" />
-        <activity android:name=".activity.XingZuoPeiDuiActivity" />
-        <activity android:name=".activity.ShengXiaoPeiDuiActivity" />
-        <activity android:name=".activity.ZhuGeShenSuanActivity" />
-        <activity android:name=".activity.ZhouGongJieMengActivity" />
-        <activity android:name=".activity.ZhouGongJieMengChildActivity" />
-        <activity android:name=".activity.ZhouGongJieMengResultActivity" />
+            android:windowSoftInputMode="stateVisible"
+            android:exported="false"/>
+        <activity android:name=".activity.XingZuoMingYunActivity"
+            android:exported="false"/>
+        <activity android:name=".activity.XingZuoPeiDuiActivity"
+            android:exported="false" />
+        <activity android:name=".activity.ShengXiaoPeiDuiActivity"
+            android:exported="false" />
+        <activity android:name=".activity.ZhuGeShenSuanActivity"
+            android:exported="false"/>
+        <activity android:name=".activity.ZhouGongJieMengActivity"
+            android:exported="false"/>
+        <activity android:name=".activity.ZhouGongJieMengChildActivity"
+            android:exported="false"/>
+        <activity android:name=".activity.ZhouGongJieMengResultActivity"
+            android:exported="false" />
         <activity android:name=".activity.AboutActivity" />
 
         <!-- Required. For publish channel feature -->

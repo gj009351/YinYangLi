@@ -124,7 +124,9 @@ public class DialogUtils {
             @Override
             public void onConfirm() {
             }
-        });
+        })
+                .setConfirmText(R.string.ok)
+                .showCancel(false);
         dialog.show();
     }
 }

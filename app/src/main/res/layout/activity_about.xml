@@ -30,16 +30,19 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:layout_marginTop="24dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:textColor="@color/black_343339"
         android:text="@string/app_descript"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/list_item_height"
         android:orientation="horizontal"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="36dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:text="发送邮件"
@@ -49,7 +52,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:text="@string/app_email"
             android:textColor="@color/black_343339"
             android:textSize="16sp"
@@ -59,8 +62,7 @@
     <LinearLayout
         android:id="@+id/noduty"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_height="@dimen/list_item_height"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:gravity="center_vertical"

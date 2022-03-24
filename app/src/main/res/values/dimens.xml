@@ -3,6 +3,8 @@
     <dimen name="ball_default_bottom">60dp</dimen>
     <dimen name="ball_default_end">60dp</dimen>
     <dimen name="top_view_height">48dp</dimen>
+    <dimen name="list_item_height_large">56dp</dimen>
+    <dimen name="list_item_height">48dp</dimen>
     <dimen name="guaxiang_width">40dp</dimen>
     <dimen name="guaxiang_height">1dp</dimen>
     <dimen name="guaxiang_width_item">18dp</dimen>

@@ -13,6 +13,7 @@ import com.duke.yinyangli.bean.database.DaoMaster;
 import com.duke.yinyangli.bean.database.DaoSession;
 import com.duke.yinyangli.constants.Constants;
 import com.duke.yinyangli.utils.SqliteUtil;
+import com.parse.Parse;
 import com.tencent.mmkv.MMKV;
 
 import java.util.List;
@@ -36,7 +37,6 @@ public class MyApplication extends Application {
         if (result != null && result.fatalThrowable != null) {
             Log.e("BMD", "exception occored " + result.fatalThrowable);
         }
-
     }
 
     private void setDatabase() {
@@ -81,6 +81,13 @@ public class MyApplication extends Application {
                 }
             });
         }
+
+
+        Parse.initialize(new Parse.Configuration.Builder(this)
+                .applicationId(getString(R.string.back4app_app_id))
+                .clientKey(getString(R.string.back4app_client_key))
+                .server(getString(R.string.back4app_server_url))
+                .build());
     }
 
     public static MyApplication getInstance() {

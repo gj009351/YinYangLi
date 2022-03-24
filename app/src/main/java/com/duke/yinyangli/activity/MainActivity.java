@@ -45,6 +45,7 @@ import com.haibin.calendarview.library.Calendar;
 import com.haibin.calendarview.library.CalendarLayout;
 import com.haibin.calendarview.library.CalendarUtil;
 import com.haibin.calendarview.library.CalendarView;
+import com.parse.ParseObject;
 import com.tencent.mmkv.MMKV;
 
 import java.util.Date;
@@ -173,6 +174,16 @@ public class MainActivity extends BaseActivity implements
 
             });
         }
+
+        ParseObject firstObject = new  ParseObject("FirstClass");
+        firstObject.put("message","Hey ! First message from android. Parse is now connected");
+        firstObject.saveInBackground(e -> {
+            if (e != null){
+                Log.e("MainActivity", e.getLocalizedMessage());
+            }else{
+                Log.d("MainActivity","Object saved.");
+            }
+        });
     }
 
     @Override
