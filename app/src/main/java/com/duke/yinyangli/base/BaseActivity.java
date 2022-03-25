@@ -34,9 +34,11 @@ import com.duke.yinyangli.dialog.SimpleDialog;
 import com.duke.yinyangli.utils.AdmobUtils;
 import com.duke.yinyangli.utils.AppUtils;
 import com.duke.yinyangli.utils.ChooseCostUtils;
+import com.duke.yinyangli.utils.FileUtils;
 import com.duke.yinyangli.utils.ImageUtils;
 import com.duke.yinyangli.utils.JsonUtils;
 import com.duke.yinyangli.utils.LogUtils;
+import com.duke.yinyangli.utils.ToastUtil;
 import com.duke.yinyangli.utils.generateImage.GeneratePictureManager;
 import com.duke.yinyangli.utils.generateImage.SharePicModel;
 import com.google.android.gms.ads.AdRequest;
@@ -55,6 +57,9 @@ import java.lang.ref.WeakReference;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cn.jpush.android.api.JPushInterface;
+import top.zibin.luban.CompressionPredicate;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 public abstract class BaseActivity extends AppCompatActivity implements SharePicModel.OnSharePicListener {
 
@@ -129,7 +134,9 @@ public abstract class BaseActivity extends AppCompatActivity implements SharePic
     }
 
     public void showProgressDialog() {
-        dismissProgressDialog();
+        if (progressDialog != null && progressDialog.isShowing()) {
+            return;
+        }
         progressDialog = DialogUtils.progress(this);
     }
 
@@ -181,13 +188,42 @@ public abstract class BaseActivity extends AppCompatActivity implements SharePic
     }
 
     public void startShare() {
-//        showProgressDialog();
+        showProgressDialog();
         SharePicModel sharePicModel = new SharePicModel((ViewGroup) getWindow().getDecorView());
         sharePicModel.setSharePicListener(this);
         GeneratePictureManager.getInstance().generate(sharePicModel, (throwable, filePath, bitmap) -> {
             if (throwable != null || bitmap == null) {
+                dismissProgressDialog();
+                showToast("操作失败");
             } else {
-                share(filePath);
+                Luban.with(this)
+                        .load(filePath)
+                        .ignoreBy(100)
+                        .setTargetDir(FileUtils.getTimeNameImage(BaseActivity.this))
+                        .filter(new CompressionPredicate() {
+                            @Override
+                            public boolean apply(String path) {
+                                return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+                            }
+                        })
+                        .setCompressListener(new OnCompressListener() {
+                            @Override
+                            public void onStart() {
+                                showProgressDialog();
+                            }
+
+                            @Override
+                            public void onSuccess(File file) {
+                                dismissProgressDialog();
+                                share(file.getAbsolutePath());
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                dismissProgressDialog();
+                                showToast("操作失败");
+                            }
+                        }).launch();
             }
         });
     }
@@ -214,6 +250,14 @@ public abstract class BaseActivity extends AppCompatActivity implements SharePic
     @Override
     public View getShareContentView() {
         return null;
+    }
+
+    public void showToast(int textResId) {
+        ToastUtil.show(this, textResId);
+    }
+
+    public void showToast(String text) {
+        ToastUtil.show(this, text);
     }
 
     protected static final class MyHandler extends Handler {

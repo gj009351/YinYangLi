@@ -63,7 +63,7 @@ public class SharePicModel extends GenerateModel {
 
     @Override
     public String getSavePath() {
-        return FileUtils.getPhotoDirectoryString(getView().getContext()) + FileUtils.timeFileName() + ".png";
+        return FileUtils.getTimeNameImage(getView().getContext());
     }
 
     public interface OnSharePicListener {

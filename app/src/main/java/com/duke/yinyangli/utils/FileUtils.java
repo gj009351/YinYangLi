@@ -193,4 +193,8 @@ public class FileUtils {
     public static String timeFileName() {
         return TimeUtils.getNowString(TimeUtils.getSafeDateFormat("yyyyMMddHHmmss"));
     }
+
+    public static String getTimeNameImage(Context context) {
+        return FileUtils.getPhotoDirectoryString(context) + FileUtils.timeFileName() + ".png";
+    }
 }
