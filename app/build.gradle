@@ -66,6 +66,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'org.greenrobot:greendao:3.3.0'
+    implementation 'com.blankj:utilcodex:1.31.0'
     //statusbar
     // 基础依赖包，必须要依赖
     implementation 'com.gyf.immersionbar:immersionbar:3.0.0'

@@ -15,6 +15,7 @@
     <string name="cancel">取消</string>
     <string name="go_download">去下载</string>
     <string name="loading">加载中</string>
+    <string name="share">分享</string>
     <string name="date_scroll">日期跳转</string>
     <string name="noduty">免责声明</string>
     <string name="noduty_content">  这是一款关于万年历、阴历、算命、八卦等的工具软件，旨在为广大中国传统文化爱好者提供一种方便、快捷、舒适的查阅体验。
@@ -30,6 +31,7 @@
     <string name="about">关于</string>
     <string-array name="setting_list" >
         <item>@string/date_scroll</item>
+        <item>@string/share</item>
         <item>@string/setting</item>
         <item>@string/about</item>
     </string-array>

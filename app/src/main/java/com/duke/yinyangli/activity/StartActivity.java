@@ -13,6 +13,7 @@ import com.duke.yinyangli.R;
 import com.duke.yinyangli.base.BaseActivity;
 import com.duke.yinyangli.calendar.Lunar;
 import com.duke.yinyangli.utils.AdmobUtils;
+import com.duke.yinyangli.utils.ChooseCostUtils;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
@@ -67,12 +68,14 @@ public class StartActivity extends BaseActivity {
         Lunar lunar = new Lunar();
         currentTime.setText(lunar.getTimeZhiContent());
         version.setText("V" + BuildConfig.VERSION_NAME);
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-                AdmobUtils.setHasInit(true);
-            }
-        });
+        if (!ChooseCostUtils.getInstance().isVIP()) {
+            MobileAds.initialize(this, new OnInitializationCompleteListener() {
+                @Override
+                public void onInitializationComplete(InitializationStatus initializationStatus) {
+                    AdmobUtils.setHasInit(true);
+                }
+            });
+        }
     }
 
 }

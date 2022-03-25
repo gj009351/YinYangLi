@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -192,5 +193,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         ChooseCostUtils.getInstance().addCount();
     }
 
-
+    public void startShare() {
+        showProgressDialog();
+    }
 }

@@ -363,6 +363,8 @@ public class MainActivity extends BaseActivity implements
                 String text = mSettingAdapter.getItem(position);
                 if (getResources().getString(R.string.date_scroll).equals(text)) {
                     showSelectDatePicker();
+                } else if (getResources().getString(R.string.share).equals(text)) {
+                    startShare();
                 } else if (getResources().getString(R.string.setting).equals(text)) {
                     SettingActivity.start(MainActivity.this);
                     mGoToOther = true;
