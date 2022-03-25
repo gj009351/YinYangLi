@@ -7,6 +7,7 @@
     <string name="jump_googleplay_fail">打开应用商店失败</string>
     <string name="select">选择</string>
     <string name="ok">好的</string>
+    <string name="sure">确定</string>
     <string name="slogen">一卦，一天一卦</string>
     <string name="tips_main">本应用仅用于弘扬交流传统文化，切勿迷信传播</string>
     <string name="app_email">gj009351@email.com</string>
@@ -17,6 +18,8 @@
     <string name="loading">加载中</string>
     <string name="share">分享</string>
     <string name="date_scroll">日期跳转</string>
+    <string name="tip_input_name">请输入昵称</string>
+    <string name="edit_name">修改昵称</string>
     <string name="noduty">免责声明</string>
     <string name="noduty_content">  这是一款关于万年历、阴历、算命、八卦等的工具软件，旨在为广大中国传统文化爱好者提供一种方便、快捷、舒适的查阅体验。
         \n  当您在生活中做任何事情或决定时，如有参考本应用中的意见或指导而导致的任何结果，一卦概不负责，亦不承担任何法律责任。

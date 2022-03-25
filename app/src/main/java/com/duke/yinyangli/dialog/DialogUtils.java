@@ -129,4 +129,9 @@ public class DialogUtils {
                 .showCancel(false);
         dialog.show();
     }
+
+    public static void showNameDialog(Context context, String content, EditNameDialog.OnClickListener listener) {
+        Dialog dialog = new EditNameDialog(context, content, listener);
+        dialog.show();
+    }
 }

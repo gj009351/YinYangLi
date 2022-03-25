@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="320dp"
+    android:background="@android:color/white"
+    android:layout_centerInParent="true"
+    android:layout_gravity="center"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:padding="16dp"
+        android:text="@string/edit_name"
+        android:textColor="@android:color/black"/>
+
+    <EditText
+        android:id="@+id/edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/list_item_height_large"
+        android:layout_marginTop="24dp"
+        android:layout_below="@+id/title"
+        android:layout_toStartOf="@+id/random"
+        android:textColor="@color/black_343339"
+        android:layout_marginStart="16dp"
+        android:textSize="16sp"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:id="@+id/random"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="12dp"
+        android:layout_alignBottom="@+id/edit_text"
+        android:src="@mipmap/random"
+        android:scaleType="center"/>
+
+    <TextView
+        android:id="@+id/confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/black_343339"
+        android:layout_marginTop="12dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/edit_text"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:text="@string/sure"/>
+
+    <TextView
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/textColorVice"
+        android:layout_toStartOf="@+id/confirm"
+        android:layout_alignBottom="@+id/confirm"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:text="@string/cancel"/>
+
+</RelativeLayout>

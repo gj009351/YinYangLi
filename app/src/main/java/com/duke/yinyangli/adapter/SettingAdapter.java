@@ -28,24 +28,31 @@ public class SettingAdapter extends BaseMultiItemQuickAdapter<SettingItem, BaseV
     private static final int ITEM_TYPE_NORMAL = 1;
     private static final int ITEM_TYPE_TOGGLE = 2;
     private static final int ITEM_TYPE_PICTURE = 3;
+    private static final int ITEM_TYPE_DIVIDER = 4;
 
     public SettingAdapter() {
         addItemType(ITEM_TYPE_TITLE, R.layout.item_setting_list_title);
         addItemType(ITEM_TYPE_NORMAL, R.layout.item_setting_list_normal);
         addItemType(ITEM_TYPE_TOGGLE, R.layout.item_setting_list_toggle);
         addItemType(ITEM_TYPE_PICTURE, R.layout.item_setting_list_picture);
+        addItemType(ITEM_TYPE_DIVIDER, R.layout.item_setting_list_divider);
     }
 
     public void loadSetting() {
         List<SettingItem> list = new ArrayList<>();
         list.add(new SettingItem(ITEM_TYPE_TITLE, "个人信息（仅用于分享图片）"));
         list.add(new SettingItem(ITEM_TYPE_PICTURE, Constants.SP_KEY.USER_INFO_AVATAR, "头像", ""));
+        list.add(new SettingItem(ITEM_TYPE_DIVIDER));
         list.add(new SettingItem(ITEM_TYPE_NORMAL, Constants.SP_KEY.USER_INFO_NAME, "昵称", NameUtils.getRandomName()));
         list.add(new SettingItem(ITEM_TYPE_TITLE, "首页显示开关"));
         list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_JRYJ, "今日宜忌", Constants.STATUS.NORMAL_SHOW));
+        list.add(new SettingItem(ITEM_TYPE_DIVIDER));
         list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_SCYJ, "时辰宜忌", Constants.STATUS.NORMAL_SHOW));
+        list.add(new SettingItem(ITEM_TYPE_DIVIDER));
         list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_JSXS, "吉神凶煞", Constants.STATUS.NORMAL_SHOW));
+        list.add(new SettingItem(ITEM_TYPE_DIVIDER));
         list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_XXJX, "星宿吉凶", Constants.STATUS.NORMAL_SHOW));
+        list.add(new SettingItem(ITEM_TYPE_DIVIDER));
         list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_PZBJ, "彭祖百忌", Constants.STATUS.NORMAL_SHOW));
 //        list.add(new SettingItem(ITEM_TYPE_TITLE, "桌面插件"));
 //        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_TIME, "当前时辰", true));
@@ -104,6 +111,9 @@ public class SettingAdapter extends BaseMultiItemQuickAdapter<SettingItem, BaseV
                 } else {
                     toggle.setVisibility(View.GONE);
                 }
+                break;
+            case ITEM_TYPE_DIVIDER:
+            default:
                 break;
         }
     }

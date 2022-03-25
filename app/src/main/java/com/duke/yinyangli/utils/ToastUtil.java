@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.CheckResult;
 import androidx.annotation.NonNull;
 
+import com.duke.yinyangli.MyApplication;
 import com.duke.yinyangli.R;
 
 /**
@@ -24,6 +25,14 @@ public class ToastUtil {
     private static Toast currentToast;
     //*******************************************在顶部显示********************************************
 
+
+    public static void show(@NonNull CharSequence message) {
+        show(MyApplication.getInstance().getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    public static void show(int resId) {
+        show(MyApplication.getInstance().getApplicationContext(), resId, Toast.LENGTH_SHORT).show();
+    }
 
     public static void show(@NonNull Context context, @NonNull CharSequence message) {
         if (!TextUtils.isEmpty(message)) {

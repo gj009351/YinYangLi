@@ -22,6 +22,10 @@ public class SettingItem implements MultiItemEntity{
         this.text = text;
     }
 
+    public SettingItem(int type) {
+        this.type = type;
+    }
+
     public int getType() {
         return type;
     }
