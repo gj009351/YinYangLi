@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.duke.yinyangli.R;
 import com.duke.yinyangli.adapter.SettingAdapter;
 import com.duke.yinyangli.base.BaseActivity;
+import com.duke.yinyangli.view.itemdecoration.HorizontalDividerItemDecoration;
+import com.duke.yinyangli.view.itemdecoration.VerticalDividerItemDecoration;
 
 import butterknife.BindView;
 
@@ -35,6 +37,9 @@ public class SettingActivity extends BaseActivity {
         title.setText(R.string.setting);
         right.setVisibility(View.INVISIBLE);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this)
+                .marginResId(R.dimen.default_margin, R.dimen.default_margin)
+                .build());
         recyclerView.setAdapter(mAdapter = new SettingAdapter());
         mAdapter.loadSetting();
     }

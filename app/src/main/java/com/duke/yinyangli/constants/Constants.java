@@ -16,6 +16,9 @@ public class Constants {
         String MAIN_RIGHT = "MAIN_RIGHT";
         String MAIN_BOTTOM = "MAIN_BOTTOM";
 
+        String USER_INFO_AVATAR = "USER_INFO_AVATAR";
+        String USER_INFO_NAME = "USER_INFO_NAME";
+
         String MAIN_SHOW_JRYJ = "MAIN_SHOW_JRYJ";
         String MAIN_SHOW_SCYJ = "MAIN_SHOW_SCYJ";
         String MAIN_SHOW_JSXS = "MAIN_SHOW_JSXS";
@@ -45,5 +48,10 @@ public class Constants {
         int TYPE_SHENGXIAOPEIDUI = 7;
         int TYPE_ZHUGESHENSUAN = 8;
         int TYPE_ZHOUGONGJIEMENG = 9;
+    }
+
+    public interface STATUS {
+        String NORMAL_SHOW = "1";
+        String DELETE_HIDE = "0";
     }
 }

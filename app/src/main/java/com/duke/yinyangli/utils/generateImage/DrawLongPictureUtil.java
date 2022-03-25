@@ -10,7 +10,6 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.os.Environment;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
@@ -30,12 +29,8 @@ import com.bumptech.glide.Glide;
 import com.duke.yinyangli.R;
 import com.duke.yinyangli.utils.ImageUtils;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -110,7 +105,7 @@ public class DrawLongPictureUtil extends LinearLayout {
 
         longPictureWidth = ScreenUtils.getScreenWidth();
         picMargin = 40;
-        rootView = LayoutInflater.from(context).inflate(R.layout.layout_draw_canvas, this, false);
+        rootView = LayoutInflater.from(context).inflate(R.layout.share_picture, this, false);
         initView();
     }
 

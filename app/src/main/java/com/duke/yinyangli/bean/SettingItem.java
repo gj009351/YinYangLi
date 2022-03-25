@@ -8,13 +8,13 @@ public class SettingItem implements MultiItemEntity{
     private int type;
     private String id;
     private String text;
-    private boolean value;
+    private String value;
 
-    public SettingItem(int type, String id, String text, boolean value) {
+    public SettingItem(int type, String id, String text, String value) {
         this.type = type;
         this.id = id;
         this.text = text;
-        this.value = MMKV.defaultMMKV().decodeBool(id, value);
+        this.value = MMKV.defaultMMKV().decodeString(id, value);
     }
 
     public SettingItem(int type, String text) {
@@ -38,11 +38,11 @@ public class SettingItem implements MultiItemEntity{
         this.text = text;
     }
 
-    public boolean getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(boolean value) {
+    public void setValue(String value) {
         this.value = value;
     }
 
