@@ -4,6 +4,7 @@ public class Constants {
 
     public static final String DB_NAME = "suanming.db";
     public static final String PACKAGE_NAME = "com.duke.yinyangli";
+    public static final String APP_NAME = "yinyangli";
 
     public interface INTENT_KEY {
         String KEY_ID = "KEY_ID";
@@ -18,6 +19,7 @@ public class Constants {
 
         String USER_INFO_AVATAR = "USER_INFO_AVATAR";
         String USER_INFO_NAME = "USER_INFO_NAME";
+        String USER_INFO_DESCRIPTION = "USER_INFO_DESCRIPTION";
 
         String MAIN_SHOW_JRYJ = "MAIN_SHOW_JRYJ";
         String MAIN_SHOW_SCYJ = "MAIN_SHOW_SCYJ";

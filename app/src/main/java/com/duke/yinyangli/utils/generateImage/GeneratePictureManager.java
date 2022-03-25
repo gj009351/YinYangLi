@@ -38,18 +38,16 @@ public class GeneratePictureManager {
     }
 
     public void generate(GenerateModel generateModel, OnGenerateListener listener) {
-        mWorkHandler.post(() -> {
-            try {
-                generateModel.startPrepare(listener);
-            } catch (Exception e) {
-                e.printStackTrace();
-                if (listener != null) {
-                    postResult(() -> {
-                        listener.onGenerateFinished(e, null);
-                    });
-                }
+        try {
+            generateModel.startPrepare(listener);
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (listener != null) {
+                postResult(() -> {
+                    listener.onGenerateFinished(e, null, null);
+                });
             }
-        });
+        }
     }
 
     private void postResult(Runnable runnable) {
@@ -57,28 +55,33 @@ public class GeneratePictureManager {
     }
 
     public void prepared(GenerateModel generateModel, OnGenerateListener listener) {
-        mWorkHandler.post(() -> {
-            View view = generateModel.getView();
-            Exception exception = null;
-            Bitmap bitmap = null;
-            try {
-                bitmap = createBitmap(view);
-                String savePath = generateModel.getSavePath();
-                if (!TextUtils.isEmpty(savePath)) {
-                    if (!BitmapUtil.saveImage(bitmap, savePath)) {
-                        exception = new RuntimeException("pic save failed");
+        mWorkHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                View view = generateModel.getView();
+                Exception exception = null;
+                Bitmap bitmap = null;
+                String savePath = null;
+                try {
+                    bitmap = createBitmap(view);
+                    savePath = generateModel.getSavePath();
+                    if (!TextUtils.isEmpty(savePath)) {
+                        if (!BitmapUtil.saveImage(bitmap, savePath)) {
+                            exception = new RuntimeException("pic save failed");
+                        }
                     }
+                } catch (Exception e) {
+                    exception = e;
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                exception = e;
-                e.printStackTrace();
-            }
-            if (listener != null) {
-                final Exception exception1 = exception;
-                final Bitmap bitmap1 = bitmap;
-                mMainHandler.post(() -> {
-                    listener.onGenerateFinished(exception1, bitmap1);
-                });
+                if (listener != null) {
+                    final Exception exception1 = exception;
+                    final Bitmap bitmap1 = bitmap;
+                    String finalSavePath = savePath;
+                    mMainHandler.post(() -> {
+                        listener.onGenerateFinished(exception1, finalSavePath, bitmap1);
+                    });
+                }
             }
         });
     }
@@ -89,7 +92,7 @@ public class GeneratePictureManager {
     private Bitmap createBitmap(View view) {
         int widthSpec = View.MeasureSpec.makeMeasureSpec(view.getLayoutParams().width, View.MeasureSpec.EXACTLY);
         int heightSpec = View.MeasureSpec.makeMeasureSpec(view.getLayoutParams().height, View.MeasureSpec.EXACTLY);
-        view.measure(widthSpec, heightSpec);
+        view.measure(0, 0);
         int measureWidth = view.getMeasuredWidth();
         int measureHeight = view.getMeasuredHeight();
         view.layout(0, 0, measureWidth, measureHeight);
@@ -103,7 +106,7 @@ public class GeneratePictureManager {
 
     public interface OnGenerateListener {
 
-        void onGenerateFinished(Throwable throwable, Bitmap bitmap);
+        void onGenerateFinished(Throwable throwable, String savePath, Bitmap bitmap);
 
     }
 }

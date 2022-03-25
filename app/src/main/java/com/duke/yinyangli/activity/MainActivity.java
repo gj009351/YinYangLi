@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -406,5 +407,11 @@ public class MainActivity extends BaseActivity implements
         } else {
             super.onReceiveEvent(event);
         }
+    }
+
+    @Override
+    public View getShareContentView() {
+        View view = LayoutInflater.from(this).inflate(R.layout.share_current_lunar, null);
+        return view;
     }
 }

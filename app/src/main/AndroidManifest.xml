@@ -284,6 +284,16 @@
         <meta-data
             android:name="JPUSH_APPKEY"
             android:value="2850d8cb37fbcc192f78f8c3" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.duke.yinyangli.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+        <meta-data
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/file_paths_share_img" />
+    </provider>
     </application>
 
 </manifest>

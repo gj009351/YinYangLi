@@ -9,6 +9,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 
+import com.blankj.utilcode.util.TimeUtils;
 import com.duke.yinyangli.MyApplication;
 import com.duke.yinyangli.R;
 
@@ -18,10 +19,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 
 public class FileUtils {
 
-    private static final String PACKAGE_PHOTO = "com.avatalk/photos/";
+    private static final String PACKAGE_PHOTO = "yinyangli/photos/";
 
     public static boolean copyFile(File srcFile, File destFile) {
         boolean flag = false;
@@ -165,8 +167,13 @@ public class FileUtils {
     public static File getPhotoDirectory(Context context) {
         return new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), PACKAGE_PHOTO);
     }
+
     public static String getPhotoDirectoryString(Context context) {
-        return new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), PACKAGE_PHOTO).getAbsolutePath();
+        File file = getPhotoDirectory(context);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        return file.getAbsolutePath();
     }
 
     public static String getFileTypeName(String url) {
@@ -181,5 +188,9 @@ public class FileUtils {
             type = "." + type;
         }
         return type;
+    }
+
+    public static String timeFileName() {
+        return TimeUtils.getNowString(TimeUtils.getSafeDateFormat("yyyyMMddHHmmss"));
     }
 }

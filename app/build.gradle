@@ -96,6 +96,7 @@ dependencies {
     implementation 'com.tencent:mmkv-static:1.1.2'
     // For developers using AndroidX in their applications
     implementation 'pub.devrel:easypermissions:3.0.0'
+    implementation 'top.zibin:Luban:1.1.8'
     implementation 'com.daimajia.easing:library:2.0@aar'
     implementation 'com.daimajia.androidanimations:library:2.3@aar'
     //圆形头像

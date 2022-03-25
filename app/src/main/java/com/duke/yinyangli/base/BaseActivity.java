@@ -1,11 +1,15 @@
 package com.duke.yinyangli.base;
 
 import android.app.Dialog;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,8 +17,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import com.duke.yinyangli.BuildConfig;
+import com.duke.yinyangli.MyApplication;
 import com.duke.yinyangli.R;
 import com.duke.yinyangli.activity.ChooseActivity;
 import com.duke.yinyangli.activity.MainActivity;
@@ -28,8 +34,11 @@ import com.duke.yinyangli.dialog.SimpleDialog;
 import com.duke.yinyangli.utils.AdmobUtils;
 import com.duke.yinyangli.utils.AppUtils;
 import com.duke.yinyangli.utils.ChooseCostUtils;
+import com.duke.yinyangli.utils.ImageUtils;
 import com.duke.yinyangli.utils.JsonUtils;
 import com.duke.yinyangli.utils.LogUtils;
+import com.duke.yinyangli.utils.generateImage.GeneratePictureManager;
+import com.duke.yinyangli.utils.generateImage.SharePicModel;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.gyf.immersionbar.ImmersionBar;
@@ -40,13 +49,14 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.File;
 import java.lang.ref.WeakReference;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cn.jpush.android.api.JPushInterface;
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements SharePicModel.OnSharePicListener {
 
     private Unbinder unbinder;
     public TextView title;
@@ -158,6 +168,54 @@ public abstract class BaseActivity extends AppCompatActivity {
                 .showDialog();
     }
 
+    public boolean isSafe() {
+        return !isDestroyed() && !isFinishing();
+    }
+
+    /**
+     * 测算后调用，记录每天次数+1
+     * @param article
+     */
+    public void addTestCount(Article article) {
+        ChooseCostUtils.getInstance().addCount();
+    }
+
+    public void startShare() {
+//        showProgressDialog();
+        SharePicModel sharePicModel = new SharePicModel((ViewGroup) getWindow().getDecorView());
+        sharePicModel.setSharePicListener(this);
+        GeneratePictureManager.getInstance().generate(sharePicModel, (throwable, filePath, bitmap) -> {
+            if (throwable != null || bitmap == null) {
+            } else {
+                share(filePath);
+            }
+        });
+    }
+
+    private void share(String filePath) {
+        File shareFile = new File(filePath);
+        if (!shareFile.exists()) return;
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Uri contentUri = FileProvider.getUriForFile(MyApplication.getInstance().getApplicationContext()
+                    , getPackageName()+".fileprovider", shareFile);
+            intent.putExtra(Intent.EXTRA_STREAM, contentUri);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        }else {
+            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(shareFile));
+        }
+        intent.setType("image/*");
+        Intent chooser = Intent.createChooser(intent, "分享图片");
+        if(intent.resolveActivity(getPackageManager()) != null){
+            startActivity(chooser);
+        }
+    }
+
+    @Override
+    public View getShareContentView() {
+        return null;
+    }
+
     protected static final class MyHandler extends Handler {
 
         private WeakReference<BaseActivity> weakReference;
@@ -180,20 +238,4 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     }
 
-
-    public boolean isSafe() {
-        return !isDestroyed() && !isFinishing();
-    }
-
-    /**
-     * 测算后调用，记录每天次数+1
-     * @param article
-     */
-    public void addTestCount(Article article) {
-        ChooseCostUtils.getInstance().addCount();
-    }
-
-    public void startShare() {
-        showProgressDialog();
-    }
 }

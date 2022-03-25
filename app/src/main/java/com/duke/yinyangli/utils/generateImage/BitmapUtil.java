@@ -66,11 +66,13 @@ public class BitmapUtil {
     }
 
     private static boolean createNewFile(String path) {
-        if (TextUtils.isEmpty(path))
+        if (TextUtils.isEmpty(path)) {
             return false;
+        }
         File file = new File(path);
-        if (file.exists())
+        if (file.exists()) {
             return true;
+        }
         boolean isOk = false;
         try {
             isOk = file.createNewFile();

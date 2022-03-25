@@ -117,7 +117,7 @@ public class DrawLongPictureUtil extends LinearLayout {
         imgUserIcon = rootView.findViewById(R.id.imgUserIcon);
         tvUserName = rootView.findViewById(R.id.tvUserName);
         tvUserDes = rootView.findViewById(R.id.tvUserDes);
-        tvContent = rootView.findViewById(R.id.tvContent);
+        tvContent = rootView.findViewById(R.id.tvUserDes);
         imgQrCode = rootView.findViewById(R.id.imgQrCode);
 
         layoutView(llTopView);
