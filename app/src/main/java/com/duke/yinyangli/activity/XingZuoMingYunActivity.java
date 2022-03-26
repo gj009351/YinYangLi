@@ -10,6 +10,7 @@ import com.duke.yinyangli.MyApplication;
 import com.duke.yinyangli.R;
 import com.duke.yinyangli.adapter.AllResultAdapter;
 import com.duke.yinyangli.base.BaseActivity;
+import com.duke.yinyangli.base.BaseResultActivity;
 import com.duke.yinyangli.bean.database.Astro;
 import com.duke.yinyangli.bean.database.AstroDao;
 import com.duke.yinyangli.bean.database.DaoSession;
@@ -35,7 +36,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class XingZuoMingYunActivity extends BaseActivity {
+public class XingZuoMingYunActivity extends BaseResultActivity {
 
     @BindView(R.id.spinner_xingzuo)
     NiceSpinner mXingZuoSpinner;
@@ -73,6 +74,7 @@ public class XingZuoMingYunActivity extends BaseActivity {
         super.initView();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter = new AllResultAdapter(this));
+        mSubmit.setOnClickListener(this);
     }
 
     @Override
@@ -80,18 +82,6 @@ public class XingZuoMingYunActivity extends BaseActivity {
         super.initData();
         mAriticle = (Article) getIntent().getSerializableExtra(Constants.INTENT_KEY.KEY_MODEL);
         title.setText(mAriticle.getTitle());
-
-        right.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SimpleDialog.init(XingZuoMingYunActivity.this, mAriticle.getTitle()
-                        , getString(R.string.tip_xingzuomingyun), null)
-                        .showCancel(false)
-                        .setConfirmText(R.string.known)
-                        .setConfirmTextColor(R.color.blue_2288BB)
-                        .showDialog();
-            }
-        });
 
         List<String> xingZuoList = new LinkedList<String>(Arrays.asList(getResources().getStringArray(R.array.array_xingzuo)));
         mXingZuoSpinner.attachDataSource(xingZuoList);
@@ -114,48 +104,56 @@ public class XingZuoMingYunActivity extends BaseActivity {
         mXueXing = (String) mXueXingSpinner.getItemAtPosition(0);
     }
 
-    @OnClick(R.id.submit)
+    @Override
+    public String getAboutDialogTitle() {
+        return mAriticle.getTitle();
+    }
+
+    @Override
+    public String getAboutDialogContent() {
+        return getString(R.string.tip_xingzuomingyun);
+    }
+
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.submit:
-                if (TextUtils.isEmpty(mXingZuo)) {
-                    ToastUtil.show(this, "请选择你的星座");
-                    return;
-                }
-                if (TextUtils.isEmpty(mXueXing)) {
-                    ToastUtil.show(this, "请选择你的血型");
-                    return;
-                }
-                showProgressDialog();
-                ThreadHelper.INST.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        DaoSession daoSession = MyApplication.getInstance().getDao();
-                        Astro astro = daoSession.getAstroDao().queryBuilder()
-                                .where(AstroDao.Properties.Title.eq(mXueXing + mXingZuo)).unique();
-                        XingZuo xingZuo = daoSession.getXingZuoDao().queryBuilder()
-                                .where(XingZuoDao.Properties.Title.eq(mXingZuo)).unique();
+        if (view.getId() == R.id.submit) {
+            if (TextUtils.isEmpty(mXingZuo)) {
+                ToastUtil.show(this, "请选择你的星座");
+                return;
+            }
+            if (TextUtils.isEmpty(mXueXing)) {
+                ToastUtil.show(this, "请选择你的血型");
+                return;
+            }
+            showProgressDialog();
+            ThreadHelper.INST.execute(new Runnable() {
+                @Override
+                public void run() {
+                    DaoSession daoSession = MyApplication.getInstance().getDao();
+                    Astro astro = daoSession.getAstroDao().queryBuilder()
+                            .where(AstroDao.Properties.Title.eq(mXueXing + mXingZuo)).unique();
+                    XingZuo xingZuo = daoSession.getXingZuoDao().queryBuilder()
+                            .where(XingZuoDao.Properties.Title.eq(mXingZuo)).unique();
 
-                        List<Article> articles = new ArrayList<>();
-                        articles.add(Article.create(xingZuo.getTitle(), xingZuo.getContent(), ""));
-                        articles.add(Article.create(astro.getTitle(), astro.getContent(), ""));
+                    List<Article> articles = new ArrayList<>();
+                    articles.add(Article.create(xingZuo.getTitle(), xingZuo.getContent(), ""));
+                    articles.add(Article.create(astro.getTitle(), astro.getContent(), ""));
 
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                mAdapter.setResult(articles);
-                                mXingZuoSpinner.setEnabled(false);
-                                mXueXingSpinner.setEnabled(false);
-                                mSubmit.setVisibility(View.GONE);
-                                ImageUtil.setXingZuoImage(mImage, mXingZuo);
-                                addTestCount(mAriticle);
-                                dismissProgressDialog();
-                            }
-                        });
-                    }
-                });
-                break;
-            default:break;
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mAdapter.setResult(articles);
+                            mXingZuoSpinner.setEnabled(false);
+                            mXueXingSpinner.setEnabled(false);
+                            mSubmit.setVisibility(View.GONE);
+                            ImageUtil.setXingZuoImage(mImage, mXingZuo);
+                            addTestCount(mAriticle);
+                            dismissProgressDialog();
+                        }
+                    });
+                }
+            });
+        } else {
+            super.onClick(view);
         }
     }
 

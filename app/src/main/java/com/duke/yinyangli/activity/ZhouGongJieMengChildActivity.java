@@ -9,6 +9,7 @@ import com.duke.yinyangli.MyApplication;
 import com.duke.yinyangli.R;
 import com.duke.yinyangli.adapter.ChooseMeng1Adapter;
 import com.duke.yinyangli.base.BaseActivity;
+import com.duke.yinyangli.base.BaseResultActivity;
 import com.duke.yinyangli.bean.database.DaoSession;
 import com.duke.yinyangli.bean.database.Zgjm;
 import com.duke.yinyangli.bean.database.ZgjmDao;
@@ -24,7 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
-public class ZhouGongJieMengChildActivity extends BaseActivity {
+public class ZhouGongJieMengChildActivity extends BaseResultActivity {
 
     @BindView(R.id.tips_title)
     TextView mTipTitle;
@@ -70,18 +71,6 @@ public class ZhouGongJieMengChildActivity extends BaseActivity {
         title.setText("周公解梦");
         mTipTitle.setText(mAriticle.getTitle());
 
-        right.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SimpleDialog.init(ZhouGongJieMengChildActivity.this, mAriticle.getTitle()
-                        , getString(R.string.tip_zhougongjiemeng), null)
-                        .showCancel(false)
-                        .setConfirmText(R.string.known)
-                        .setConfirmTextColor(R.color.blue_2288BB)
-                        .showDialog();
-            }
-        });
-
         ThreadHelper.INST.execute(new Runnable() {
             @Override
             public void run() {
@@ -103,5 +92,15 @@ public class ZhouGongJieMengChildActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public String getAboutDialogTitle() {
+        return mAriticle.getTitle();
+    }
+
+    @Override
+    public String getAboutDialogContent() {
+        return getString(R.string.tip_zhougongjiemeng);
     }
 }

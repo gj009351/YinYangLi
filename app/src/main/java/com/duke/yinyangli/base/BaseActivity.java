@@ -61,12 +61,11 @@ import top.zibin.luban.CompressionPredicate;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
-public abstract class BaseActivity extends AppCompatActivity implements SharePicModel.OnSharePicListener {
+public abstract class BaseActivity extends AppCompatActivity implements SharePicModel.OnSharePicListener, View.OnClickListener {
 
     private Unbinder unbinder;
     public TextView title;
     public ImageView left;
-    public ImageView right;
     public MyHandler mHandler;
     private SimpleDialog mDialog;
     private Dialog progressDialog;
@@ -94,14 +93,8 @@ public abstract class BaseActivity extends AppCompatActivity implements SharePic
     public void initView() {
         title = findViewById(R.id.title);
         left = findViewById(R.id.left);
-        right = findViewById(R.id.right);
         if (left != null) {
-            left.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    onBackPressed();
-                }
-            });
+            left.setOnClickListener(this);
         }
         mBannerAdView = findViewById(R.id.adView);
         if (mBannerAdView != null && AdmobUtils.isInit()) {
@@ -124,6 +117,13 @@ public abstract class BaseActivity extends AppCompatActivity implements SharePic
             unbinder = null;
         }
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.left) {
+            onBackPressed();
+        }
     }
 
 

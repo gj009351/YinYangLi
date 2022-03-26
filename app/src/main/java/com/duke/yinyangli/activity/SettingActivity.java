@@ -51,7 +51,6 @@ public class SettingActivity extends BaseActivity implements OnItemClickListener
     public void initView() {
         super.initView();
         title.setText(R.string.setting);
-        right.setVisibility(View.INVISIBLE);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(mAdapter = new SettingAdapter());
         mAdapter.loadSetting();

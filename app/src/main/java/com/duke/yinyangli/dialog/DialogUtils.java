@@ -17,6 +17,8 @@ import com.bigkoo.pickerview.view.TimePickerView;
 import com.duke.yinyangli.MyApplication;
 import com.duke.yinyangli.R;
 import com.duke.yinyangli.activity.AboutActivity;
+import com.duke.yinyangli.activity.GuaResultActivity;
+import com.duke.yinyangli.base.BaseActivity;
 
 import java.util.Calendar;
 
@@ -74,18 +76,19 @@ public class DialogUtils {
         return dialog;
     }
 
-    public static Dialog showBirthdayPicker(Context context, OnTimeSelectListener listener) {
+    public static Dialog showBirthdayPicker(BaseActivity activity, OnTimeSelectListener listener) {
         Dialog dialog = null;
         Calendar start = Calendar.getInstance();
         start.set(Calendar.YEAR, 1900);
         Calendar end = Calendar.getInstance();
-        TimePickerView pvTime = new TimePickerBuilder(context, listener)
+        TimePickerView pvTime = new TimePickerBuilder(activity, listener)
                 .setTitleBgColor(0xFFFAFAFC)
                 .setBgColor(0xFFEEEEEE)
-                .setCancelColor(0xFFFFFFFF)
+                .setCancelColor(0xFFA0A0A0)
                 .addOnCancelClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        activity.finish();
                     }
                 })
                 .setOutSideCancelable(false)
@@ -133,5 +136,13 @@ public class DialogUtils {
     public static void showNameDialog(Context context, String content, EditNameDialog.OnClickListener listener) {
         Dialog dialog = new EditNameDialog(context, content, listener);
         dialog.show();
+    }
+
+    public static void showAbountGuaDialog(Context context, String title, String content) {
+        SimpleDialog.init(context, title, content, null)
+                .showCancel(false)
+                .setConfirmText(R.string.known)
+                .setConfirmTextColor(R.color.blue_2288BB)
+                .showDialog();
     }
 }

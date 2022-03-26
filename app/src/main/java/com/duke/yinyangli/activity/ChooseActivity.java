@@ -104,7 +104,6 @@ public class ChooseActivity extends BaseActivity {
         super.initView();
         setTips();
         title.setText(R.string.select);
-        right.setVisibility(View.INVISIBLE);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new ChooseAdapter(this));
     }

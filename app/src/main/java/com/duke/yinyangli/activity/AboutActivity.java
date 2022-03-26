@@ -23,7 +23,6 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
     public void initView() {
         super.initView();
         title.setText(R.string.about);
-        right.setVisibility(View.INVISIBLE);
         View noduty = findViewById(R.id.noduty);
         noduty.setOnClickListener(this);
     }
@@ -32,6 +31,8 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
     public void onClick(View v) {
         if (v.getId() == R.id.noduty) {
             DialogUtils.showAboutDialog(this);
+        } else {
+            super.onClick(v);
         }
     }
 }

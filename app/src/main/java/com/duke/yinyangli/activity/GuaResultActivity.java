@@ -15,8 +15,10 @@ import com.duke.yinyangli.R;
 import com.duke.yinyangli.adapter.AllResultAdapter;
 import com.duke.yinyangli.adapter.GuaXiangAdapter;
 import com.duke.yinyangli.base.BaseActivity;
+import com.duke.yinyangli.base.BaseResultActivity;
 import com.duke.yinyangli.bean.JieGuaItem;
 import com.duke.yinyangli.constants.Constants;
+import com.duke.yinyangli.dialog.DialogUtils;
 import com.duke.yinyangli.dialog.SimpleDialog;
 import com.duke.yinyangli.interfaces.OnLoadListener;
 import com.duke.yinyangli.utils.LogUtils;
@@ -34,7 +36,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
-public class GuaResultActivity extends BaseActivity {
+public class GuaResultActivity extends BaseResultActivity {
 
 
     private static final long DURATION_DALEY_NRXT = 800;
@@ -107,27 +109,16 @@ public class GuaResultActivity extends BaseActivity {
             playFlip(image);
             playFlip(imageRight);
         }
+    }
 
-        right.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mAriticle.getType() == Constants.TYPE.TYPE_QIAN) {
-                    SimpleDialog.init(GuaResultActivity.this, mAriticle.getTitle()
-                            , getString(R.string.tip_zhiqianzhanbu), null)
-                            .showCancel(false)
-                            .setConfirmText(R.string.known)
-                            .setConfirmTextColor(R.color.blue_2288BB)
-                            .showDialog();
-                } else {
-                    SimpleDialog.init(GuaResultActivity.this, mAriticle.getTitle()
-                            , getString(R.string.tip_shicaozhanbu), null)
-                            .showCancel(false)
-                            .setConfirmText(R.string.known)
-                            .setConfirmTextColor(R.color.blue_2288BB)
-                            .showDialog();
-                }
-            }
-        });
+    @Override
+    public String getAboutDialogTitle() {
+        return mAriticle.getTitle();
+    }
+
+    @Override
+    public String getAboutDialogContent() {
+        return getString(mAriticle.getType() == Constants.TYPE.TYPE_QIAN ? R.string.tip_zhiqianzhanbu : R.string.tip_shicaozhanbu);
     }
 
     private void playFlip(ImageView imageView) {

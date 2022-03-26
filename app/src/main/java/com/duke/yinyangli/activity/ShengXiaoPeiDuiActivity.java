@@ -10,6 +10,7 @@ import com.duke.yinyangli.MyApplication;
 import com.duke.yinyangli.R;
 import com.duke.yinyangli.adapter.AllResultAdapter;
 import com.duke.yinyangli.base.BaseActivity;
+import com.duke.yinyangli.base.BaseResultActivity;
 import com.duke.yinyangli.bean.database.DaoSession;
 import com.duke.yinyangli.bean.database.ShuXiangLove;
 import com.duke.yinyangli.bean.database.ShuXiangLoveDao;
@@ -30,7 +31,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class ShengXiaoPeiDuiActivity extends BaseActivity {
+public class ShengXiaoPeiDuiActivity extends BaseResultActivity {
 
     @BindView(R.id.spinner_first)
     NiceSpinner mSpinner1;
@@ -70,6 +71,7 @@ public class ShengXiaoPeiDuiActivity extends BaseActivity {
         super.initView();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(mAdapter = new AllResultAdapter(this));
+        mSubmit.setOnClickListener(this);
     }
 
     @Override
@@ -77,66 +79,62 @@ public class ShengXiaoPeiDuiActivity extends BaseActivity {
         super.initData();
         mAriticle = (Article) getIntent().getSerializableExtra(Constants.INTENT_KEY.KEY_MODEL);
         title.setText(mAriticle.getTitle());
-
-        right.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SimpleDialog.init(ShengXiaoPeiDuiActivity.this, mAriticle.getTitle()
-                        , getString(R.string.tip_shengxiaopeidui), null)
-                        .showCancel(false)
-                        .setConfirmText(R.string.known)
-                        .setConfirmTextColor(R.color.blue_2288BB)
-                        .showDialog();
-            }
-        });
     }
 
-    @OnClick(R.id.submit)
+    @Override
+    public String getAboutDialogTitle() {
+        return mAriticle.getTitle();
+    }
+
+    @Override
+    public String getAboutDialogContent() {
+        return getString(R.string.tip_shengxiaopeidui);
+    }
+
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.submit:
-                String shengxiaoNv = (String) mSpinner1.getSelectedItem();
-                String shengxiaoNan = (String) mSpinner2.getSelectedItem();
-                if (TextUtils.isEmpty(shengxiaoNv)) {
-                    ToastUtil.show(this, "请选择女方的属相");
-                }
-                if (TextUtils.isEmpty(shengxiaoNan)) {
-                    ToastUtil.show(this, "请选择男方的属相");
-                }
-                showProgressDialog();
-                ThreadHelper.INST.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        DaoSession daoSession = MyApplication.getInstance().getDao();
-                        ShuXiangLove shengxiaoLove = daoSession.getShuXiangLoveDao().queryBuilder()
-                                .where(ShuXiangLoveDao.Properties.Shengxiao1.eq(shengxiaoNan)
-                                        , ShuXiangLoveDao.Properties.Shengxiao2.eq(shengxiaoNv)).unique();
+        if (view.getId() == R.id.submit) {
+            String shengxiaoNv = (String) mSpinner1.getSelectedItem();
+            String shengxiaoNan = (String) mSpinner2.getSelectedItem();
+            if (TextUtils.isEmpty(shengxiaoNv)) {
+                ToastUtil.show(this, "请选择女方的属相");
+            }
+            if (TextUtils.isEmpty(shengxiaoNan)) {
+                ToastUtil.show(this, "请选择男方的属相");
+            }
+            showProgressDialog();
+            ThreadHelper.INST.execute(new Runnable() {
+                @Override
+                public void run() {
+                    DaoSession daoSession = MyApplication.getInstance().getDao();
+                    ShuXiangLove shengxiaoLove = daoSession.getShuXiangLoveDao().queryBuilder()
+                            .where(ShuXiangLoveDao.Properties.Shengxiao1.eq(shengxiaoNan)
+                                    , ShuXiangLoveDao.Properties.Shengxiao2.eq(shengxiaoNv)).unique();
 
-                        List<Article> articles = new ArrayList<>();
-                        int titleIndex = shengxiaoLove.getContent1().indexOf("：");
-                        int length = shengxiaoLove.getContent1().length();
-                        String title = "女" + shengxiaoNv + " + " + "男" + shengxiaoNan;
-                        String content = shengxiaoLove.getContent1().substring(titleIndex + 1, length);
-                        articles.add(Article.create(title, content, ""));
+                    List<Article> articles = new ArrayList<>();
+                    int titleIndex = shengxiaoLove.getContent1().indexOf("：");
+                    int length = shengxiaoLove.getContent1().length();
+                    String title = "女" + shengxiaoNv + " + " + "男" + shengxiaoNan;
+                    String content = shengxiaoLove.getContent1().substring(titleIndex + 1, length);
+                    articles.add(Article.create(title, content, ""));
 
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                mAdapter.setResult(articles);
-                                mSpinner1.setEnabled(false);
-                                mSpinner2.setEnabled(false);
-                                mSubmit.setVisibility(View.GONE);
-                                ImageUtil.setShuXiangImage(mLeftImage, shengxiaoNv);
-                                ImageUtil.setShuXiangImage(mRightImage, shengxiaoNan);
-                                mCenterImage.setVisibility(View.VISIBLE);
-                                addTestCount(mAriticle);
-                                dismissProgressDialog();
-                            }
-                        });
-                    }
-                });
-                break;
-                default:break;
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mAdapter.setResult(articles);
+                            mSpinner1.setEnabled(false);
+                            mSpinner2.setEnabled(false);
+                            mSubmit.setVisibility(View.GONE);
+                            ImageUtil.setShuXiangImage(mLeftImage, shengxiaoNv);
+                            ImageUtil.setShuXiangImage(mRightImage, shengxiaoNan);
+                            mCenterImage.setVisibility(View.VISIBLE);
+                            addTestCount(mAriticle);
+                            dismissProgressDialog();
+                        }
+                    });
+                }
+            });
+        } else {
+            super.onClick(view);
         }
     }
 

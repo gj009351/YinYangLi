@@ -13,6 +13,7 @@ import com.duke.yinyangli.MyApplication;
 import com.duke.yinyangli.R;
 import com.duke.yinyangli.adapter.AllResultAdapter;
 import com.duke.yinyangli.base.BaseActivity;
+import com.duke.yinyangli.base.BaseResultActivity;
 import com.duke.yinyangli.bean.database.DaoSession;
 import com.duke.yinyangli.bean.database.Rgnm;
 import com.duke.yinyangli.bean.database.RgnmDao;
@@ -35,7 +36,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
-public class BaZiResultActivity extends BaseActivity {
+public class BaZiResultActivity extends BaseResultActivity {
 
 
     @BindView(R.id.image)
@@ -76,18 +77,6 @@ public class BaZiResultActivity extends BaseActivity {
         mAriticle = (Article) getIntent().getSerializableExtra(Constants.INTENT_KEY.KEY_MODEL);
         title.setText(mAriticle.getTitle());
         image.setImageResource(R.mipmap.bazi);
-
-        right.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SimpleDialog.init(BaZiResultActivity.this, mAriticle.getTitle()
-                        , getString(R.string.tip_baguasuanming), null)
-                        .showCancel(false)
-                        .setConfirmText(R.string.known)
-                        .setConfirmTextColor(R.color.blue_2288BB)
-                        .showDialog();
-            }
-        });
 
         DialogUtils.showBirthdayPicker(this, new OnTimeSelectListener() {
             @Override
@@ -157,6 +146,14 @@ public class BaZiResultActivity extends BaseActivity {
         LinearInterpolator lin = new LinearInterpolator();
         operatingAnim.setInterpolator(lin);
         image.startAnimation(operatingAnim);
+    }
+
+    public String getAboutDialogTitle() {
+        return mAriticle.getTitle();
+    }
+
+    public String getAboutDialogContent() {
+        return getString(R.string.tip_baguasuanming);
     }
 
     @Override
