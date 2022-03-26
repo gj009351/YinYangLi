@@ -64,13 +64,13 @@
   <LinearLayout
       android:id="@+id/llBottomView"
       android:layout_width="match_parent"
-      android:layout_height="96dp"
+      android:layout_height="88dp"
       android:padding="16dp"
       android:orientation="horizontal">
 
       <ImageView
-          android:layout_width="60dp"
-          android:layout_height="60dp"
+          android:layout_width="56dp"
+          android:layout_height="56dp"
           android:scaleType="centerCrop"
           android:src="@mipmap/ic_launcher" />
 
@@ -78,7 +78,7 @@
           android:layout_width="wrap_content"
           android:layout_weight="1"
           android:layout_height="60dp"
-          android:layout_marginStart="16dp"
+          android:layout_marginStart="8dp"
           android:gravity="center_vertical"
           android:orientation="vertical">
 
@@ -103,8 +103,8 @@
 
     <ImageView
         android:id="@+id/imgQrCode"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:src="@mipmap/qrcode" />
   </LinearLayout>
 </LinearLayout>

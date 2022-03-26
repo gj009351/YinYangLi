@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.duke.yinyangli.view.share.ShareGuaResultView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="@dimen/share_view_default_width"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/white_solid_radius_12dp"
+        android:padding="16dp"
+        android:minHeight="100dp"
+        android:layout_margin="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/result_origin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:text="六爻"
+                android:textColor="#333333"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/result_origin_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/result_master"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="主卦："
+                android:gravity="center"
+                android:textColor="#333333"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/result_master_list"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/result_changed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="变卦："
+                android:gravity="center"
+                android:textColor="#333333"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/result_changed_list"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/result_content_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</com.duke.yinyangli.view.share.ShareGuaResultView>

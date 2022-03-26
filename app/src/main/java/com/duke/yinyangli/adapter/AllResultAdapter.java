@@ -101,6 +101,10 @@ public class AllResultAdapter extends RecyclerView.Adapter<AllResultAdapter.View
         notifyDataSetChanged();
     }
 
+    public List<Article> getShareData() {
+        return mData.subList(0, 2);
+    }
+
     public void setResult(Calendar calendar, int[] result, ChengGuItem chengGuItem) {
         if (mData == null) {
             mData = new ArrayList<>();

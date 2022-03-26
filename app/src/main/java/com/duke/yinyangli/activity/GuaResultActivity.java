@@ -7,6 +7,7 @@ import android.animation.AnimatorSet;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Message;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ import com.duke.yinyangli.interfaces.OnLoadListener;
 import com.duke.yinyangli.utils.LogUtils;
 import com.duke.yinyangli.utils.core.JieGuaUtils;
 import com.duke.yinyangli.utils.core.ZhanBuUtils;
+import com.duke.yinyangli.view.share.ShareGuaResultView;
 import com.duke.yinyangli.view.spiderview.SpiderWebView;
 import com.haibin.calendarview.library.Article;
 
@@ -258,5 +260,16 @@ public class GuaResultActivity extends BaseResultActivity {
         }
     }
 
-
+    @Override
+    public View getShareContentView() {
+        ShareGuaResultView view = (ShareGuaResultView)(LayoutInflater.from(this).inflate(R.layout.share_gua_result, null));
+        view.setInfo(resultView.getText()
+                , resultMaster.getText()
+                , resultChanged.getText()
+                , mOriginAdapter.getData()
+                , mMasterAdapter.getData()
+                , mChangedAdapter.getData()
+                , mAllAdapter.getShareData());
+        return view;
+    }
 }

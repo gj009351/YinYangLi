@@ -36,6 +36,10 @@ public class GuaXiangAdapter extends RecyclerView.Adapter<GuaXiangAdapter.ViewHo
         notifyDataSetChanged();
     }
 
+    public List<GuaXiangItem> getData() {
+        return mData;
+    }
+
     public int getGuaXiang() {
         StringBuilder sb = new StringBuilder();
         for (GuaXiangItem item : mData) {
