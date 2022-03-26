@@ -33,7 +33,6 @@ public class ZhouGongJieMengChildActivity extends BaseResultActivity {
     RecyclerView mRecyclerView;
 
     private ChooseMeng1Adapter mAdapter;
-    private Article mAriticle;
 
     @Override
     public int getLayoutId() {
@@ -67,16 +66,16 @@ public class ZhouGongJieMengChildActivity extends BaseResultActivity {
     @Override
     public void initData() {
         super.initData();
-        mAriticle = (Article) getIntent().getSerializableExtra(Constants.INTENT_KEY.KEY_MODEL);
+        mArticle = (Article) getIntent().getSerializableExtra(Constants.INTENT_KEY.KEY_MODEL);
         title.setText("周公解梦");
-        mTipTitle.setText(mAriticle.getTitle());
+        mTipTitle.setText(mArticle.getTitle());
 
         ThreadHelper.INST.execute(new Runnable() {
             @Override
             public void run() {
                 DaoSession daoSession = MyApplication.getInstance().getDao();
                 List<Zgjm> zgjmList = daoSession.getZgjmDao().queryBuilder()
-                        .where(ZgjmDao.Properties.Jmlb.eq(mAriticle.getId())).list();
+                        .where(ZgjmDao.Properties.Jmlb.eq(mArticle.getId())).list();
                 List<Article> list = new ArrayList<>();
                 if (zgjmList != null && zgjmList.size() > 0) {
                     for (Zgjm zgjm : zgjmList) {
@@ -92,11 +91,6 @@ public class ZhouGongJieMengChildActivity extends BaseResultActivity {
                 }
             }
         });
-    }
-
-    @Override
-    public String getAboutDialogTitle() {
-        return mAriticle.getTitle();
     }
 
     @Override

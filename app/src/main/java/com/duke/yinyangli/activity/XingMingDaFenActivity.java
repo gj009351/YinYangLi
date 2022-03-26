@@ -40,7 +40,6 @@ public class XingMingDaFenActivity extends BaseResultActivity {
     RecyclerView recyclerView;
 
     private AllResultAdapter mAdapter;
-    private Article mAriticle;
 
     public static void start(Context context, Article article) {
         context.startActivity(new Intent(context, XingMingDaFenActivity.class)
@@ -68,14 +67,9 @@ public class XingMingDaFenActivity extends BaseResultActivity {
     @Override
     public void initData() {
         super.initData();
-        mAriticle = (Article) getIntent().getSerializableExtra(Constants.INTENT_KEY.KEY_MODEL);
-        title.setText(mAriticle.getTitle());
+        mArticle = (Article) getIntent().getSerializableExtra(Constants.INTENT_KEY.KEY_MODEL);
+        title.setText(mArticle.getTitle());
         editName.requestFocus();
-    }
-
-    @Override
-    public String getAboutDialogTitle() {
-        return mAriticle.getTitle();
     }
 
     @Override
@@ -142,7 +136,7 @@ public class XingMingDaFenActivity extends BaseResultActivity {
                                 editName.setEnabled(false);
                                 submit.setVisibility(View.GONE);
                                 divider.setBackgroundColor(editName.getCurrentTextColor());
-                                addTestCount(mAriticle);
+                                addTestCount(mArticle);
                                 dismissProgressDialog();
                             }
                         });

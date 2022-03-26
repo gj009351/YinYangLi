@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/llShareContainer"
-    android:layout_width="match_parent"
+    android:backgroundTint="@color/white_8ff0f0f0"
+    android:backgroundTintMode="src_over"
+    android:layout_width="@dimen/share_view_default_width"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
   <!-- 这里是顶部view -->
-  <LinearLayout
+    <LinearLayout
       android:id="@+id/llTopView"
-      android:layout_width="match_parent"
+        android:layout_width="@dimen/share_view_default_width"
       android:layout_height="wrap_content"
       android:padding="16dp"
       android:orientation="vertical">
@@ -48,23 +50,25 @@
   </LinearLayout>
 
   <!-- 这里绘制文字内容 -->
-  <LinearLayout
+    <LinearLayout
       android:id="@+id/llContent"
-      android:layout_width="match_parent"
+      android:layout_width="@dimen/share_view_content_width"
       android:layout_height="wrap_content"
       android:layout_marginBottom="10dp"
-      android:layout_marginLeft="20dp"
-      android:layout_marginRight="20dp"
+      android:layout_marginLeft="16dp"
+      android:layout_marginRight="16dp"
+      android:layout_below="@+id/llTopView"
       android:layout_marginTop="10dp"
       android:orientation="vertical">
 
   </LinearLayout>
 
   <!-- 这里是底部view -->
-  <LinearLayout
+    <LinearLayout
       android:id="@+id/llBottomView"
-      android:layout_width="match_parent"
+      android:layout_width="@dimen/share_view_default_width"
       android:layout_height="88dp"
+      android:layout_below="@+id/llContent"
       android:padding="16dp"
       android:orientation="horizontal">
 
@@ -75,7 +79,7 @@
           android:src="@mipmap/ic_launcher" />
 
       <LinearLayout
-          android:layout_width="wrap_content"
+          android:layout_width="match_parent"
           android:layout_weight="1"
           android:layout_height="60dp"
           android:layout_marginStart="8dp"
@@ -107,4 +111,4 @@
         android:layout_height="56dp"
         android:src="@mipmap/qrcode" />
   </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

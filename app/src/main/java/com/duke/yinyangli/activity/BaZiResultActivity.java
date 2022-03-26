@@ -44,7 +44,6 @@ public class BaZiResultActivity extends BaseResultActivity {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    private Article mAriticle;
     private AllResultAdapter mAdapter;
     private Runnable mSuanmingRuannable;
 
@@ -74,8 +73,8 @@ public class BaZiResultActivity extends BaseResultActivity {
     public void initData() {
         super.initData();
         mHandler = new MyHandler(this);
-        mAriticle = (Article) getIntent().getSerializableExtra(Constants.INTENT_KEY.KEY_MODEL);
-        title.setText(mAriticle.getTitle());
+        mArticle = (Article) getIntent().getSerializableExtra(Constants.INTENT_KEY.KEY_MODEL);
+        title.setText(mArticle.getTitle());
         image.setImageResource(R.mipmap.bazi);
 
         DialogUtils.showBirthdayPicker(this, new OnTimeSelectListener() {
@@ -119,7 +118,7 @@ public class BaZiResultActivity extends BaseResultActivity {
                                     public void run() {
                                         if (isSafe()) {
                                             mAdapter.setResult(rgnm, month, day, time, shuXiang, lunar, solar);
-                                            addTestCount(mAriticle);
+                                            addTestCount(mArticle);
                                             dismissProgressDialog();
                                         }
                                     }
@@ -146,10 +145,6 @@ public class BaZiResultActivity extends BaseResultActivity {
         LinearInterpolator lin = new LinearInterpolator();
         operatingAnim.setInterpolator(lin);
         image.startAnimation(operatingAnim);
-    }
-
-    public String getAboutDialogTitle() {
-        return mAriticle.getTitle();
     }
 
     public String getAboutDialogContent() {

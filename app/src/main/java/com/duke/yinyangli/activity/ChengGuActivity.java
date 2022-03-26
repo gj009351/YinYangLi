@@ -31,7 +31,6 @@ public class ChengGuActivity extends BaseResultActivity {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    private Article mAriticle;
     private AllResultAdapter mAdapter;
     private Runnable mChengGuRuannable;
 
@@ -61,8 +60,8 @@ public class ChengGuActivity extends BaseResultActivity {
     public void initData() {
         super.initData();
         mHandler = new MyHandler(this);
-        mAriticle = (Article) getIntent().getSerializableExtra(Constants.INTENT_KEY.KEY_MODEL);
-        title.setText(mAriticle.getTitle());
+        mArticle = (Article) getIntent().getSerializableExtra(Constants.INTENT_KEY.KEY_MODEL);
+        title.setText(mArticle.getTitle());
         image.setImageResource(R.mipmap.yuantiangang);
         DialogUtils.showBirthdayPicker(this, new OnTimeSelectListener() {
             @Override
@@ -81,18 +80,13 @@ public class ChengGuActivity extends BaseResultActivity {
                                         () -> {
                                             if (isSafe()) {
                                                 mAdapter.setResult(calendar, result, chengGuItem);
-                                                addTestCount(mAriticle);
+                                                addTestCount(mArticle);
                                                 dismissProgressDialog();
                                             }
                                         }
                                 )), 2000);
             }
         });
-    }
-
-    @Override
-    public String getAboutDialogTitle() {
-        return mAriticle.getTitle();
     }
 
     @Override

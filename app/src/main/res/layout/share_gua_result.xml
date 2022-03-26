@@ -2,17 +2,15 @@
 <com.duke.yinyangli.view.share.ShareGuaResultView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_width="@dimen/share_view_default_width"
+    android:layout_width="@dimen/share_view_content_width"
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/share_view_content_width"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@drawable/white_solid_radius_12dp"
         android:padding="16dp"
-        android:minHeight="100dp"
-        android:layout_margin="16dp">
+        android:minHeight="100dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -87,7 +85,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/result_content_list"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/share_view_content_width"
         android:layout_height="wrap_content" />
 
 </com.duke.yinyangli.view.share.ShareGuaResultView>

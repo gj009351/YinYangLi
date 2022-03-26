@@ -3,11 +3,14 @@ package com.duke.yinyangli.base;
 import com.duke.yinyangli.dialog.DialogUtils;
 import android.view.View;
 import com.duke.yinyangli.R;
+import com.haibin.calendarview.library.Article;
 
 public abstract class BaseResultActivity extends BaseActivity {
 
     private View about;
     private View share;
+
+    public Article mArticle;
 
     @Override
     public void initView() {
@@ -32,7 +35,14 @@ public abstract class BaseResultActivity extends BaseActivity {
         }
     }
 
-    public abstract String getAboutDialogTitle();
+    public String getAboutDialogTitle() {
+        return mArticle.getTitle();
+    }
+
+    @Override
+    public int getShareType() {
+        return mArticle.getType();
+    }
 
     public abstract String getAboutDialogContent();
 }

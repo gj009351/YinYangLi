@@ -25,7 +25,6 @@ public class ZhouGongJieMengActivity extends BaseResultActivity {
     RecyclerView mRecyclerView;
 
     private ChooseMeng1Adapter mAdapter;
-    private Article mAriticle;
 
     @Override
     public int getLayoutId() {
@@ -53,8 +52,8 @@ public class ZhouGongJieMengActivity extends BaseResultActivity {
     @Override
     public void initData() {
         super.initData();
-        mAriticle = (Article) getIntent().getSerializableExtra(Constants.INTENT_KEY.KEY_MODEL);
-        title.setText(mAriticle.getTitle());
+        mArticle = (Article) getIntent().getSerializableExtra(Constants.INTENT_KEY.KEY_MODEL);
+        title.setText(mArticle.getTitle());
 
         List<Article> list = new ArrayList<>();
         list.add(Article.create("人物（父母、老师、烈士、小贩...）", "", "").setId(1));
@@ -70,16 +69,10 @@ public class ZhouGongJieMengActivity extends BaseResultActivity {
         mAdapter.setOnItemClickListener(new ChooseMeng1Adapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position, Article article) {
-                addTestCount(mAriticle);
+                addTestCount(mArticle);
                 ZhouGongJieMengChildActivity.start(ZhouGongJieMengActivity.this, article);
             }
         });
-    }
-
-
-    @Override
-    public String getAboutDialogTitle() {
-        return mAriticle.getTitle();
     }
 
     @Override

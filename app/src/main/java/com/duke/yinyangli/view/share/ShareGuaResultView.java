@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.duke.yinyangli.R;
 import com.duke.yinyangli.adapter.AllResultAdapter;
 import com.duke.yinyangli.adapter.GuaXiangAdapter;
+import com.duke.yinyangli.adapter.ShareContentAdapter;
 import com.duke.yinyangli.bean.GuaXiangItem;
 import com.haibin.calendarview.library.Article;
 
@@ -32,7 +33,7 @@ public class ShareGuaResultView extends LinearLayout {
     private GuaXiangAdapter mOriginAdapter;
     private GuaXiangAdapter mMasterAdapter;
     private GuaXiangAdapter mChangedAdapter;
-    private AllResultAdapter mAllAdapter;
+    private ShareContentAdapter mAllAdapter;
 
     public ShareGuaResultView(Context context) {
         super(context);
@@ -65,7 +66,7 @@ public class ShareGuaResultView extends LinearLayout {
         resultChangedList.setAdapter(mChangedAdapter = new GuaXiangAdapter(getContext(), false));
 
         resultAll.setLayoutManager(new LinearLayoutManager(getContext()));
-        resultAll.setAdapter(mAllAdapter = new AllResultAdapter(getContext()));
+        resultAll.setAdapter(mAllAdapter = new ShareContentAdapter(getContext()));
     }
 
     public void setInfo(CharSequence originText, CharSequence masterText, CharSequence changedText

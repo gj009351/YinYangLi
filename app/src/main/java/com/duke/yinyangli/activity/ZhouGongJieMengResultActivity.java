@@ -6,20 +6,20 @@ import android.widget.TextView;
 
 import com.duke.yinyangli.R;
 import com.duke.yinyangli.base.BaseActivity;
+import com.duke.yinyangli.base.BaseResultActivity;
 import com.duke.yinyangli.constants.Constants;
 import com.duke.yinyangli.utils.StringUtils;
 import com.haibin.calendarview.library.Article;
 
 import butterknife.BindView;
 
-public class ZhouGongJieMengResultActivity extends BaseActivity {
+public class ZhouGongJieMengResultActivity extends BaseResultActivity {
 
     @BindView(R.id.tips_title)
     TextView mTipsTitle;
 
     @BindView(R.id.content)
     TextView mContent;
-    private Article mAriticle;
 
     @Override
     public int getLayoutId() {
@@ -39,9 +39,14 @@ public class ZhouGongJieMengResultActivity extends BaseActivity {
     @Override
     public void initView() {
         super.initView();
-        mAriticle = (Article) getIntent().getSerializableExtra(Constants.INTENT_KEY.KEY_MODEL);
+        mArticle = (Article) getIntent().getSerializableExtra(Constants.INTENT_KEY.KEY_MODEL);
         title.setText("周公解梦");
-        mTipsTitle.setText("梦的类型：" + mAriticle.getTitle());
-        mContent.setText("解梦：" + StringUtils.getString(mAriticle.getContent()).replace("·", ""));
+        mTipsTitle.setText("梦的类型：" + mArticle.getTitle());
+        mContent.setText("解梦：" + StringUtils.getString(mArticle.getContent()).replace("·", ""));
+    }
+
+    @Override
+    public String getAboutDialogContent() {
+        return getString(R.string.tip_zhougongjiemeng);
     }
 }

@@ -49,7 +49,6 @@ public class ShengXiaoPeiDuiActivity extends BaseResultActivity {
     View mSubmit;
 
     private AllResultAdapter mAdapter;
-    private Article mAriticle;
 
     @Override
     public int getLayoutId() {
@@ -77,13 +76,8 @@ public class ShengXiaoPeiDuiActivity extends BaseResultActivity {
     @Override
     public void initData() {
         super.initData();
-        mAriticle = (Article) getIntent().getSerializableExtra(Constants.INTENT_KEY.KEY_MODEL);
-        title.setText(mAriticle.getTitle());
-    }
-
-    @Override
-    public String getAboutDialogTitle() {
-        return mAriticle.getTitle();
+        mArticle = (Article) getIntent().getSerializableExtra(Constants.INTENT_KEY.KEY_MODEL);
+        title.setText(mArticle.getTitle());
     }
 
     @Override
@@ -127,7 +121,7 @@ public class ShengXiaoPeiDuiActivity extends BaseResultActivity {
                             ImageUtil.setShuXiangImage(mLeftImage, shengxiaoNv);
                             ImageUtil.setShuXiangImage(mRightImage, shengxiaoNan);
                             mCenterImage.setVisibility(View.VISIBLE);
-                            addTestCount(mAriticle);
+                            addTestCount(mArticle);
                             dismissProgressDialog();
                         }
                     });

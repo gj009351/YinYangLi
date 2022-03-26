@@ -50,7 +50,6 @@ public class XingZuoMingYunActivity extends BaseResultActivity {
     RecyclerView mRecyclerView;
 
     private AllResultAdapter mAdapter;
-    private Article mAriticle;
     private String mXingZuo;
     private String mXueXing;
 
@@ -80,8 +79,8 @@ public class XingZuoMingYunActivity extends BaseResultActivity {
     @Override
     public void initData() {
         super.initData();
-        mAriticle = (Article) getIntent().getSerializableExtra(Constants.INTENT_KEY.KEY_MODEL);
-        title.setText(mAriticle.getTitle());
+        mArticle = (Article) getIntent().getSerializableExtra(Constants.INTENT_KEY.KEY_MODEL);
+        title.setText(mArticle.getTitle());
 
         List<String> xingZuoList = new LinkedList<String>(Arrays.asList(getResources().getStringArray(R.array.array_xingzuo)));
         mXingZuoSpinner.attachDataSource(xingZuoList);
@@ -102,11 +101,6 @@ public class XingZuoMingYunActivity extends BaseResultActivity {
             }
         });
         mXueXing = (String) mXueXingSpinner.getItemAtPosition(0);
-    }
-
-    @Override
-    public String getAboutDialogTitle() {
-        return mAriticle.getTitle();
     }
 
     @Override
@@ -146,7 +140,7 @@ public class XingZuoMingYunActivity extends BaseResultActivity {
                             mXueXingSpinner.setEnabled(false);
                             mSubmit.setVisibility(View.GONE);
                             ImageUtil.setXingZuoImage(mImage, mXingZuo);
-                            addTestCount(mAriticle);
+                            addTestCount(mArticle);
                             dismissProgressDialog();
                         }
                     });

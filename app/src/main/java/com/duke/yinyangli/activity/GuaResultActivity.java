@@ -71,7 +71,6 @@ public class GuaResultActivity extends BaseResultActivity {
     private GuaXiangAdapter mMasterAdapter;
     private GuaXiangAdapter mChangedAdapter;
     private AllResultAdapter mAllAdapter;
-    private Article mAriticle;
 
     public static void start(Context context, Article article) {
         context.startActivity(new Intent(context, GuaResultActivity.class)
@@ -100,13 +99,13 @@ public class GuaResultActivity extends BaseResultActivity {
     public void initData() {
         super.initData();
         mHandler = new MyHandler(this);
-        mAriticle = (Article) getIntent().getSerializableExtra(Constants.INTENT_KEY.KEY_MODEL);
-        title.setText(mAriticle.getTitle());
-        image.setImageResource(mAriticle.getImgRes());
+        mArticle = (Article) getIntent().getSerializableExtra(Constants.INTENT_KEY.KEY_MODEL);
+        title.setText(mArticle.getTitle());
+        image.setImageResource(mArticle.getImgRes());
         setResult();
-        if (mAriticle.getType() == Constants.TYPE.TYPE_QIAN) {
-            imageLeft.setImageResource(mAriticle.getImgRes());
-            imageRight.setImageResource(mAriticle.getImgRes());
+        if (mArticle.getType() == Constants.TYPE.TYPE_QIAN) {
+            imageLeft.setImageResource(mArticle.getImgRes());
+            imageRight.setImageResource(mArticle.getImgRes());
             playFlip(imageLeft);
             playFlip(image);
             playFlip(imageRight);
@@ -114,13 +113,8 @@ public class GuaResultActivity extends BaseResultActivity {
     }
 
     @Override
-    public String getAboutDialogTitle() {
-        return mAriticle.getTitle();
-    }
-
-    @Override
     public String getAboutDialogContent() {
-        return getString(mAriticle.getType() == Constants.TYPE.TYPE_QIAN ? R.string.tip_zhiqianzhanbu : R.string.tip_shicaozhanbu);
+        return getString(mArticle.getType() == Constants.TYPE.TYPE_QIAN ? R.string.tip_zhiqianzhanbu : R.string.tip_shicaozhanbu);
     }
 
     private void playFlip(ImageView imageView) {
@@ -152,7 +146,7 @@ public class GuaResultActivity extends BaseResultActivity {
     }
 
     private void setResult() {
-        switch (mAriticle.getType()) {
+        switch (mArticle.getType()) {
             case Constants.TYPE.TYPE_CAO:
                 getResultCao();
                 break;
@@ -218,7 +212,7 @@ public class GuaResultActivity extends BaseResultActivity {
                                 if (isSafe() && jieGuaItem != null) {
                                     resultMaster.setText("主卦：" + jieGuaItem.getName());
                                     mAllAdapter.setResult(jieGuaItem);
-                                    addTestCount(mAriticle);
+                                    addTestCount(mArticle);
                                 }
                             }
                         });
@@ -232,7 +226,7 @@ public class GuaResultActivity extends BaseResultActivity {
                             }
                         });
             } else {
-                int result = mAriticle.getType() == Constants.TYPE.TYPE_CAO ? ZhanBuUtils.getResultCao()
+                int result = mArticle.getType() == Constants.TYPE.TYPE_CAO ? ZhanBuUtils.getResultCao()
                         : ZhanBuUtils.getResultQian();
                 list.add(result);
                 mOriginAdapter.refreshData(ZhanBuUtils.getGua(list, 0));

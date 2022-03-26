@@ -16,6 +16,7 @@ import com.duke.yinyangli.bean.database.DaoSession;
 import com.duke.yinyangli.constants.Constants;
 import com.duke.yinyangli.utils.SqliteUtil;
 import com.parse.Parse;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.mmkv.MMKV;
 import com.yuyh.library.imgsel.ISNav;
 import com.yuyh.library.imgsel.common.ImageLoader;
@@ -68,6 +69,8 @@ public class MyApplication extends Application {
 
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
+
+        CrashReport.initCrashReport(getApplicationContext(), "2a89e82776", false);
 
         // 自定义图片加载器
         ISNav.getInstance().init((ImageLoader) (context, path, imageView) -> Glide.with(context).load(path).into(imageView));

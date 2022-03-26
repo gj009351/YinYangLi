@@ -90,14 +90,20 @@ public class GeneratePictureManager {
      * 生成Bitmap
      */
     private Bitmap createBitmap(View view) {
-        int widthSpec = View.MeasureSpec.makeMeasureSpec(view.getLayoutParams().width, View.MeasureSpec.EXACTLY);
-        int heightSpec = View.MeasureSpec.makeMeasureSpec(view.getLayoutParams().height, View.MeasureSpec.EXACTLY);
+        int widthSpec = View.MeasureSpec.makeMeasureSpec(view.getLayoutParams().width, View.MeasureSpec.AT_MOST);
+        int heightSpec = View.MeasureSpec.makeMeasureSpec(view.getLayoutParams().height, View.MeasureSpec.AT_MOST);
         view.measure(0, 0);
         int measureWidth = view.getMeasuredWidth();
         int measureHeight = view.getMeasuredHeight();
         view.layout(0, 0, measureWidth, measureHeight);
         int width = view.getWidth();
         int height = view.getHeight();
+        if (width > 1080) {
+            width = 1080;
+        }
+        if (height > 2440) {
+            height = width * 16 / 9;
+        }
         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         view.draw(canvas);

@@ -43,7 +43,6 @@ public class ZhuGeShenSuanActivity extends BaseResultActivity {
 
 
     private AllResultAdapter mAdapter;
-    private Article mAriticle;
 
     @Override
     public int getLayoutId() {
@@ -74,13 +73,8 @@ public class ZhuGeShenSuanActivity extends BaseResultActivity {
     @Override
     public void initData() {
         super.initData();
-        mAriticle = (Article) getIntent().getSerializableExtra(Constants.INTENT_KEY.KEY_MODEL);
-        title.setText(mAriticle.getTitle());
-    }
-
-    @Override
-    public String getAboutDialogTitle() {
-        return mAriticle.getTitle();
+        mArticle = (Article) getIntent().getSerializableExtra(Constants.INTENT_KEY.KEY_MODEL);
+        title.setText(mArticle.getTitle());
     }
 
     @Override
@@ -132,7 +126,7 @@ public class ZhuGeShenSuanActivity extends BaseResultActivity {
                         mEditText.setEnabled(false);
                         mSubmit.setVisibility(View.GONE);
                         mDivider.setBackgroundColor(mEditText.getCurrentTextColor());
-                        addTestCount(mAriticle);
+                        addTestCount(mArticle);
                         dismissProgressDialog();
                     }
                 });
