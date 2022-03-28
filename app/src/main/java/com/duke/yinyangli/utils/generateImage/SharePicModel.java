@@ -48,6 +48,8 @@ public class SharePicModel extends GenerateModel {
         } else if (Constants.TYPE.TYPE_BAZI == mArticleType) {
             mSharePicView.setBackgroundColor(getColor(R.color.white));
             imageView.setImageResource(R.mipmap.bazi);
+        } else if (Constants.TYPE.TYPE_XINGMING == mArticleType) {
+            mSharePicView.setBackgroundColor(getColor(R.color.white));
         }
 
         ImageView userIcon = mSharePicView.findViewById(R.id.imgUserIcon);
