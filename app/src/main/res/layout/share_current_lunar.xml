@@ -1,13 +1,354 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layoutDirection="ltr">
 
-
-    <TextView
-        android:layout_width="300dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历万年历"/>
+        android:layout_marginStart="@dimen/normal_margin"
+        android:layout_marginTop="@dimen/small_margin"
+        android:layout_marginEnd="@dimen/normal_margin"
+        android:orientation="vertical"
+        android:padding="@dimen/huangli_detail_bg_border_size">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/huangli_detail_header_height"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="@dimen/normal_margin"
+                android:paddingBottom="@dimen/normal_margin">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@mipmap/jinriyi" />
+
+                    <com.duke.yinyangli.view.VerticalTextView
+                        android:id="@+id/yi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/small_margin" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@mipmap/jinriji" />
+
+                    <com.duke.yinyangli.view.VerticalTextView
+                        android:id="@+id/ji"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/small_margin" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/card_bg_color" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1px"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/small_margin"
+                android:paddingTop="@dimen/small_margin"
+                android:paddingRight="@dimen/small_margin"
+                android:paddingBottom="@dimen/large_margin">
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="mitype-demibold"
+                    android:textColor="@color/black_343339"
+                    android:textFontWeight="500"
+                    android:textSize="@dimen/huangli_detail_date_text_size" />
+
+                <TextView
+                    android:id="@+id/lunar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:textColor="@color/black_343339"
+                    android:textSize="@dimen/huangli_detail_lunar_text_size" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/tab_image_margin_top"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/solar_term"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/normal_margin"
+                        android:textColor="@color/black_343339"
+                        android:textSize="@dimen/card_title_text_size" />
+
+                    <TextView
+                        android:id="@+id/ba_zi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black_666666"
+                        android:textSize="@dimen/card_title_text_size" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/huang_li_tai_shen_min_height"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="1px"
+                    android:layout_weight="1"
+                    android:background="@color/card_bg_color"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TaiShenLabelTextStyle"
+                        android:text="@string/taishen" />
+
+                    <TextView
+                        android:id="@+id/tai_shen"
+                        style="@style/TaiShenContentTextStyle"
+                        android:layout_marginTop="@dimen/date_calculate_tab_margin_top" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="1px"
+                    android:layout_weight="1"
+                    android:background="@color/card_bg_color"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TaiShenLabelTextStyle"
+                        android:text="@string/xingxiu" />
+
+                    <TextView
+                        android:id="@+id/xing_xiu"
+                        style="@style/TaiShenContentTextStyle"
+                        android:layout_marginTop="@dimen/date_calculate_tab_margin_top" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="1px"
+                android:layout_weight="1"
+                android:paddingLeft="1px"
+                android:paddingRight="1px">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/card_bg_color"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TaiShenLabelTextStyle"
+                        android:layout_marginTop="18dp"
+                        android:text="@string/pengzu" />
+
+                    <TextView
+                        android:id="@+id/peng_zu1"
+                        style="@style/TaiShenContentTextStyle"
+                        android:layout_marginTop="@dimen/date_calculate_tab_margin_top" />
+
+                    <TextView
+                        android:id="@+id/peng_zu2"
+                        style="@style/TaiShenContentTextStyle"
+                        android:layout_marginTop="-1dp" />
+
+                    <TextView
+                        android:id="@+id/peng_zu3"
+                        style="@style/TaiShenContentTextStyle"
+                        android:layout_marginTop="@dimen/calendar_ad_btn_margin" />
+
+                    <TextView
+                        android:id="@+id/peng_zu4"
+                        style="@style/TaiShenContentTextStyle"
+                        android:layout_marginTop="-1dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="1px"
+                    android:layout_weight="1"
+                    android:background="@color/card_bg_color"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TaiShenLabelTextStyle"
+                        android:text="@string/wuxing" />
+
+                    <TextView
+                        android:id="@+id/wu_xing"
+                        style="@style/TaiShenContentTextStyle"
+                        android:layout_marginTop="@dimen/date_calculate_tab_margin_top" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="1px"
+                    android:layout_weight="1"
+                    android:background="@color/card_bg_color"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TaiShenLabelTextStyle"
+                        android:text="@string/chongsha" />
+
+                    <TextView
+                        android:id="@+id/chong_sha"
+                        style="@style/TaiShenContentTextStyle"
+                        android:layout_marginTop="@dimen/date_calculate_tab_margin_top"
+                        android:maxEms="5" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1px"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:weightSum="4">
+
+                <TextView
+                    android:id="@+id/jixiong1"
+                    style="@style/JiXiongTextStyle" />
+
+                <TextView
+                    android:id="@+id/jixiong2"
+                    style="@style/JiXiongTextStyle"
+                    android:layout_marginLeft="1px" />
+
+                <TextView
+                    android:id="@+id/jixiong3"
+                    style="@style/JiXiongTextStyle"
+                    android:layout_marginLeft="1px" />
+
+                <TextView
+                    android:id="@+id/jixiong4"
+                    style="@style/JiXiongTextStyle"
+                    android:layout_marginLeft="1px" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="1px"
+                android:paddingRight="1px"
+                android:weightSum="4">
+
+                <TextView
+                    android:id="@+id/jixiong5"
+                    style="@style/JiXiongTextStyle" />
+
+                <TextView
+                    android:id="@+id/jixiong6"
+                    style="@style/JiXiongTextStyle"
+                    android:layout_marginLeft="1px" />
+
+                <TextView
+                    android:id="@+id/jixiong7"
+                    style="@style/JiXiongTextStyle"
+                    android:layout_marginLeft="1px" />
+
+                <TextView
+                    android:id="@+id/jixiong8"
+                    style="@style/JiXiongTextStyle"
+                    android:layout_marginLeft="1px" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:weightSum="4">
+
+                <TextView
+                    android:id="@+id/jixiong9"
+                    style="@style/JiXiongTextStyle" />
+
+                <TextView
+                    android:id="@+id/jixiong10"
+                    style="@style/JiXiongTextStyle"
+                    android:layout_marginLeft="1px" />
+
+                <TextView
+                    android:id="@+id/jixiong11"
+                    style="@style/JiXiongTextStyle"
+                    android:layout_marginLeft="1px" />
+
+                <TextView
+                    android:id="@+id/jixiong12"
+                    style="@style/JiXiongTextStyle"
+                    android:layout_marginLeft="1px" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

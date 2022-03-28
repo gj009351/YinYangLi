@@ -50,4 +50,36 @@
         <item name="android:colorControlNormal">@color/black_666666</item>
         <item name="android:colorControlActivated">@color/black_333333</item>
     </style>
+
+    <style name="TextStyle" parent="Widget.AppCompat.TextView">
+    </style>
+
+    <style name="TaiShenContentTextStyle" parent="@style/TextStyle">
+        <item name="android:textSize">@dimen/list_secondary_text_size</item>
+        <item name="android:textColor">@color/black_666666</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="TaiShenLabelTextStyle" parent="@style/TextStyle">
+        <item name="android:textSize">@dimen/card_title_text_size</item>
+        <item name="android:textColor">@color/black_343339</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="JiXiongTextStyle" parent="@style/TextStyle">
+        <item name="android:textSize">@dimen/list_secondary_text_size</item>
+        <item name="android:gravity">0x11</item>
+        <item name="android:background">@color/card_bg_color</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">@dimen/huang_li_ji_xiong_min_height</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+
+    <dimen name="list_secondary_text_size">12sp</dimen>
 </resources>

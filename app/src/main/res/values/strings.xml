@@ -175,6 +175,12 @@
     <string name="admob_banner_main_unit_id">@string/admob_banner_test_unit_id</string>
     <string name="admob_banner_choose_unit_id">@string/admob_banner_test_unit_id</string>
     <string name="admob_banner_result_unit_id">@string/admob_banner_test_unit_id</string>
+    <string name="word">我</string>
+    <string name="taishen">胎神</string>
+    <string name="xingxiu">星宿</string>
+    <string name="pengzu">彭祖</string>
+    <string name="wuxing">五行</string>
+    <string name="chongsha">冲煞</string>
 
     <!--  =============================  release  ==========================       -->
 <!--    <string name="admob_reward_unit_id">ca-app-pub-9923626397118153/6215617469</string>-->
