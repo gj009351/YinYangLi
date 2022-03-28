@@ -3,22 +3,25 @@ package com.duke.yinyangli.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.duke.yinyangli.MyApplication;
 import com.duke.yinyangli.R;
 import com.duke.yinyangli.adapter.AllResultAdapter;
-import com.duke.yinyangli.base.BaseActivity;
 import com.duke.yinyangli.base.BaseResultActivity;
 import com.duke.yinyangli.bean.database.DaoSession;
 import com.duke.yinyangli.bean.database.ShuXiangLove;
 import com.duke.yinyangli.bean.database.ShuXiangLoveDao;
 import com.duke.yinyangli.constants.Constants;
-import com.duke.yinyangli.dialog.SimpleDialog;
 import com.duke.yinyangli.utils.ThreadHelper;
 import com.duke.yinyangli.utils.ToastUtil;
 import com.duke.yinyangli.utils.core.ImageUtil;
+import com.duke.yinyangli.view.share.ShengXiaoPeiduiView;
 import com.haibin.calendarview.library.Article;
 
 import org.angmarch.views.NiceSpinner;
@@ -26,10 +29,7 @@ import org.angmarch.views.NiceSpinner;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
-import butterknife.OnClick;
 
 public class ShengXiaoPeiDuiActivity extends BaseResultActivity {
 
@@ -49,6 +49,8 @@ public class ShengXiaoPeiDuiActivity extends BaseResultActivity {
     View mSubmit;
 
     private AllResultAdapter mAdapter;
+    private String mShengxiaoNv;
+    private String mShengxiaoNan;
 
     @Override
     public int getLayoutId() {
@@ -87,12 +89,12 @@ public class ShengXiaoPeiDuiActivity extends BaseResultActivity {
 
     public void onClick(View view) {
         if (view.getId() == R.id.submit) {
-            String shengxiaoNv = (String) mSpinner1.getSelectedItem();
-            String shengxiaoNan = (String) mSpinner2.getSelectedItem();
-            if (TextUtils.isEmpty(shengxiaoNv)) {
+            mShengxiaoNv = (String) mSpinner1.getSelectedItem();
+            mShengxiaoNan = (String) mSpinner2.getSelectedItem();
+            if (TextUtils.isEmpty(mShengxiaoNv)) {
                 ToastUtil.show(this, "请选择女方的属相");
             }
-            if (TextUtils.isEmpty(shengxiaoNan)) {
+            if (TextUtils.isEmpty(mShengxiaoNan)) {
                 ToastUtil.show(this, "请选择男方的属相");
             }
             showProgressDialog();
@@ -101,13 +103,13 @@ public class ShengXiaoPeiDuiActivity extends BaseResultActivity {
                 public void run() {
                     DaoSession daoSession = MyApplication.getInstance().getDao();
                     ShuXiangLove shengxiaoLove = daoSession.getShuXiangLoveDao().queryBuilder()
-                            .where(ShuXiangLoveDao.Properties.Shengxiao1.eq(shengxiaoNan)
-                                    , ShuXiangLoveDao.Properties.Shengxiao2.eq(shengxiaoNv)).unique();
+                            .where(ShuXiangLoveDao.Properties.Shengxiao1.eq(mShengxiaoNan)
+                                    , ShuXiangLoveDao.Properties.Shengxiao2.eq(mShengxiaoNv)).unique();
 
                     List<Article> articles = new ArrayList<>();
                     int titleIndex = shengxiaoLove.getContent1().indexOf("：");
                     int length = shengxiaoLove.getContent1().length();
-                    String title = "女" + shengxiaoNv + " + " + "男" + shengxiaoNan;
+                    String title = "女" + mShengxiaoNv + " + " + "男" + mShengxiaoNan;
                     String content = shengxiaoLove.getContent1().substring(titleIndex + 1, length);
                     articles.add(Article.create(title, content, ""));
 
@@ -118,8 +120,8 @@ public class ShengXiaoPeiDuiActivity extends BaseResultActivity {
                             mSpinner1.setEnabled(false);
                             mSpinner2.setEnabled(false);
                             mSubmit.setVisibility(View.GONE);
-                            ImageUtil.setShuXiangImage(mLeftImage, shengxiaoNv);
-                            ImageUtil.setShuXiangImage(mRightImage, shengxiaoNan);
+                            ImageUtil.setShuXiangImage(mLeftImage, mShengxiaoNv);
+                            ImageUtil.setShuXiangImage(mRightImage, mShengxiaoNan);
                             mCenterImage.setVisibility(View.VISIBLE);
                             addTestCount(mArticle);
                             dismissProgressDialog();
@@ -132,4 +134,10 @@ public class ShengXiaoPeiDuiActivity extends BaseResultActivity {
         }
     }
 
+    @Override
+    public View getShareContentView() {
+        ShengXiaoPeiduiView view = (ShengXiaoPeiduiView) LayoutInflater.from(this).inflate(R.layout.share_shengxiao_peidui, null);
+        view.setInfo(mShengxiaoNv, mShengxiaoNan, mAdapter.getShareData(getShareType()));
+        return view;
+    }
 }

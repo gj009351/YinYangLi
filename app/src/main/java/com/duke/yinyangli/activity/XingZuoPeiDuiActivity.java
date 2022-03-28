@@ -3,6 +3,7 @@ package com.duke.yinyangli.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -19,6 +20,7 @@ import com.duke.yinyangli.dialog.SimpleDialog;
 import com.duke.yinyangli.utils.ThreadHelper;
 import com.duke.yinyangli.utils.ToastUtil;
 import com.duke.yinyangli.utils.core.ImageUtil;
+import com.duke.yinyangli.view.share.XingZuoPeiduiView;
 import com.haibin.calendarview.library.Article;
 
 import org.angmarch.views.NiceSpinner;
@@ -49,6 +51,8 @@ public class XingZuoPeiDuiActivity extends BaseResultActivity {
     View mSubmit;
 
     private AllResultAdapter mAdapter;
+    private String mXingzuoNv;
+    private String mXingzuoNan;
 
     @Override
     public int getLayoutId() {
@@ -87,12 +91,12 @@ public class XingZuoPeiDuiActivity extends BaseResultActivity {
 
     public void onClick(View view) {
         if (view.getId() == R.id.submit) {
-            String xingzuoNv = (String) mSpinner1.getSelectedItem();
-            String xingzuoNan = (String) mSpinner2.getSelectedItem();
-            if (TextUtils.isEmpty(xingzuoNv)) {
+            mXingzuoNv = (String) mSpinner1.getSelectedItem();
+            mXingzuoNan = (String) mSpinner2.getSelectedItem();
+            if (TextUtils.isEmpty(mXingzuoNv)) {
                 ToastUtil.show(this, "请选择女方的星座");
             }
-            if (TextUtils.isEmpty(xingzuoNan)) {
+            if (TextUtils.isEmpty(mXingzuoNan)) {
                 ToastUtil.show(this, "请选择男方的星座");
             }
             showProgressDialog();
@@ -101,8 +105,8 @@ public class XingZuoPeiDuiActivity extends BaseResultActivity {
                 public void run() {
                     DaoSession daoSession = MyApplication.getInstance().getDao();
                     XingZuoLove xingZuoLove = daoSession.getXingZuoLoveDao().queryBuilder()
-                            .where(XingZuoLoveDao.Properties.Xingzuo1.eq(xingzuoNv)
-                                    , XingZuoLoveDao.Properties.Xingzuo2.eq(xingzuoNan)).unique();
+                            .where(XingZuoLoveDao.Properties.Xingzuo1.eq(mXingzuoNv)
+                                    , XingZuoLoveDao.Properties.Xingzuo2.eq(mXingzuoNan)).unique();
 
                     List<Article> articles = new ArrayList<>();
                     articles.add(Article.create(xingZuoLove.getTitle(), xingZuoLove.getContent1(), ""));
@@ -115,8 +119,8 @@ public class XingZuoPeiDuiActivity extends BaseResultActivity {
                             mSpinner1.setEnabled(false);
                             mSpinner2.setEnabled(false);
                             mSubmit.setVisibility(View.GONE);
-                            ImageUtil.setXingZuoImage(mLeftImage, xingzuoNv);
-                            ImageUtil.setXingZuoImage(mRightImage, xingzuoNan);
+                            ImageUtil.setXingZuoImage(mLeftImage, mXingzuoNv);
+                            ImageUtil.setXingZuoImage(mRightImage, mXingzuoNan);
                             mCenterImage.setVisibility(View.VISIBLE);
                             addTestCount(mArticle);
                             dismissProgressDialog();
@@ -129,4 +133,10 @@ public class XingZuoPeiDuiActivity extends BaseResultActivity {
         }
     }
 
+    @Override
+    public View getShareContentView() {
+        XingZuoPeiduiView view = (XingZuoPeiduiView) LayoutInflater.from(this).inflate(R.layout.share_xingzuo_peidui, null);
+        view.setInfo(mXingzuoNv, mXingzuoNan, mAdapter.getShareData(getShareType()));
+        return view;
+    }
 }

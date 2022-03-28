@@ -55,6 +55,12 @@ public class SharePicModel extends GenerateModel {
         } else if (Constants.TYPE.TYPE_XINGZUOMINGYUN == mArticleType) {
             ImageUtil.setXingZuoImage(imageView, mXingZuo);
             mSharePicView.setBackgroundColor(getColor(R.color.white));
+        } else if (Constants.TYPE.TYPE_XINGZUOPEIDUI == mArticleType) {
+            imageView.setImageResource(R.mipmap.peidui);
+            mSharePicView.setBackgroundColor(getColor(R.color.white));
+        } else if (Constants.TYPE.TYPE_SHENGXIAOPEIDUI == mArticleType) {
+            imageView.setImageResource(R.mipmap.peidui);
+            mSharePicView.setBackgroundColor(getColor(R.color.white));
         }
 
         ImageView userIcon = mSharePicView.findViewById(R.id.imgUserIcon);
