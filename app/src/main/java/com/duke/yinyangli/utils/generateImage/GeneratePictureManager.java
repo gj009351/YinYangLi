@@ -101,7 +101,7 @@ public class GeneratePictureManager {
         if (width > 2000) {
             width = 1080;
         }
-        if (height > 20000) {
+        if (height > 30000) {
             height = width * 22 / 9;
         }
         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);

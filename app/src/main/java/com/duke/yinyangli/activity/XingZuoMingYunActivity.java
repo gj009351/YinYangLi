@@ -3,6 +3,7 @@ package com.duke.yinyangli.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -21,6 +22,7 @@ import com.duke.yinyangli.dialog.SimpleDialog;
 import com.duke.yinyangli.utils.ThreadHelper;
 import com.duke.yinyangli.utils.ToastUtil;
 import com.duke.yinyangli.utils.core.ImageUtil;
+import com.duke.yinyangli.view.share.XingZuoResultView;
 import com.haibin.calendarview.library.Article;
 
 import org.angmarch.views.NiceSpinner;
@@ -151,4 +153,15 @@ public class XingZuoMingYunActivity extends BaseResultActivity {
         }
     }
 
+    @Override
+    public View getShareContentView() {
+        XingZuoResultView view = (XingZuoResultView) LayoutInflater.from(this).inflate(R.layout.share_xing_zuo, null);
+        view.setInfo(mAdapter.getShareData(getShareType()));
+        return view;
+    }
+
+    @Override
+    public String getShareXingZuo() {
+        return mXingZuo;
+    }
 }

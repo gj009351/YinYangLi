@@ -191,6 +191,7 @@ public abstract class BaseActivity extends AppCompatActivity implements SharePic
         showProgressDialog();
         SharePicModel sharePicModel = new SharePicModel((ViewGroup) getWindow().getDecorView());
         sharePicModel.setSharePicListener(this);
+        sharePicModel.setShareXingZuo(getShareXingZuo());
         sharePicModel.setShareType(getShareType());
         GeneratePictureManager.getInstance().generate(sharePicModel, (throwable, filePath, bitmap) -> {
             if (throwable != null || bitmap == null) {
@@ -255,6 +256,10 @@ public abstract class BaseActivity extends AppCompatActivity implements SharePic
 
     public int getShareType() {
         return -1;
+    }
+
+    public String getShareXingZuo() {
+        return "";
     }
 
     public void showToast(int textResId) {

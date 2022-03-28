@@ -17,6 +17,7 @@ import com.duke.yinyangli.constants.Constants;
 import com.duke.yinyangli.utils.FileUtils;
 import com.duke.yinyangli.utils.ImageUtils;
 import com.duke.yinyangli.utils.UserInfo;
+import com.duke.yinyangli.utils.core.ImageUtil;
 import com.haibin.calendarview.library.Article;
 
 
@@ -29,6 +30,7 @@ public class SharePicModel extends GenerateModel {
     private View mSharePicView;
     private int mArticleType;
     private OnSharePicListener mListener;
+    private String mXingZuo;
 
     public SharePicModel(ViewGroup rootView) {
         super(rootView);
@@ -49,6 +51,9 @@ public class SharePicModel extends GenerateModel {
             mSharePicView.setBackgroundColor(getColor(R.color.white));
             imageView.setImageResource(R.mipmap.bazi);
         } else if (Constants.TYPE.TYPE_XINGMING == mArticleType) {
+            mSharePicView.setBackgroundColor(getColor(R.color.white));
+        } else if (Constants.TYPE.TYPE_XINGZUOMINGYUN == mArticleType) {
+            ImageUtil.setXingZuoImage(imageView, mXingZuo);
             mSharePicView.setBackgroundColor(getColor(R.color.white));
         }
 
@@ -99,7 +104,43 @@ public class SharePicModel extends GenerateModel {
         mArticleType = type;
     }
 
+    public void setShareXingZuo(String xingZuo) {
+        mXingZuo = xingZuo;
+    }
+
     private int getColor(int colorResId) {
         return getView().getResources().getColor(colorResId);
     }
+
+    private int getXingZuoBackground() {
+        switch (mXingZuo) {
+            case "水瓶座":
+                return R.mipmap.share_bg_shuiping;
+            case "白羊座":
+                return R.mipmap.share_bg_baiyang;
+            case "金牛座":
+                return R.mipmap.share_bg_jinniu;
+            case "双子座":
+                return R.mipmap.share_bg_shuangzi;
+            case "巨蟹座":
+                return R.mipmap.share_bg_juxie;
+            case "狮子座":
+                return R.mipmap.share_bg_shizi;
+            case "处女座":
+                return R.mipmap.share_bg_chunv;
+            case "天秤座":
+                return R.mipmap.share_bg_tiancheng;
+            case "天蝎座":
+                return R.mipmap.share_bg_tianxie;
+            case "射手座":
+                return R.mipmap.share_bg_sheshou;
+            case "摩羯座":
+                return R.mipmap.share_bg_mojie;
+            case "双鱼座":
+                return R.mipmap.share_bg_shuangyu;
+            default:
+                return R.mipmap.share_bg_jinniu;
+        }
+    }
+
 }

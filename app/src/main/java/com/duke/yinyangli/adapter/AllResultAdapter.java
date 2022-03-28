@@ -107,6 +107,8 @@ public class AllResultAdapter extends RecyclerView.Adapter<AllResultAdapter.View
     public List<Article> getShareData(int shareType) {
         if (Constants.TYPE.TYPE_CAO == shareType || Constants.TYPE.TYPE_QIAN == shareType) {
             return mData.subList(0, 2);
+        } else if (Constants.TYPE.TYPE_XINGZUOMINGYUN == shareType) {
+            return mData.subList(0, 1);
         }
         return mData;
     }
