@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.duke.yinyangli.view.share.ZhouGongResultView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="400dp"
+    android:minHeight="400dp">
+
+    <ImageView
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        android:alpha="0.1"
+        android:scaleType="fitXY"
+        android:layout_centerInParent="true"
+        android:src="@mipmap/top_logo_zgjm"/>
+
+    <TextView
+        android:id="@+id/share_zgjm_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/black_333333"
+        android:padding="16dp"/>
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_below="@+id/share_zgjm_title"
+        android:textColor="@color/black_666666"
+        android:padding="16dp"/>
+
+</com.duke.yinyangli.view.share.ZhouGongResultView>

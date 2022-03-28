@@ -19,12 +19,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
-public class ZhouGongJieMengActivity extends BaseResultActivity {
+public class ZhouGongJieMengActivity extends BaseActivity {
 
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
 
     private ChooseMeng1Adapter mAdapter;
+
+    private Article mArticle;
 
     @Override
     public int getLayoutId() {
@@ -75,8 +77,4 @@ public class ZhouGongJieMengActivity extends BaseResultActivity {
         });
     }
 
-    @Override
-    public String getAboutDialogContent() {
-        return getString(R.string.tip_zhougongjiemeng);
-    }
 }
