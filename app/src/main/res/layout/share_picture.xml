@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <!-- 这里是顶部view -->
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/llTopView"
         android:layout_width="@dimen/share_view_default_width"
         android:layout_height="wrap_content"
@@ -28,6 +28,7 @@
             android:layout_marginTop="16dp"
             android:ellipsize="end"
             android:maxLines="1"
+            android:layout_below="@+id/imgUserIcon"
             android:textColor="@color/black_343339"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -37,14 +38,19 @@
             android:id="@+id/tvUserDes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
             android:layout_marginTop="16dp"
             android:ellipsize="end"
-            android:maxLines="1"
+            android:layout_below="@+id/tvUserName"
             android:textColor="@color/black_666666"
             android:textSize="12sp"
             tools:text="用户签名" />
-    </LinearLayout>
+
+        <ImageView
+            android:id="@+id/image_right"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
 
     <!-- 这里绘制文字内容 -->
     <LinearLayout

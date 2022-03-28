@@ -61,11 +61,13 @@ public class AllResultAdapter extends RecyclerView.Adapter<AllResultAdapter.View
         mData.add(Article.create("日干心性", rgnm.getRgxx(), 0));
         mData.add(Article.create("日干支层次", rgnm.getRgcz(), 0));
         mData.add(Article.create("日干支分析", rgnm.getRgzfx(), 0));
-        List<String> mingli = new ArrayList<>();
-        mingli.add(lunar.getMonthInChinese() + "生：" + month.getMingmi());
-        mingli.add(lunar.getDayInChinese() + "生：" + day.getMingmi());
-        mingli.add(lunar.getTimeZhi2() + "生：" + time.getMingmi());
-        mData.add(Article.create("月日时命理", rgnm.getRgzfx(), 0));
+        if (month != null) {
+            List<String> mingli = new ArrayList<>();
+            mingli.add(lunar.getMonthInChinese() + "生：" + month.getMingmi());
+            mingli.add(lunar.getDayInChinese() + "生：" + day.getMingmi());
+            mingli.add(lunar.getTimeZhi2() + "生：" + time.getMingmi());
+            mData.add(Article.create("月日时命理", mingli, 0));
+        }
         mData.add(Article.create("性格分析", rgnm.getXgfx(), 0));
         mData.add(Article.create("爱情分析", rgnm.getAqfx(), 0));
         mData.add(Article.create("事业分析", rgnm.getSyfx(), 0));
@@ -105,8 +107,6 @@ public class AllResultAdapter extends RecyclerView.Adapter<AllResultAdapter.View
     public List<Article> getShareData(int shareType) {
         if (Constants.TYPE.TYPE_CAO == shareType || Constants.TYPE.TYPE_QIAN == shareType) {
             return mData.subList(0, 2);
-        } else if (Constants.TYPE.TYPE_CHENGGU == shareType) {
-            return mData;
         }
         return mData;
     }

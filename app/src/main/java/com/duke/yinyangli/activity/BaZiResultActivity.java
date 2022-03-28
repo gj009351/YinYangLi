@@ -2,6 +2,7 @@ package com.duke.yinyangli.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -26,6 +27,7 @@ import com.duke.yinyangli.calendar.Solar;
 import com.duke.yinyangli.constants.Constants;
 import com.duke.yinyangli.dialog.DialogUtils;
 import com.duke.yinyangli.dialog.SimpleDialog;
+import com.duke.yinyangli.view.share.BaZiResultView;
 import com.haibin.calendarview.library.Article;
 
 import java.io.File;
@@ -84,7 +86,6 @@ public class BaZiResultActivity extends BaseResultActivity {
                 Solar solar = Solar.fromDate(date);
 
                 showProgressDialog();
-                startRotate();
                 mHandler.post(mSuanmingRuannable = new Runnable() {
                     @Override
                     public void run() {
@@ -97,9 +98,6 @@ public class BaZiResultActivity extends BaseResultActivity {
 
                             DaoSession daoSession = MyApplication.getInstance().getDao();
                             if (daoSession != null) {
-
-                                List<Rgnm> rgnmList = daoSession.getRgnmDao().queryBuilder().list();
-
                                 Rgnm rgnm = daoSession.getRgnmDao().queryBuilder()
                                         .where(RgnmDao.Properties.Rgz.eq(ganzhi)).unique();
 
@@ -140,15 +138,15 @@ public class BaZiResultActivity extends BaseResultActivity {
         });
     }
 
-    private void startRotate() {
-        Animation operatingAnim = AnimationUtils.loadAnimation(this, R.anim.rotate);
-        LinearInterpolator lin = new LinearInterpolator();
-        operatingAnim.setInterpolator(lin);
-        image.startAnimation(operatingAnim);
-    }
-
     public String getAboutDialogContent() {
         return getString(R.string.tip_baguasuanming);
+    }
+
+    @Override
+    public View getShareContentView() {
+        BaZiResultView view = (BaZiResultView) LayoutInflater.from(this).inflate(R.layout.share_ba_zi, null);
+        view.setInfo(mAdapter.getShareData(getShareType()));
+        return view;
     }
 
     @Override
@@ -161,4 +159,5 @@ public class BaZiResultActivity extends BaseResultActivity {
         }
         super.onDestroy();
     }
+
 }
