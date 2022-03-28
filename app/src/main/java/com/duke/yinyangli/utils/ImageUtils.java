@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.ExifInterface;
 import android.os.Environment;
 import android.renderscript.Allocation;
@@ -11,6 +12,7 @@ import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.ImageView;
 
 import java.io.BufferedOutputStream;
@@ -22,6 +24,10 @@ public class ImageUtils {
 
     public static void setBlur(Context context, ImageView imageView, int resource) {
         imageView.setImageBitmap(blur(context, BitmapFactory.decodeResource(context.getResources(), resource), 25));
+    }
+
+    public static void setBlur(Context context, View view, int resource) {
+        view.setBackground(new BitmapDrawable(blur(context, BitmapFactory.decodeResource(context.getResources(), resource), 10)));
     }
 
     public static Bitmap blur(Context context, Bitmap bitmap, float radius) {

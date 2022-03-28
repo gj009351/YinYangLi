@@ -2,6 +2,7 @@ package com.duke.yinyangli.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -17,6 +18,7 @@ import com.duke.yinyangli.constants.Constants;
 import com.duke.yinyangli.dialog.DialogUtils;
 import com.duke.yinyangli.dialog.SimpleDialog;
 import com.duke.yinyangli.utils.core.ChengguUtils;
+import com.duke.yinyangli.view.share.ChengGuResultView;
 import com.haibin.calendarview.library.Article;
 
 import java.util.Calendar;
@@ -100,5 +102,12 @@ public class ChengGuActivity extends BaseResultActivity {
             mHandler.removeCallbacks(mChengGuRuannable);
         }
         super.onDestroy();
+    }
+
+    @Override
+    public View getShareContentView() {
+        ChengGuResultView view = (ChengGuResultView)(LayoutInflater.from(this).inflate(R.layout.share_cheng_gu, null));
+        view.setInfo(mAdapter.getShareData(getShareType()));
+        return view;
     }
 }

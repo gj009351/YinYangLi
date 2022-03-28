@@ -263,7 +263,7 @@ public class GuaResultActivity extends BaseResultActivity {
                 , mOriginAdapter.getData()
                 , mMasterAdapter.getData()
                 , mChangedAdapter.getData()
-                , mAllAdapter.getShareData());
+                , mAllAdapter.getShareData(getShareType()));
         return view;
     }
 }

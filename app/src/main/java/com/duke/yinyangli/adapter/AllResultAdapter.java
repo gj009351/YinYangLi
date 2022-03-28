@@ -18,6 +18,7 @@ import com.duke.yinyangli.bean.database.Rysmn;
 import com.duke.yinyangli.bean.database.ShuXiang;
 import com.duke.yinyangli.calendar.Lunar;
 import com.duke.yinyangli.calendar.Solar;
+import com.duke.yinyangli.constants.Constants;
 import com.duke.yinyangli.utils.StringUtils;
 import com.haibin.calendarview.library.Article;
 
@@ -101,8 +102,13 @@ public class AllResultAdapter extends RecyclerView.Adapter<AllResultAdapter.View
         notifyDataSetChanged();
     }
 
-    public List<Article> getShareData() {
-        return mData.subList(0, 2);
+    public List<Article> getShareData(int shareType) {
+        if (Constants.TYPE.TYPE_CAO == shareType || Constants.TYPE.TYPE_QIAN == shareType) {
+            return mData.subList(0, 2);
+        } else if (Constants.TYPE.TYPE_CHENGGU == shareType) {
+            return mData;
+        }
+        return mData;
     }
 
     public void setResult(Calendar calendar, int[] result, ChengGuItem chengGuItem) {

@@ -1,5 +1,7 @@
 package com.duke.yinyangli.utils.generateImage;
 
+import android.content.res.ColorStateList;
+import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import com.duke.yinyangli.MyApplication;
 import com.duke.yinyangli.R;
 import com.duke.yinyangli.constants.Constants;
 import com.duke.yinyangli.utils.FileUtils;
+import com.duke.yinyangli.utils.ImageUtils;
 import com.duke.yinyangli.utils.UserInfo;
 import com.haibin.calendarview.library.Article;
 
@@ -35,13 +38,16 @@ public class SharePicModel extends GenerateModel {
     protected void startPrepare(GeneratePictureManager.OnGenerateListener listener) throws Exception {
         mSharePicView = LayoutInflater.from(mContext).inflate(R.layout.share_picture, mRootView, false);
 
-        ImageView background = mSharePicView.findViewById(R.id.background);
+//            ImageUtils.setBlur(mSharePicView.getContext(), mSharePicView, R.mipmap.share_chenggu);
         if (Constants.TYPE.TYPE_CAO == mArticleType || Constants.TYPE.TYPE_QIAN == mArticleType) {
             mSharePicView.setBackgroundResource(R.mipmap.suangua);
+            mSharePicView.getBackground().setColorFilter(getView().getResources().getColor(R.color.white_8ff0f0f0), PorterDuff.Mode.SRC_OVER);
+        } else if (Constants.TYPE.TYPE_CHENGGU == mArticleType) {
+            mSharePicView.setBackgroundResource(R.mipmap.share_chenggu);
         }
 
-        ImageView imageView = mSharePicView.findViewById(R.id.imgUserIcon);
-        Glide.with(MyApplication.getInstance().getApplicationContext()).load(UserInfo.getUserIcon()).placeholder(R.mipmap.usericon).into(imageView);
+        ImageView userIcon = mSharePicView.findViewById(R.id.imgUserIcon);
+        Glide.with(MyApplication.getInstance().getApplicationContext()).load(UserInfo.getUserIcon()).placeholder(R.mipmap.usericon).into(userIcon);
 
         TextView name = mSharePicView.findViewById(R.id.tvUserName);
         name.setText(UserInfo.getUserName());
