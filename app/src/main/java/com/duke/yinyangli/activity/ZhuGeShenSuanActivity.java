@@ -3,6 +3,7 @@ package com.duke.yinyangli.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
@@ -19,6 +20,8 @@ import com.duke.yinyangli.dialog.SimpleDialog;
 import com.duke.yinyangli.utils.LimitInputTextWatcher;
 import com.duke.yinyangli.utils.ToastUtil;
 import com.duke.yinyangli.utils.core.mingzidafen.BhFTWxLib;
+import com.duke.yinyangli.view.share.ChengGuResultView;
+import com.duke.yinyangli.view.share.ZhuGeResultView;
 import com.haibin.calendarview.library.Article;
 import com.luhuiguo.chinese.ChineseUtils;
 
@@ -43,6 +46,7 @@ public class ZhuGeShenSuanActivity extends BaseResultActivity {
 
 
     private AllResultAdapter mAdapter;
+    private String mResult;
 
     @Override
     public int getLayoutId() {
@@ -92,12 +96,12 @@ public class ZhuGeShenSuanActivity extends BaseResultActivity {
             }
             String text = mEditText.getText().toString();
             if (text.length() == 3) {
-                String result = ChineseUtils.toSimplified(text);
+                mResult = ChineseUtils.toSimplified(text);
                 BhFTWxLib lib = new BhFTWxLib();
                 int total = 0;
-                int first = lib.getStringLibs(result.charAt(0));
-                int second = lib.getStringLibs(result.charAt(1));
-                int third = lib.getStringLibs(result.charAt(2));
+                int first = lib.getStringLibs(mResult.charAt(0));
+                int second = lib.getStringLibs(mResult.charAt(1));
+                int third = lib.getStringLibs(mResult.charAt(2));
                 first = first % 10;
                 second = second % 10;
                 third = third % 10;
@@ -136,6 +140,13 @@ public class ZhuGeShenSuanActivity extends BaseResultActivity {
         } else {
             super.onClick(view);
         }
+    }
+
+    @Override
+    public View getShareContentView() {
+        ZhuGeResultView view = (ZhuGeResultView)(LayoutInflater.from(this).inflate(R.layout.share_zhugeshensuan, null));
+        view.setInfo(mResult, mAdapter.getShareData(getShareType()));
+        return view;
     }
 
 }
