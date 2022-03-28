@@ -74,14 +74,6 @@ dependencies {
     implementation 'com.gyf.immersionbar:immersionbar-components:3.0.0'
     //multidex
     implementation 'com.bytedance.boost_multidex:boost_multidex:1.0.0'
-    //    implementation "io.reactivex.rxjava2:rxjava:2.2.6"
-    //    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
-    //    implementation 'com.squareup.retrofit2:retrofit:2.8.1'
-    //    implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
-    //    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.8.1'
-    //    implementation "com.squareup.okhttp:okhttp:2.7.5"
-    //    implementation 'com.squareup.okhttp3:okhttp:3.14.7'
-    //    implementation 'com.squareup.okio:okio:1.17.2'
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.text:alginlib:1.0.1'
@@ -105,13 +97,4 @@ dependencies {
     implementation 'com.github.arcadefire:nice-spinner:1.4.4'
     implementation 'com.google.android.gms:play-services-ads:19.6.0'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
-
-    //back4app-parse
-    implementation "com.github.parse-community.Parse-SDK-Android:parse:$parseVersion"
-    // for Google login/signup support (optional)
-    implementation "com.github.parse-community.Parse-SDK-Android:google:$parseVersion"
-    // for FCM Push support (optional)
-    implementation "com.github.parse-community.Parse-SDK-Android:fcm:$parseVersion"
-    // for RxJava support (optional)
-    implementation "com.github.parse-community.Parse-SDK-Android:rxjava:$parseVersion"
 }

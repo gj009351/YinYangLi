@@ -200,7 +200,7 @@ public abstract class BaseActivity extends AppCompatActivity implements SharePic
                 Luban.with(this)
                         .load(filePath)
                         .ignoreBy(100)
-                        .setTargetDir(FileUtils.getTimeNameImage(BaseActivity.this))
+                        .setTargetDir(FileUtils.getPhotoDirectoryString(BaseActivity.this))
                         .filter(new CompressionPredicate() {
                             @Override
                             public boolean apply(String path) {

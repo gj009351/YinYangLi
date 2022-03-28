@@ -98,11 +98,11 @@ public class GeneratePictureManager {
         view.layout(0, 0, measureWidth, measureHeight);
         int width = view.getWidth();
         int height = view.getHeight();
-        if (width > 1080) {
+        if (width > 2000) {
             width = 1080;
         }
-        if (height > 2440) {
-            height = width * 16 / 9;
+        if (height > 4000) {
+            height = width * 22 / 9;
         }
         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);

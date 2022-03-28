@@ -183,10 +183,4 @@
 <!--    <string name="admob_banner_choose_unit_id">ca-app-pub-9923626397118153/6379456347</string>-->
 <!--    <string name="admob_banner_result_unit_id">ca-app-pub-9923626397118153/8814047990</string>-->
 
-
-
-
-    <string name="back4app_server_url">https://parseapi.back4app.com/</string>
-    <string name="back4app_app_id">YXNLHaYiA4QMEfAeROuhzAvg8OXpjLf6HKh7IO0v</string>
-    <string name="back4app_client_key">L2DQmNzuoEMaIAZZUplu50U1QsNV75pDUHoXxlm1</string>
 </resources>
