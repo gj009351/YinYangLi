@@ -127,35 +127,4 @@ public class SharePicModel extends GenerateModel {
         return getView().getResources().getColor(colorResId);
     }
 
-    private int getXingZuoBackground() {
-        switch (mXingZuo) {
-            case "水瓶座":
-                return R.mipmap.share_bg_shuiping;
-            case "白羊座":
-                return R.mipmap.share_bg_baiyang;
-            case "金牛座":
-                return R.mipmap.share_bg_jinniu;
-            case "双子座":
-                return R.mipmap.share_bg_shuangzi;
-            case "巨蟹座":
-                return R.mipmap.share_bg_juxie;
-            case "狮子座":
-                return R.mipmap.share_bg_shizi;
-            case "处女座":
-                return R.mipmap.share_bg_chunv;
-            case "天秤座":
-                return R.mipmap.share_bg_tiancheng;
-            case "天蝎座":
-                return R.mipmap.share_bg_tianxie;
-            case "射手座":
-                return R.mipmap.share_bg_sheshou;
-            case "摩羯座":
-                return R.mipmap.share_bg_mojie;
-            case "双鱼座":
-                return R.mipmap.share_bg_shuangyu;
-            default:
-                return R.mipmap.share_bg_jinniu;
-        }
-    }
-
 }
