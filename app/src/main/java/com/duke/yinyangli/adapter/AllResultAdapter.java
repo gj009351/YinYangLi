@@ -45,27 +45,30 @@ public class AllResultAdapter extends RecyclerView.Adapter<AllResultAdapter.View
         List<String> birthdays = new ArrayList<>();
         birthdays.add("公历（阳历）：" + solar.getYear() + "年 " + solar.getMonth() + "月 " + solar.getDay() + "日 " + solar.getHour() + "时");
         birthdays.add("农历（阴历）：" + lunar.getYearInChinese() + "年 " + lunar.getMonthInChinese() + "月 " + lunar.getDayInChinese() + " " + lunar.getTimeZhi2());
-        mData.add(Article.create("出生日期：", getStringFromList(birthdays, true), 0));
-        mData.add(Article.create("生肖：" ,lunar.getYearShengXiao() ,0));
-        mData.add(Article.create("八字", getStringFromList(lunar.getBaZi(), false), 0));
-        mData.add(Article.create("五行", getStringFromList(lunar.getBaZiWuXing(),false), 0));
-        mData.add(Article.create("纳音", getStringFromList(lunar.getBaZiNaYin(), false), 0));
-        mData.add(Article.create("十二值星", lunar.getZhiXing(), 0));
-        List<String> shishen = new ArrayList<>();
-        shishen.add("干：" + lunar.getBaZiShiShenGan());
-        shishen.add("支：" + lunar.getBaZiShiShenZhi());
-        mData.add(Article.create("十神", shishen, 0));
-        mData.add(Article.create("四宫", lunar.getGong(), 0));
-        mData.add(Article.create("七政", lunar.getZheng(), 0));
-        mData.add(Article.create("四神兽", lunar.getShou(), 0));
+        mData.add(Article.create("出生日期：", StringUtils.getStringFromList(birthdays, true), 0));
+        mData.add(Article.create("生肖：" + lunar.getYearShengXiao() ,0));
+        mData.add(Article.create("八字：" + StringUtils.getStringFromList(lunar.getBaZi(), false), 0));
+        mData.add(Article.create("五行：" + StringUtils.getStringFromList(lunar.getBaZiWuXing(),false), 0));
+        mData.add(Article.create("纳音：" + StringUtils.getStringFromList(lunar.getBaZiNaYin(), false), 0));
+        mData.add(Article.create("十二值星：" + lunar.getZhiXing(), 0));
+        mData.add(Article.create("四宫：" + lunar.getGong(), 0));
+        mData.add(Article.create("七政：" + lunar.getZheng(), 0));
+        mData.add(Article.create("四神兽：" + lunar.getShou(), 0));
+        mData.add(Article.create("十神", "干：" + lunar.getBaZiShiShenGan() + "\n支：" + lunar.getBaZiShiShenZhi(), 0));
         mData.add(Article.create("日干心性", rgnm.getRgxx(), 0));
         mData.add(Article.create("日干支层次", rgnm.getRgcz(), 0));
         mData.add(Article.create("日干支分析", rgnm.getRgzfx(), 0));
+        List<String> mingli = new ArrayList<>();
         if (month != null) {
-            List<String> mingli = new ArrayList<>();
             mingli.add(lunar.getMonthInChinese() + "生：" + month.getMingmi());
+        }
+        if (day != null) {
             mingli.add(lunar.getDayInChinese() + "生：" + day.getMingmi());
+        }
+        if (time != null) {
             mingli.add(lunar.getTimeZhi2() + "生：" + time.getMingmi());
+        }
+        if (mingli.size() > 0) {
             mData.add(Article.create("月日时命理", mingli, 0));
         }
         mData.add(Article.create("性格分析", rgnm.getXgfx(), 0));
@@ -76,17 +79,6 @@ public class AllResultAdapter extends RecyclerView.Adapter<AllResultAdapter.View
         mData.add(Article.create("生肖分析",  shuXiang.getContent(), 0));
 
         notifyDataSetChanged();
-    }
-
-    private String getStringFromList(List<String> list, boolean huanhang) {
-        StringBuilder sb = new StringBuilder();
-        if (list != null && !list.isEmpty()) {
-            for (String item : list) {
-                sb.append(item);
-                sb.append(huanhang ? "\n" : " ");
-            }
-        }
-        return sb.toString();
     }
 
     public void setResult(JieGuaItem item) {
@@ -107,6 +99,8 @@ public class AllResultAdapter extends RecyclerView.Adapter<AllResultAdapter.View
     public List<Article> getShareData(int shareType) {
         if (Constants.TYPE.TYPE_CAO == shareType || Constants.TYPE.TYPE_QIAN == shareType) {
             return mData.subList(0, 2);
+        } else if (Constants.TYPE.TYPE_BAZI == shareType) {
+            return mData.subList(0, 1);
         } else if (Constants.TYPE.TYPE_XINGZUOMINGYUN == shareType) {
             return mData.subList(0, 1);
         }

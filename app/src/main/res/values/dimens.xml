@@ -1,7 +1,7 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="ball_default_bottom">60dp</dimen>
-    <dimen name="ball_default_end">60dp</dimen>
+    <dimen name="ball_default_bottom">40dp</dimen>
+    <dimen name="ball_default_end">40dp</dimen>
     <dimen name="top_view_height">48dp</dimen>
     <dimen name="list_item_height_large">56dp</dimen>
     <dimen name="list_item_height">48dp</dimen>

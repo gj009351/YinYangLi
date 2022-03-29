@@ -6,6 +6,8 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class StringUtils {
 
     public static String getString(String origin) {
@@ -27,4 +29,16 @@ public class StringUtils {
                 , before.length(), (before + center).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // 设置前景色为洋红色
         tv.setText(spanString);
     }
+
+    public static String getStringFromList(List<String> list, boolean huanhang) {
+        StringBuilder sb = new StringBuilder();
+        if (list != null && !list.isEmpty()) {
+            for (String item : list) {
+                sb.append(item);
+                sb.append(huanhang ? "\n" : " ");
+            }
+        }
+        return sb.toString();
+    }
+
 }

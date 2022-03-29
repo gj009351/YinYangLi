@@ -34,58 +34,6 @@ public class ShareContentAdapter extends RecyclerView.Adapter<ShareContentAdapte
         mContext = context;
     }
 
-
-    public void setResult(Rgnm rgnm, Rysmn month, Rysmn day, Rysmn time, ShuXiang shuXiang, Lunar lunar, Solar solar) {
-        if (mData == null) {
-            mData = new ArrayList<>();
-        } else {
-            mData.clear();
-        }
-        List<String> birthdays = new ArrayList<>();
-        birthdays.add("公历（阳历）：" + solar.getYear() + "年 " + solar.getMonth() + "月 " + solar.getDay() + "日 " + solar.getHour() + "时");
-        birthdays.add("农历（阴历）：" + lunar.getYearInChinese() + "年 " + lunar.getMonthInChinese() + "月 " + lunar.getDayInChinese() + " " + lunar.getTimeZhi2());
-        mData.add(Article.create("出生日期：", getStringFromList(birthdays, true), 0));
-        mData.add(Article.create("生肖：" ,lunar.getYearShengXiao() ,0));
-        mData.add(Article.create("八字", getStringFromList(lunar.getBaZi(), false), 0));
-        mData.add(Article.create("五行", getStringFromList(lunar.getBaZiWuXing(),false), 0));
-        mData.add(Article.create("纳音", getStringFromList(lunar.getBaZiNaYin(), false), 0));
-        mData.add(Article.create("十二值星", lunar.getZhiXing(), 0));
-        List<String> shishen = new ArrayList<>();
-        shishen.add("干：" + lunar.getBaZiShiShenGan());
-        shishen.add("支：" + lunar.getBaZiShiShenZhi());
-        mData.add(Article.create("十神", shishen, 0));
-        mData.add(Article.create("四宫", lunar.getGong(), 0));
-        mData.add(Article.create("七政", lunar.getZheng(), 0));
-        mData.add(Article.create("四神兽", lunar.getShou(), 0));
-        mData.add(Article.create("日干心性", rgnm.getRgxx(), 0));
-        mData.add(Article.create("日干支层次", rgnm.getRgcz(), 0));
-        mData.add(Article.create("日干支分析", rgnm.getRgzfx(), 0));
-        List<String> mingli = new ArrayList<>();
-        mingli.add(lunar.getMonthInChinese() + "生：" + month.getMingmi());
-        mingli.add(lunar.getDayInChinese() + "生：" + day.getMingmi());
-        mingli.add(lunar.getTimeZhi2() + "生：" + time.getMingmi());
-        mData.add(Article.create("月日时命理", rgnm.getRgzfx(), 0));
-        mData.add(Article.create("性格分析", rgnm.getXgfx(), 0));
-        mData.add(Article.create("爱情分析", rgnm.getAqfx(), 0));
-        mData.add(Article.create("事业分析", rgnm.getSyfx(), 0));
-        mData.add(Article.create("财运分析", rgnm.getCyfx(), 0));
-        mData.add(Article.create("健康分析", rgnm.getJkfx(), 0));
-        mData.add(Article.create("生肖分析",  shuXiang.getContent(), 0));
-
-        notifyDataSetChanged();
-    }
-
-    private String getStringFromList(List<String> list, boolean huanhang) {
-        StringBuilder sb = new StringBuilder();
-        if (list != null && !list.isEmpty()) {
-            for (String item : list) {
-                sb.append(item);
-                sb.append(huanhang ? "\n" : " ");
-            }
-        }
-        return sb.toString();
-    }
-
     public void setResult(JieGuaItem item) {
         if (mData == null) {
             mData = new ArrayList<>();

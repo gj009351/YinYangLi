@@ -48,6 +48,14 @@ public class BaZiResultActivity extends BaseResultActivity {
 
     private AllResultAdapter mAdapter;
     private Runnable mSuanmingRuannable;
+    private Rgnm mRgnm;
+    private Rysmn mRysmn;
+    private ShuXiang mShuXiang;
+    private Rysmn mMonth;
+    private Rysmn mDay;
+    private Rysmn mTime;
+    private Lunar mLunar;
+    private Solar mSolar;
 
     public static void start(Context context, Article article) {
         context.startActivity(new Intent(context, BaZiResultActivity.class)
@@ -82,8 +90,8 @@ public class BaZiResultActivity extends BaseResultActivity {
         DialogUtils.showBirthdayPicker(this, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
-                Lunar lunar = Lunar.fromDate(date);
-                Solar solar = Solar.fromDate(date);
+                mLunar = Lunar.fromDate(date);
+                mSolar = Solar.fromDate(date);
 
                 showProgressDialog();
                 mHandler.post(mSuanmingRuannable = new Runnable() {
@@ -91,31 +99,31 @@ public class BaZiResultActivity extends BaseResultActivity {
                     public void run() {
 
                         if (isSafe()) {
-                            String ganzhi = lunar.getDayInGanZhi();
+                            String ganzhi = mLunar.getDayInGanZhi();
                             File outFileName = getDatabasePath(Constants.DB_NAME);
                             boolean exists = outFileName.exists();
                             long size = outFileName.length();
 
                             DaoSession daoSession = MyApplication.getInstance().getDao();
                             if (daoSession != null) {
-                                Rgnm rgnm = daoSession.getRgnmDao().queryBuilder()
+                                mRgnm = daoSession.getRgnmDao().queryBuilder()
                                         .where(RgnmDao.Properties.Rgz.eq(ganzhi)).unique();
 
-                                Rysmn month = daoSession.getRysmnDao().queryBuilder()
-                                        .where(RysmnDao.Properties.Siceng.eq(lunar.getMonthInChinese2())).unique();
-                                Rysmn day = daoSession.getRysmnDao().queryBuilder()
-                                        .where(RysmnDao.Properties.Siceng.eq(lunar.getDayInChinese2())).unique();
-                                Rysmn time = daoSession.getRysmnDao().queryBuilder()
-                                        .where(RysmnDao.Properties.Siceng.eq(lunar.getTimeZhi2())).unique();
+                                mMonth = daoSession.getRysmnDao().queryBuilder()
+                                        .where(RysmnDao.Properties.Siceng.eq(mLunar.getMonthInChinese2())).unique();
+                                mDay = daoSession.getRysmnDao().queryBuilder()
+                                        .where(RysmnDao.Properties.Siceng.eq(mLunar.getDayInChinese2())).unique();
+                                mTime = daoSession.getRysmnDao().queryBuilder()
+                                        .where(RysmnDao.Properties.Siceng.eq(mLunar.getTimeZhi2())).unique();
 
-                                ShuXiang shuXiang = daoSession.getShuXiangDao().queryBuilder()
-                                        .where(ShuXiangDao.Properties.Title.eq(lunar.getYearShengXiao())).unique();
+                                mShuXiang = daoSession.getShuXiangDao().queryBuilder()
+                                        .where(ShuXiangDao.Properties.Title.eq(mLunar.getYearShengXiao())).unique();
 
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
                                         if (isSafe()) {
-                                            mAdapter.setResult(rgnm, month, day, time, shuXiang, lunar, solar);
+                                            mAdapter.setResult(mRgnm, mMonth, mDay, mTime, mShuXiang, mLunar, mSolar);
                                             addTestCount(mArticle);
                                             dismissProgressDialog();
                                         }
@@ -145,7 +153,7 @@ public class BaZiResultActivity extends BaseResultActivity {
     @Override
     public View getShareContentView() {
         BaZiResultView view = (BaZiResultView) LayoutInflater.from(this).inflate(R.layout.share_ba_zi, null);
-        view.setInfo(mAdapter.getShareData(getShareType()));
+        view.setInfo(mRgnm, mMonth, mDay, mTime, mShuXiang, mLunar, mSolar);
         return view;
     }
 

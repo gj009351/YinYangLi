@@ -42,9 +42,12 @@ public class SharePicModel extends GenerateModel {
 
         ImageView imageView = mSharePicView.findViewById(R.id.image_right);
 //            ImageUtils.setBlur(mSharePicView.getContext(), mSharePicView, R.mipmap.share_chenggu);
-        if (Constants.TYPE.TYPE_CAO == mArticleType || Constants.TYPE.TYPE_QIAN == mArticleType) {
-            mSharePicView.setBackgroundResource(R.mipmap.suangua);
-            mSharePicView.getBackground().setColorFilter(getColor(R.color.white_8ff0f0f0), PorterDuff.Mode.SRC_OVER);
+        if (Constants.TYPE.TYPE_CAO == mArticleType) {
+            mSharePicView.setBackgroundColor(getColor(R.color.white));
+            imageView.setImageResource(R.mipmap.cao_black);
+        } else if (Constants.TYPE.TYPE_QIAN == mArticleType) {
+            mSharePicView.setBackgroundColor(getColor(R.color.white));
+            imageView.setImageResource(R.mipmap.qian_black);
         } else if (Constants.TYPE.TYPE_CHENGGU == mArticleType) {
             mSharePicView.setBackgroundResource(R.mipmap.share_chenggu);
         } else if (Constants.TYPE.TYPE_BAZI == mArticleType) {

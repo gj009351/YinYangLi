@@ -61,6 +61,13 @@ public class Article implements Serializable {
         return article;
     }
 
+    public static Article create(String title, int imgRes) {
+        Article article = new Article();
+        article.setTitle(title);
+        article.setImgResource(imgRes);
+        return article;
+    }
+
     public static Article create(String title, String content, int imgRes) {
         Article article = new Article();
         article.setTitle(title);
