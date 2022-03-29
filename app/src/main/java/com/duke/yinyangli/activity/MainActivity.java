@@ -5,13 +5,10 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
+import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListPopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -31,13 +28,12 @@ import com.duke.yinyangli.constants.Constants;
 import com.duke.yinyangli.constants.Event;
 import com.duke.yinyangli.dialog.DialogUtils;
 import com.duke.yinyangli.utils.AdmobUtils;
-import com.duke.yinyangli.utils.AppUtils;
-import com.duke.yinyangli.utils.DisplayUtils;
 import com.duke.yinyangli.utils.LogUtils;
+import com.duke.yinyangli.utils.generateImage.GeneratePictureManager;
+import com.duke.yinyangli.utils.generateImage.ShareLunarModel;
 import com.duke.yinyangli.view.FloatViewBall;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.LoadAdError;
 import com.haibin.calendarview.group.GroupItemDecoration;
@@ -49,6 +45,7 @@ import com.haibin.calendarview.library.CalendarView;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.core.BasePopupView;
 import com.lxj.xpopup.interfaces.OnSelectListener;
+import com.lxj.xpopup.util.SmartGlideImageLoader;
 import com.tencent.mmkv.MMKV;
 
 import java.util.Date;
@@ -102,6 +99,7 @@ public class MainActivity extends BaseActivity implements
     private InterstitialAd mInterstitialAd;
     private boolean mInBack;
     private boolean mGoToOther;
+    private Calendar mSelectCalendar;
 
     public static void show(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
@@ -248,6 +246,7 @@ public class MainActivity extends BaseActivity implements
         int year = mCalendarView.getCurYear();
         int month = mCalendarView.getCurMonth();
         int currentDay = mCalendarView.getCurDay();
+        mSelectCalendar = mCalendarView.getSelectedCalendar();
         mCurrentLunar = Lunar.fromDate(mCalendarView.getSelectedCalendar().getDate());
 
         onSetCurrentLunar();
@@ -308,6 +307,7 @@ public class MainActivity extends BaseActivity implements
     public void onCalendarSelect(Calendar calendar, boolean isClick) {
         mTextLunar.setVisibility(View.VISIBLE);
         mTextYear.setVisibility(View.VISIBLE);
+        mSelectCalendar = calendar;
         mTextMonthDay.setText(calendar.getMonth() + "月" + calendar.getDay() + "日");
         mTextYear.setText(String.valueOf(calendar.getYear()));
         mTextLunar.setText(calendar.getLunar());
@@ -368,23 +368,6 @@ public class MainActivity extends BaseActivity implements
         } else {
             mSettingWindow.show();
         }
-//            mSettingWindow = new ListPopupWindow(this);
-//            mSettingWindow.setAdapter(mSettingAdapter = new HomeSettingAdapter(this));
-//            mSettingWindow.setBackgroundDrawable(
-//                    getDrawable(R.drawable.home_bg_setting_popubwindow));
-//            mSettingWindow.setAnchorView(view);
-//            mSettingWindow.setWidth(DisplayUtils.dp2px(this, 160f));
-//            mSettingWindow.setDropDownGravity(Gravity.TOP | Gravity.END);
-//            mSettingWindow.setModal(true);
-//        }
-//        mSettingWindow.show();
-//        mSettingWindow.getListView().setDividerHeight(DisplayUtils.dp2px(this, 0));
-//        mSettingWindow.getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-//
-//            }
-//        });
     }
 
     private void showSelectDatePicker() {
@@ -420,8 +403,19 @@ public class MainActivity extends BaseActivity implements
     }
 
     @Override
-    public View getShareContentView() {
-        View view = LayoutInflater.from(this).inflate(R.layout.share_current_lunar, null);
-        return view;
+    public void startShare() {
+        showProgressDialog();
+        ShareLunarModel shareLunarModel = new ShareLunarModel((ViewGroup) getWindow().getDecorView());
+        shareLunarModel.setDate(mSelectCalendar);
+        shareLunarModel.setLunar(mCurrentLunar);
+        GeneratePictureManager.getInstance().generate(shareLunarModel, this);
+    }
+
+    @Override
+    public void share(String filePath) {
+//        super.share(filePath);
+        new XPopup.Builder(this)
+                .asImageViewer(null, filePath, new SmartGlideImageLoader())
+                .show();
     }
 }

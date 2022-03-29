@@ -2,6 +2,8 @@ package com.duke.yinyangli.utils.generateImage;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
@@ -105,7 +107,9 @@ public class GeneratePictureManager {
             height = width * 22 / 9;
         }
         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        bitmap.setHasAlpha(true);
         Canvas canvas = new Canvas(bitmap);
+        canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
         view.draw(canvas);
         return bitmap;
     }

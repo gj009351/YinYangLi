@@ -107,10 +107,6 @@ public class SharePicModel extends GenerateModel {
         return FileUtils.getTimeNameImage(getView().getContext());
     }
 
-    public interface OnSharePicListener {
-        View getShareContentView();
-    }
-
     public void setSharePicListener(OnSharePicListener listener) {
         mListener = listener;
     }

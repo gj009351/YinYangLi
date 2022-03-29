@@ -5,24 +5,20 @@
         <attr name="bar_degree" format="integer" />
         <attr name="bar_duration" format="integer" />
     </declare-styleable>
-    <declare-styleable name="TextViewVertical">
-        <attr name="v_text" format="string" />
-        <attr name="v_textSize" format="dimension" />
-        <attr name="v_textColor" format="color" />
-        <attr name="v_start" format="enum">
-            <enum name="left" value="1" />
-            <enum name="right" value="2" />
+    <declare-styleable name="VerticalTextView">
+        <attr name="text" format="string|reference"/>
+        <attr name="textColor" format="color|reference"/>
+        <attr name="textSize" format="dimension|reference"/>
+        <attr name="rowSpacing" format="dimension|reference"/>
+        <attr name="columnSpacing" format="dimension|reference"/>
+        <attr name="columnLength" format="integer"/>
+        <attr name="maxColumns" format="integer"/>
+        <attr name="atMostHeight" format="boolean"/>
+        <attr name="isCharCenter" format="boolean"/>
+        <attr name="textStyle">
+            <flag name="normal" value="0" />
+            <flag name="bold" value="1" />
+            <flag name="italic" value="2" />
         </attr>
-        <attr name="v_line" format="enum">
-            <enum name="none" value="0" />
-            <enum name="left" value="1" />
-            <enum name="right" value="2" />
-        </attr>
-        <attr name="v_lineWidth" format="dimension" />
-        <attr name="v_lineColor" format="color" />
-        <attr name="v_textVerticalMargin" format="dimension" />
-        <attr name="v_textHorizontalMargin" format="dimension" />
-        <attr name="v_cutChars" format="string" />
-        <attr name="v_line2TextMargin" format="dimension" />
     </declare-styleable>
 </resources>

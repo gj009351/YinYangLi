@@ -2,6 +2,7 @@ package com.duke.yinyangli.base;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ import com.duke.yinyangli.utils.JsonUtils;
 import com.duke.yinyangli.utils.LogUtils;
 import com.duke.yinyangli.utils.ToastUtil;
 import com.duke.yinyangli.utils.generateImage.GeneratePictureManager;
+import com.duke.yinyangli.utils.generateImage.OnSharePicListener;
 import com.duke.yinyangli.utils.generateImage.SharePicModel;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -61,7 +63,9 @@ import top.zibin.luban.CompressionPredicate;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
-public abstract class BaseActivity extends AppCompatActivity implements SharePicModel.OnSharePicListener, View.OnClickListener {
+public abstract class BaseActivity extends AppCompatActivity implements OnSharePicListener
+        , View.OnClickListener
+        , GeneratePictureManager.OnGenerateListener {
 
     private Unbinder unbinder;
     public TextView title;
@@ -193,44 +197,46 @@ public abstract class BaseActivity extends AppCompatActivity implements SharePic
         sharePicModel.setSharePicListener(this);
         sharePicModel.setShareXingZuo(getShareXingZuo());
         sharePicModel.setShareType(getShareType());
-        GeneratePictureManager.getInstance().generate(sharePicModel, (throwable, filePath, bitmap) -> {
-            if (throwable != null || bitmap == null) {
-                dismissProgressDialog();
-                showToast("操作失败");
-            } else {
-                Luban.with(this)
-                        .load(filePath)
-                        .ignoreBy(100)
-                        .setTargetDir(FileUtils.getPhotoDirectoryString(BaseActivity.this))
-                        .filter(new CompressionPredicate() {
-                            @Override
-                            public boolean apply(String path) {
-                                return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
-                            }
-                        })
-                        .setCompressListener(new OnCompressListener() {
-                            @Override
-                            public void onStart() {
-                                showProgressDialog();
-                            }
-
-                            @Override
-                            public void onSuccess(File file) {
-                                dismissProgressDialog();
-                                share(file.getAbsolutePath());
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-                                dismissProgressDialog();
-                                showToast("操作失败");
-                            }
-                        }).launch();
-            }
-        });
+        GeneratePictureManager.getInstance().generate(sharePicModel, this);
     }
 
-    private void share(String filePath) {
+    public void onGenerateFinished(Throwable throwable, String savePath, Bitmap bitmap) {
+        if (throwable != null || bitmap == null) {
+            dismissProgressDialog();
+            showToast("操作失败");
+        } else {
+            Luban.with(this)
+                    .load(savePath)
+                    .ignoreBy(100)
+                    .setTargetDir(FileUtils.getPhotoDirectoryString(BaseActivity.this))
+                    .filter(new CompressionPredicate() {
+                        @Override
+                        public boolean apply(String path) {
+                            return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+                        }
+                    })
+                    .setCompressListener(new OnCompressListener() {
+                        @Override
+                        public void onStart() {
+                            showProgressDialog();
+                        }
+
+                        @Override
+                        public void onSuccess(File file) {
+                            dismissProgressDialog();
+                            share(file.getAbsolutePath());
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            dismissProgressDialog();
+                            showToast("操作失败");
+                        }
+                    }).launch();
+        }
+    }
+
+    public void share(String filePath) {
         File shareFile = new File(filePath);
         if (!shareFile.exists()) return;
         Intent intent = new Intent(Intent.ACTION_SEND);

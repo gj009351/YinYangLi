@@ -112,7 +112,7 @@ public class BaZiResultActivity extends BaseResultActivity {
                                 mMonth = daoSession.getRysmnDao().queryBuilder()
                                         .where(RysmnDao.Properties.Siceng.eq(mLunar.getMonthInChinese2())).unique();
                                 mDay = daoSession.getRysmnDao().queryBuilder()
-                                        .where(RysmnDao.Properties.Siceng.eq(mLunar.getDayInChinese2())).unique();
+                                        .where(RysmnDao.Properties.Siceng.eq(mLunar.getDayInChinese())).unique();
                                 mTime = daoSession.getRysmnDao().queryBuilder()
                                         .where(RysmnDao.Properties.Siceng.eq(mLunar.getTimeZhi2())).unique();
 
