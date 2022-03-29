@@ -133,7 +133,7 @@
                 android:layout_toRightOf="@+id/img_yi"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:textSize="20sp"/>
+                android:textSize="16sp"/>
 
             <ImageView
                 android:id="@+id/img_ji"
@@ -150,9 +150,14 @@
                 android:layout_alignTop="@+id/img_ji"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:textSize="20sp"/>
+                android:textSize="16sp"/>
 
         </RelativeLayout>
+
+        <View
+            android:layout_width="480dp"
+            android:layout_height="1dp"
+            android:background="@color/card_bg_color" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -172,7 +177,6 @@
                     android:layout_height="0dp"
                     android:layout_marginTop="1px"
                     android:layout_weight="1"
-                    android:background="@color/card_bg_color"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -191,7 +195,6 @@
                     android:layout_height="0dp"
                     android:layout_marginTop="1px"
                     android:layout_weight="1"
-                    android:background="@color/card_bg_color"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -217,7 +220,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/card_bg_color"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -260,7 +262,6 @@
                     android:layout_height="0dp"
                     android:layout_marginTop="1px"
                     android:layout_weight="1"
-                    android:background="@color/card_bg_color"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -279,7 +280,6 @@
                     android:layout_height="0dp"
                     android:layout_marginTop="1px"
                     android:layout_weight="1"
-                    android:background="@color/card_bg_color"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -295,6 +295,11 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+
+        <View
+            android:layout_width="480dp"
+            android:layout_height="1dp"
+            android:background="@color/card_bg_color" />
 
         <LinearLayout
             android:layout_width="match_parent"

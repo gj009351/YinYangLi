@@ -61,6 +61,15 @@ public class ShareLunarModel extends GenerateModel {
         TextView ji = (TextView) findViewById(R.id.txt_ji);
         ji.setText(getStringFromList(mCurrentLunar.getDayJi()));
 
+        TextView taishen = (TextView) findViewById(R.id.tai_shen);
+        taishen.setText(mCurrentLunar.getDayPositionTai());
+        TextView xingxiu = (TextView) findViewById(R.id.xing_xiu);
+        xingxiu.setText(mCurrentLunar.getXiu());
+        TextView wuxing = (TextView) findViewById(R.id.wu_xing);
+        wuxing.setText(getStringFromList(mCurrentLunar.getBaZiWuXing()));
+        TextView chongsha = (TextView) findViewById(R.id.chong_sha);
+        chongsha.setText("日冲：" + mCurrentLunar.getDayChongDesc() + "\n日煞：" + mCurrentLunar.getDaySha());
+
         ImageView qrcode = mSharePicView.findViewById(R.id.imgQrCode);
         prepared(listener);
     }
