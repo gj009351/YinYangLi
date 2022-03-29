@@ -46,6 +46,9 @@ import com.haibin.calendarview.library.Calendar;
 import com.haibin.calendarview.library.CalendarLayout;
 import com.haibin.calendarview.library.CalendarUtil;
 import com.haibin.calendarview.library.CalendarView;
+import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.core.BasePopupView;
+import com.lxj.xpopup.interfaces.OnSelectListener;
 import com.tencent.mmkv.MMKV;
 
 import java.util.Date;
@@ -74,6 +77,8 @@ public class MainActivity extends BaseActivity implements
     TextView mTextLunar;
     @BindView(R.id.tv_current_day)
     TextView mTextCurrentDay;
+    @BindView(R.id.action_settings_holder)
+    View settingHolder;
     @BindView(R.id.calendarView)
     CalendarView mCalendarView;
     @BindView(R.id.rl_tool)
@@ -91,7 +96,7 @@ public class MainActivity extends BaseActivity implements
     private int mYear;
     private Lunar mCurrentLunar;
     private MainInfoAdapter mAdapter;
-    private ListPopupWindow mSettingWindow;
+    private BasePopupView mSettingWindow;
     private HomeSettingAdapter mSettingAdapter;
 
     private InterstitialAd mInterstitialAd;
@@ -334,36 +339,52 @@ public class MainActivity extends BaseActivity implements
     }
 
     private void showSettingWindow(View view) {
-        if (null == mSettingWindow) {
-            mSettingWindow = new ListPopupWindow(this);
-            mSettingWindow.setAdapter(mSettingAdapter = new HomeSettingAdapter(this));
-            mSettingWindow.setBackgroundDrawable(
-                    getDrawable(R.drawable.home_bg_setting_popubwindow));
-            mSettingWindow.setAnchorView(view);
-            mSettingWindow.setWidth(DisplayUtils.dp2px(this, 136f));
-            mSettingWindow.setDropDownGravity(Gravity.BOTTOM | Gravity.END);
-            mSettingWindow.setModal(true);
+        if (mSettingWindow == null) {
+            mSettingWindow = new XPopup.Builder(this)
+                    .atView(settingHolder)
+                    // 依附于所点击的View，内部会自动判断在上方或者下方显示
+                    .asAttachList(getResources().getStringArray(R.array.setting_list)
+                            , new int[]{}
+                            , new OnSelectListener() {
+                                @Override
+                                public void onSelect(int position, String text) {
+                                    mSettingWindow.dismiss();
+                                    if (getResources().getString(R.string.date_scroll).equals(text)) {
+                                        showSelectDatePicker();
+                                    } else if (getResources().getString(R.string.share).equals(text)) {
+                                        startShare();
+                                    } else if (getResources().getString(R.string.setting).equals(text)) {
+                                        SettingActivity.start(MainActivity.this);
+                                        mGoToOther = true;
+                                    } else {
+                                        AboutActivity.start(MainActivity.this);
+                                        mGoToOther = true;
+                                    }
+                                }
+                            }
+                            , R.layout.home_setting_popup_list
+                            , R.layout.item_home_setting_list)
+                    .show();
+        } else {
+            mSettingWindow.show();
         }
-        mSettingWindow.show();
-        mSettingWindow.getListView().setDividerHeight(DisplayUtils.dp2px(this, 0));
-        mSettingWindow.getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                mSettingWindow.dismiss();
-                String text = mSettingAdapter.getItem(position);
-                if (getResources().getString(R.string.date_scroll).equals(text)) {
-                    showSelectDatePicker();
-                } else if (getResources().getString(R.string.share).equals(text)) {
-                    startShare();
-                } else if (getResources().getString(R.string.setting).equals(text)) {
-                    SettingActivity.start(MainActivity.this);
-                    mGoToOther = true;
-                } else {
-                    AboutActivity.start(MainActivity.this);
-                    mGoToOther = true;
-                }
-            }
-        });
+//            mSettingWindow = new ListPopupWindow(this);
+//            mSettingWindow.setAdapter(mSettingAdapter = new HomeSettingAdapter(this));
+//            mSettingWindow.setBackgroundDrawable(
+//                    getDrawable(R.drawable.home_bg_setting_popubwindow));
+//            mSettingWindow.setAnchorView(view);
+//            mSettingWindow.setWidth(DisplayUtils.dp2px(this, 160f));
+//            mSettingWindow.setDropDownGravity(Gravity.TOP | Gravity.END);
+//            mSettingWindow.setModal(true);
+//        }
+//        mSettingWindow.show();
+//        mSettingWindow.getListView().setDividerHeight(DisplayUtils.dp2px(this, 0));
+//        mSettingWindow.getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+//
+//            }
+//        });
     }
 
     private void showSelectDatePicker() {

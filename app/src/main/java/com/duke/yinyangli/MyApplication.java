@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.util.Log;
+
 import com.bumptech.glide.Glide;
 import com.bytedance.boost_multidex.BoostMultiDex;
 import com.bytedance.boost_multidex.Result;
@@ -13,6 +14,7 @@ import com.duke.yinyangli.bean.database.DaoMaster;
 import com.duke.yinyangli.bean.database.DaoSession;
 import com.duke.yinyangli.constants.Constants;
 import com.duke.yinyangli.utils.SqliteUtil;
+import com.lxj.xpopup.XPopup;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.mmkv.MMKV;
 import com.yuyh.library.imgsel.ISNav;
@@ -71,6 +73,9 @@ public class MyApplication extends Application {
 
         // 自定义图片加载器
         ISNav.getInstance().init((ImageLoader) (context, path, imageView) -> Glide.with(context).load(path).into(imageView));
+
+        XPopup.setPrimaryColor(getResources().getColor(R.color.colorPrimary));
+        XPopup.setAnimationDuration(200);
 
         if (Constants.PACKAGE_NAME.equals(getProcessName(this))) {
             Handler handler = new Handler();

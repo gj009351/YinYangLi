@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 
 import androidx.annotation.DimenRes;
-import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
@@ -24,8 +23,8 @@ public class HorizontalDividerItemDecoration extends FlexibleDividerDecoration {
     @Override
     protected Rect getDividerBound(int position, RecyclerView parent, View child) {
         Rect bounds = new Rect(0, 0, 0, 0);
-        int transitionX = (int) ViewCompat.getTranslationX(child);
-        int transitionY = (int) ViewCompat.getTranslationY(child);
+        int transitionX = (int) child.getTranslationX();
+        int transitionY = (int) child.getTranslationY();
         RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
         bounds.left = parent.getPaddingLeft() +
                 mMarginProvider.dividerLeftMargin(position, parent) + transitionX;

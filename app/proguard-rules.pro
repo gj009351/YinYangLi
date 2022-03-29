@@ -22,6 +22,28 @@
 -dontoptimize
 -dontpreverify
 
+-keepattributes Signature #范型
+#native方法不混淆
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+#v4包不混淆
+-keep class android.support.v4.app.** { *; }
+-keep interface android.support.v4.app.** { *; }
+#Gson混淆配置
+-keep class com.google.gson.** { *; }
+
+#butterknife不混淆
+-keep class butterknife.** { *; }
+-dontwarn butterknife.internal.**
+-keep class **$$ViewBinder { *; }
+-keepclasseswithmembernames class * {
+    @butterknife.* <fields>;
+}
+-keepclasseswithmembernames class * {
+    @butterknife.* <methods>;
+}
+
 -dontwarn cn.jpush.**
 -keep class cn.jpush.** { *; }
 -keep class * extends cn.jpush.android.helpers.JPushMessageReceiver { *; }
@@ -41,3 +63,5 @@ public static java.lang.String TABLENAME;
 -dontwarn net.sqlcipher.database.**
 # If you do NOT use RxJava:
 -dontwarn rx.**
+-dontwarn com.lxj.xpopup.widget.**
+-keep class com.lxj.xpopup.widget.**{*;}
