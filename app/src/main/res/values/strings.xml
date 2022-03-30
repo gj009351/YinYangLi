@@ -12,12 +12,22 @@
     <string name="tips_main">本应用仅用于弘扬交流传统文化，切勿迷信传播</string>
     <string name="app_email">gj009351@email.com</string>
     <string name="app_descript">  这是一款关于万年历、阴历、算命、八卦等的工具软件，感谢您的使用。仅用于弘扬交流传统文化，切勿迷信传播！</string>
+    <string name="share_content">最好看的万年历，最有趣的算卦软件</string>
     <string name="update">更新</string>
     <string name="cancel">取消</string>
     <string name="go_download">去下载</string>
     <string name="loading">加载中</string>
     <string name="share">分享</string>
     <string name="date_scroll">日期跳转</string>
+    <string name="word">我</string>
+    <string name="jishen">吉神方位</string>
+    <string name="taishen">胎神</string>
+    <string name="xingxiu">星宿</string>
+    <string name="pengzu">彭祖</string>
+    <string name="wuxing">五行</string>
+    <string name="zhixing">建除十二神\n（当日值星）</string>
+    <string name="chongsha">冲煞</string>
+    <string name="jiuxing">九星</string>
     <string name="tip_input_name">请输入昵称</string>
     <string name="edit_name">修改昵称</string>
     <string name="noduty">免责声明</string>
@@ -175,12 +185,6 @@
     <string name="admob_banner_main_unit_id">@string/admob_banner_test_unit_id</string>
     <string name="admob_banner_choose_unit_id">@string/admob_banner_test_unit_id</string>
     <string name="admob_banner_result_unit_id">@string/admob_banner_test_unit_id</string>
-    <string name="word">我</string>
-    <string name="taishen">胎神</string>
-    <string name="xingxiu">星宿</string>
-    <string name="pengzu">彭祖</string>
-    <string name="wuxing">五行</string>
-    <string name="chongsha">冲煞</string>
 
     <!--  =============================  release  ==========================       -->
 <!--    <string name="admob_reward_unit_id">ca-app-pub-9923626397118153/6215617469</string>-->

@@ -200,7 +200,7 @@ public class MainInfoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             } else {
                 image = R.mipmap.xiong;
             }
-            String title = "宿：" + mLunar.getXiu() + "  " + mLunar.getAnimal() + "  " + mLunar.getXiuLuck();
+            String title = "宿：" + mLunar.getXiuDirection() + mLunar.getXiu() + mLunar.getZheng() + mLunar.getAnimal() + "-" + mLunar.getXiuLuck();
             list.add(Article.create(title, mLunar.getXiuSong().replace(",", ",\n")
                     .replace("，", "，\n"), image));
         } else if (p == 4) {

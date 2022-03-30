@@ -31,7 +31,7 @@ public class VerticalTextView extends View {
     private int columnLength;
     private int maxColumns;
     private int textStyle;
-    private boolean isCharCenter = false; //字符是否居中展示
+    private boolean isCharCenter = true; //字符是否居中展示
     private boolean atMostHeight = true; //是否使用包裹字体的高度，减少底部可能出现的空白区域
 
     private Paint ellipsisPaint;
@@ -80,7 +80,7 @@ public class VerticalTextView extends View {
         columnLength = a.getInteger(R.styleable.VerticalTextView_columnLength, -1);
         maxColumns = a.getInteger(R.styleable.VerticalTextView_maxColumns, -1);
         atMostHeight = a.getBoolean(R.styleable.VerticalTextView_atMostHeight, true);
-        isCharCenter = a.getBoolean(R.styleable.VerticalTextView_isCharCenter, true);
+//        isCharCenter = a.getBoolean(R.styleable.VerticalTextView_isCharCenter, true);
         textStyle = a.getInt(R.styleable.VerticalTextView_textStyle, textStyle);
         a.recycle();
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.duke.yinyangli.view.VerticalTextView
+        android:id="@+id/time_jixiong_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:textSize="16sp"
+        app:textColor="@color/black_666666"
+        app:isCharCenter="true" />
+</LinearLayout>

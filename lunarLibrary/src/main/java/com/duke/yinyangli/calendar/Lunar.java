@@ -912,6 +912,14 @@ public class Lunar {
   public String getXiuLuck() {
     return LunarUtil.XIU_LUCK.get(getXiu());
   }
+  /**
+   * 获取宿方位
+   *
+   * @return 东方/北方/西方/南方
+   */
+  public String getXiuDirection() {
+    return LunarUtil.XIU_DIRECTION.get(getXiu());
+  }
 
   /**
    * 获取宿歌诀

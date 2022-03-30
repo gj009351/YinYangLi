@@ -413,9 +413,9 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public void share(String filePath) {
-//        super.share(filePath);
-        new XPopup.Builder(this)
-                .asImageViewer(null, filePath, new SmartGlideImageLoader())
-                .show();
+        super.share(filePath);
+//        new XPopup.Builder(this)
+//                .asImageViewer(null, filePath, new SmartGlideImageLoader())
+//                .show();
     }
 }

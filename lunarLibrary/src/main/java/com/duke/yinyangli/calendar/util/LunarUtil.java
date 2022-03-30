@@ -340,7 +340,41 @@ public class LunarUtil{
       put("轸","吉");
     }
   };
-  /** 星宿对应吉凶 */
+  /** 星宿对应方位 */
+  public static final Map<String,String> XIU_DIRECTION = new HashMap<String,String>(){
+    private static final long serialVersionUID = -1;
+    {
+      put("角","东方");
+      put("亢","东方");
+      put("氐","东方");
+      put("房","东方");
+      put("心","东方");
+      put("尾","东方");
+      put("箕","东方");
+      put("斗","北方");
+      put("牛","北方");
+      put("女","北方");
+      put("虚","北方");
+      put("危","北方");
+      put("室","北方");
+      put("壁","北方");
+      put("奎","西方");
+      put("娄","西方");
+      put("胃","西方");
+      put("昴","西方");
+      put("毕","西方");
+      put("觜","西方");
+      put("参","西方");
+      put("井","南方");
+      put("鬼","南方");
+      put("柳","南方");
+      put("星","南方");
+      put("张","南方");
+      put("翼","南方");
+      put("轸","南方");
+    }
+  };
+  /** 星宿对应歌 */
   public static final Map<String,String> XIU_SONG = new HashMap<String,String>(){
     private static final long serialVersionUID = -1;
     {
@@ -1117,6 +1151,9 @@ public class LunarUtil{
    */
   public static String convertTime(String hm){
     return ZHI[getTimeZhiIndex(hm)+1];
+  }
+  public static String convertTime(int index){
+    return ZHI[index];
   }
 
   /**

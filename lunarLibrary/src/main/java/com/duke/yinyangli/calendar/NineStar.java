@@ -257,13 +257,13 @@ public class NineStar {
     s.append(getPosition());
     s.append("(");
     s.append(getPositionDesc());
-    s.append(") ");
+    s.append(")\n");
     s.append(getNameInBeiDou());
     s.append(" 玄空[");
     s.append(getNameInXuanKong());
     s.append(" ");
     s.append(getLuckInXuanKong());
-    s.append("] 奇门[");
+    s.append("]\n奇门[");
     s.append(getNameInQiMen());
     s.append(" ");
     s.append(getLuckInQiMen());
@@ -274,7 +274,7 @@ public class NineStar {
     }
     s.append(" ");
     s.append(getYinYangInQiMen());
-    s.append("] 太乙[");
+    s.append("]\n太乙[");
     s.append(getNameInTaiYi());
     s.append(" ");
     s.append(getTypeInTaiYi());

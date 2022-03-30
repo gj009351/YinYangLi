@@ -105,9 +105,9 @@
                 android:layout_height="30dp"
                 android:gravity="center_vertical"
                 android:includeFontPadding="false"
-                android:text="最好看的万年历，最有趣的算卦软件"
+                android:text="@string/share_content"
                 android:textColor="@color/black_333333"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <ImageView

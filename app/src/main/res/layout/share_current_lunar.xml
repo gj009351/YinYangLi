@@ -1,28 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="480dp"
+    android:layout_width="@dimen/share_current_lunar_width"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        android:layout_width="480dp"
+        android:layout_width="@dimen/share_current_lunar_width"
         android:layout_height="wrap_content"
-        android:background="@drawable/share_bg_current_lunar"
         android:orientation="vertical"
         android:padding="@dimen/huangli_detail_bg_border_size">
 
         <LinearLayout
-            android:layout_width="480dp"
+            android:layout_width="@dimen/share_current_lunar_width"
             android:layout_height="@dimen/huangli_detail_header_height"
             android:orientation="horizontal">
 
             <RelativeLayout
+                android:id="@+id/date_container"
                 android:layout_width="320dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="1px"
                 android:gravity="center"
                 android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/date_background"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:alpha="0.1"
+                    tools:src="@mipmap/shengxiao_gou"/>
 
                 <TextView
                     android:id="@+id/ym"
@@ -59,8 +66,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/date"
-                    android:gravity="center"
                     android:layout_marginTop="@dimen/small_margin"
+                    android:gravity="center"
                     android:textColor="@color/black_343339"
                     android:textSize="@dimen/huangli_detail_lunar_text_size" />
 
@@ -111,12 +118,12 @@
         </LinearLayout>
 
         <View
-            android:layout_width="480dp"
+            android:layout_width="@dimen/share_current_lunar_width"
             android:layout_height="1dp"
             android:background="@color/card_bg_color" />
 
         <RelativeLayout
-            android:layout_width="480dp"
+            android:layout_width="@dimen/share_current_lunar_width"
             android:layout_height="wrap_content"
             android:padding="16dp">
 
@@ -124,7 +131,6 @@
                 android:id="@+id/img_yi"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginTop="4dp"
                 android:src="@mipmap/jinriyi"/>
 
             <TextView
@@ -132,6 +138,7 @@
                 android:layout_width="match_parent"
                 android:layout_toRightOf="@+id/img_yi"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:layout_marginStart="8dp"
                 android:textSize="16sp"/>
 
@@ -155,27 +162,46 @@
         </RelativeLayout>
 
         <View
-            android:layout_width="480dp"
+            android:layout_width="@dimen/share_current_lunar_width"
             android:layout_height="1dp"
             android:background="@color/card_bg_color" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="@dimen/huang_li_tai_shen_min_height"
-            android:weightSum="3">
+            android:minHeight="@dimen/huang_li_tai_shen_min_height">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:weightSum="2">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginTop="1px"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TaiShenLabelTextStyle"
+                        android:text="@string/xingxiu" />
+
+                    <TextView
+                        android:id="@+id/xing_xiu"
+                        style="@style/TaiShenContentTextStyle"
+                        android:layout_marginTop="@dimen/date_calculate_tab_margin_top" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/card_bg_color" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
@@ -190,32 +216,61 @@
                         android:layout_marginTop="@dimen/date_calculate_tab_margin_top" />
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/card_bg_color" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginTop="1px"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView
                         style="@style/TaiShenLabelTextStyle"
-                        android:text="@string/xingxiu" />
+                        android:text="@string/jishen" />
 
                     <TextView
-                        android:id="@+id/xing_xiu"
+                        android:id="@+id/ji_shen"
                         style="@style/TaiShenContentTextStyle"
                         android:layout_marginTop="@dimen/date_calculate_tab_margin_top" />
                 </LinearLayout>
+
             </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/card_bg_color" />
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginTop="1px"
                 android:layout_weight="1"
-                android:paddingLeft="1px"
-                android:paddingRight="1px">
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TaiShenLabelTextStyle"
+                        android:text="@string/zhixing" />
+
+                    <TextView
+                        android:id="@+id/zhi_xing"
+                        style="@style/TaiShenContentTextStyle"
+                        android:layout_marginTop="@dimen/date_calculate_tab_margin_top" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/card_bg_color" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -225,42 +280,34 @@
 
                     <TextView
                         style="@style/TaiShenLabelTextStyle"
-                        android:layout_marginTop="18dp"
                         android:text="@string/pengzu" />
 
                     <TextView
                         android:id="@+id/peng_zu1"
                         style="@style/TaiShenContentTextStyle"
-                        android:layout_marginTop="@dimen/date_calculate_tab_margin_top" />
+                        android:layout_marginTop="@dimen/normal_margin" />
 
                     <TextView
                         android:id="@+id/peng_zu2"
                         style="@style/TaiShenContentTextStyle"
-                        android:layout_marginTop="-1dp" />
-
-                    <TextView
-                        android:id="@+id/peng_zu3"
-                        style="@style/TaiShenContentTextStyle"
-                        android:layout_marginTop="@dimen/calendar_ad_btn_margin" />
-
-                    <TextView
-                        android:id="@+id/peng_zu4"
-                        style="@style/TaiShenContentTextStyle"
-                        android:layout_marginTop="-1dp" />
+                        android:layout_marginTop="8dp" />
                 </LinearLayout>
             </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/card_bg_color" />
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:weightSum="2">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginTop="1px"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
@@ -275,10 +322,14 @@
                         android:layout_marginTop="@dimen/date_calculate_tab_margin_top" />
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/card_bg_color" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginTop="1px"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
@@ -290,102 +341,100 @@
                     <TextView
                         android:id="@+id/chong_sha"
                         style="@style/TaiShenContentTextStyle"
-                        android:layout_marginTop="@dimen/date_calculate_tab_margin_top"
-                        android:maxEms="5" />
+                        android:layout_marginTop="@dimen/date_calculate_tab_margin_top" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/card_bg_color" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TaiShenLabelTextStyle"
+                        android:text="@string/jiuxing" />
+
+                    <TextView
+                        android:id="@+id/jiu_xing"
+                        style="@style/TaiShenContentTextStyle"
+                        android:layout_marginTop="@dimen/date_calculate_tab_margin_top" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
         <View
-            android:layout_width="480dp"
+            android:layout_width="@dimen/share_current_lunar_width"
             android:layout_height="1dp"
             android:background="@color/card_bg_color" />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1px"
-            android:weightSum="3">
+            android:layout_width="@dimen/share_current_lunar_width"
+            android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/time_jixiong"
+                android:layout_width="@dimen/share_current_lunar_width"
+                android:layout_height="64dp"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="@dimen/share_current_lunar_width"
+            android:layout_height="1dp"
+            android:background="@color/card_bg_color" />
+
+        <!-- 这里是底部view -->
+        <LinearLayout
+            android:id="@+id/llBottomView"
+            android:layout_width="@dimen/share_current_lunar_width"
+            android:layout_height="88dp"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <ImageView
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_launcher" />
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="8dp"
                 android:layout_weight="1"
-                android:weightSum="4">
+                android:gravity="center_vertical"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/jixiong1"
-                    style="@style/JiXiongTextStyle" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:text="@string/app_name"
+                    android:textColor="@color/black_333333"
+                    android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/jixiong2"
-                    style="@style/JiXiongTextStyle"
-                    android:layout_marginLeft="1px" />
-
-                <TextView
-                    android:id="@+id/jixiong3"
-                    style="@style/JiXiongTextStyle"
-                    android:layout_marginLeft="1px" />
-
-                <TextView
-                    android:id="@+id/jixiong4"
-                    style="@style/JiXiongTextStyle"
-                    android:layout_marginLeft="1px" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:text="@string/share_content"
+                    android:textColor="@color/black_333333"
+                    android:textSize="14sp" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="1px"
-                android:paddingRight="1px"
-                android:weightSum="4">
-
-                <TextView
-                    android:id="@+id/jixiong5"
-                    style="@style/JiXiongTextStyle" />
-
-                <TextView
-                    android:id="@+id/jixiong6"
-                    style="@style/JiXiongTextStyle"
-                    android:layout_marginLeft="1px" />
-
-                <TextView
-                    android:id="@+id/jixiong7"
-                    style="@style/JiXiongTextStyle"
-                    android:layout_marginLeft="1px" />
-
-                <TextView
-                    android:id="@+id/jixiong8"
-                    style="@style/JiXiongTextStyle"
-                    android:layout_marginLeft="1px" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:weightSum="4">
-
-                <TextView
-                    android:id="@+id/jixiong9"
-                    style="@style/JiXiongTextStyle" />
-
-                <TextView
-                    android:id="@+id/jixiong10"
-                    style="@style/JiXiongTextStyle"
-                    android:layout_marginLeft="1px" />
-
-                <TextView
-                    android:id="@+id/jixiong11"
-                    style="@style/JiXiongTextStyle"
-                    android:layout_marginLeft="1px" />
-
-                <TextView
-                    android:id="@+id/jixiong12"
-                    style="@style/JiXiongTextStyle"
-                    android:layout_marginLeft="1px" />
-            </LinearLayout>
+            <ImageView
+                android:id="@+id/imgQrCode"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@mipmap/qrcode" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
