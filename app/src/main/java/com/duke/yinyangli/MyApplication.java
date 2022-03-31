@@ -22,8 +22,6 @@ import com.yuyh.library.imgsel.common.ImageLoader;
 
 import java.util.List;
 
-import cn.jpush.android.api.JPushInterface;
-
 public class MyApplication extends Application {
 
     private static MyApplication sInstance;
@@ -66,9 +64,6 @@ public class MyApplication extends Application {
         String rootDir = MMKV.initialize(this);
         System.out.println("mmkv root: " + rootDir);
 
-        JPushInterface.setDebugMode(true);
-        JPushInterface.init(this);
-
         CrashReport.initCrashReport(getApplicationContext(), "2a89e82776", false);
 
         // 自定义图片加载器
@@ -77,22 +72,18 @@ public class MyApplication extends Application {
         XPopup.setPrimaryColor(getResources().getColor(R.color.colorPrimary));
         XPopup.setAnimationDuration(200);
 
-        if (Constants.PACKAGE_NAME.equals(getProcessName(this))) {
-            Handler handler = new Handler();
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    if (Constants.PACKAGE_NAME.equals(getProcessName(MyApplication.this))) {
-                        try {
-                            SqliteUtil.copyDataBase(MyApplication.this, Constants.DB_NAME);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        setDatabase();
-                    }
+        Handler handler = new Handler();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    SqliteUtil.copyDataBase(MyApplication.this, Constants.DB_NAME);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            });
-        }
+                setDatabase();
+            }
+        });
     }
 
     public static MyApplication getInstance() {

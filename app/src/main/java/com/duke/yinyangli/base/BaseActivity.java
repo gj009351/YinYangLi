@@ -13,22 +13,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
-import com.duke.yinyangli.BuildConfig;
 import com.duke.yinyangli.MyApplication;
 import com.duke.yinyangli.R;
-import com.duke.yinyangli.activity.ChooseActivity;
-import com.duke.yinyangli.activity.MainActivity;
-import com.duke.yinyangli.bean.TimeCount;
 import com.duke.yinyangli.bean.VersionResponse;
 import com.duke.yinyangli.calendar.Solar;
-import com.duke.yinyangli.constants.Constants;
 import com.duke.yinyangli.constants.Event;
 import com.duke.yinyangli.dialog.DialogUtils;
 import com.duke.yinyangli.dialog.SimpleDialog;
@@ -36,8 +30,6 @@ import com.duke.yinyangli.utils.AdmobUtils;
 import com.duke.yinyangli.utils.AppUtils;
 import com.duke.yinyangli.utils.ChooseCostUtils;
 import com.duke.yinyangli.utils.FileUtils;
-import com.duke.yinyangli.utils.ImageUtils;
-import com.duke.yinyangli.utils.JsonUtils;
 import com.duke.yinyangli.utils.LogUtils;
 import com.duke.yinyangli.utils.ToastUtil;
 import com.duke.yinyangli.utils.generateImage.GeneratePictureManager;
@@ -47,7 +39,6 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.gyf.immersionbar.ImmersionBar;
 import com.haibin.calendarview.library.Article;
-import com.tencent.mmkv.MMKV;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -58,7 +49,6 @@ import java.lang.ref.WeakReference;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import cn.jpush.android.api.JPushInterface;
 import top.zibin.luban.CompressionPredicate;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
@@ -150,14 +140,6 @@ public abstract class BaseActivity extends AppCompatActivity implements OnShareP
         LogUtils.d("onReceive message event:" + event.getCode() + ", " + event.getBundle());
         if (event.getCode() == Event.CODE_UPDATE_VERSION) {
             if (bundle != null) {
-                String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
-                if (!TextUtils.isEmpty(message)) {
-                    VersionResponse response = JsonUtils.fromJson(message, VersionResponse.class);
-                    LogUtils.d("receive update message:" + message + ", response:" + response);
-                    if (response.getVersionCode() > BuildConfig.VERSION_CODE) {
-                        showUpdateDialog(response);
-                    }
-                }
             }
         }
     }
