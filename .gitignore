@@ -7,3 +7,5 @@
 .externalNativeBuild
 .cxx
 .idea/
+/app/vip/
+/app/free/
