@@ -2,27 +2,25 @@ package com.duke.yinyangli.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.view.View;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.duke.yinyangli.MyApplication;
 import com.duke.yinyangli.R;
 import com.duke.yinyangli.adapter.ChooseMeng1Adapter;
 import com.duke.yinyangli.base.BaseActivity;
-import com.duke.yinyangli.base.BaseResultActivity;
 import com.duke.yinyangli.bean.database.DaoSession;
 import com.duke.yinyangli.bean.database.Zgjm;
 import com.duke.yinyangli.bean.database.ZgjmDao;
 import com.duke.yinyangli.constants.Constants;
-import com.duke.yinyangli.dialog.SimpleDialog;
 import com.duke.yinyangli.utils.ThreadHelper;
 import com.haibin.calendarview.library.Article;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 public class ZhouGongJieMengChildActivity extends BaseActivity {

@@ -83,15 +83,7 @@ public class SettingAdapter extends BaseMultiItemQuickAdapter<SettingItem, BaseV
                 break;
             case ITEM_TYPE_NORMAL:
                 holder.setText(R.id.key, settingItem.getText());
-                if (Constants.SP_KEY.VIP.equals(settingItem.getId())) {
-                    if (Constants.STATUS.NORMAL_SHOW.equals(settingItem.getValue())) {
-                        holder.setText(R.id.value, "永久VIP");
-                        holder.setGone(R.id.arrow, true);
-                    } else {
-                        holder.setText(R.id.value, "去付费");
-                        holder.setVisible(R.id.arrow, true);
-                    }
-                } else if (Constants.SP_KEY.USER_INFO_NAME.equals(settingItem.getId())) {
+                if (Constants.SP_KEY.USER_INFO_NAME.equals(settingItem.getId())) {
                     holder.setText(R.id.value, settingItem.getValue());
                 }
                 break;

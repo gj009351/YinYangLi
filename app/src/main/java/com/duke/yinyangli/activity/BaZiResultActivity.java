@@ -4,16 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.duke.yinyangli.MyApplication;
 import com.duke.yinyangli.R;
 import com.duke.yinyangli.adapter.AllResultAdapter;
-import com.duke.yinyangli.base.BaseActivity;
 import com.duke.yinyangli.base.BaseResultActivity;
 import com.duke.yinyangli.bean.database.DaoSession;
 import com.duke.yinyangli.bean.database.Rgnm;
@@ -26,16 +25,12 @@ import com.duke.yinyangli.calendar.Lunar;
 import com.duke.yinyangli.calendar.Solar;
 import com.duke.yinyangli.constants.Constants;
 import com.duke.yinyangli.dialog.DialogUtils;
-import com.duke.yinyangli.dialog.SimpleDialog;
 import com.duke.yinyangli.view.share.BaZiResultView;
 import com.haibin.calendarview.library.Article;
 
 import java.io.File;
 import java.util.Date;
-import java.util.List;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 public class BaZiResultActivity extends BaseResultActivity {

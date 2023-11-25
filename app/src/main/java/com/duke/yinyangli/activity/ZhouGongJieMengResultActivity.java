@@ -7,12 +7,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.duke.yinyangli.R;
-import com.duke.yinyangli.base.BaseActivity;
 import com.duke.yinyangli.base.BaseResultActivity;
 import com.duke.yinyangli.constants.Constants;
 import com.duke.yinyangli.utils.StringUtils;
 import com.duke.yinyangli.view.share.ZhouGongResultView;
-import com.duke.yinyangli.view.share.ZhuGeResultView;
 import com.haibin.calendarview.library.Article;
 
 import butterknife.BindView;

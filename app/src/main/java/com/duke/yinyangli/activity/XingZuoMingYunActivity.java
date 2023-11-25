@@ -7,10 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.duke.yinyangli.MyApplication;
 import com.duke.yinyangli.R;
 import com.duke.yinyangli.adapter.AllResultAdapter;
-import com.duke.yinyangli.base.BaseActivity;
 import com.duke.yinyangli.base.BaseResultActivity;
 import com.duke.yinyangli.bean.database.Astro;
 import com.duke.yinyangli.bean.database.AstroDao;
@@ -18,7 +20,6 @@ import com.duke.yinyangli.bean.database.DaoSession;
 import com.duke.yinyangli.bean.database.XingZuo;
 import com.duke.yinyangli.bean.database.XingZuoDao;
 import com.duke.yinyangli.constants.Constants;
-import com.duke.yinyangli.dialog.SimpleDialog;
 import com.duke.yinyangli.utils.ThreadHelper;
 import com.duke.yinyangli.utils.ToastUtil;
 import com.duke.yinyangli.utils.core.ImageUtil;
@@ -33,10 +34,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
-import butterknife.OnClick;
 
 public class XingZuoMingYunActivity extends BaseResultActivity {
 

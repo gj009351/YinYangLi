@@ -18,8 +18,6 @@ import com.duke.yinyangli.bean.SettingItem;
 import com.duke.yinyangli.constants.Constants;
 import com.duke.yinyangli.dialog.DialogUtils;
 import com.duke.yinyangli.dialog.EditNameDialog;
-import com.duke.yinyangli.view.itemdecoration.HorizontalDividerItemDecoration;
-import com.duke.yinyangli.view.itemdecoration.VerticalDividerItemDecoration;
 import com.tencent.mmkv.MMKV;
 import com.yuyh.library.imgsel.ISNav;
 import com.yuyh.library.imgsel.config.ISListConfig;

@@ -12,15 +12,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.duke.yinyangli.R;
 import com.duke.yinyangli.adapter.AllResultAdapter;
 import com.duke.yinyangli.adapter.GuaXiangAdapter;
-import com.duke.yinyangli.base.BaseActivity;
 import com.duke.yinyangli.base.BaseResultActivity;
 import com.duke.yinyangli.bean.JieGuaItem;
 import com.duke.yinyangli.constants.Constants;
-import com.duke.yinyangli.dialog.DialogUtils;
-import com.duke.yinyangli.dialog.SimpleDialog;
 import com.duke.yinyangli.interfaces.OnLoadListener;
 import com.duke.yinyangli.utils.LogUtils;
 import com.duke.yinyangli.utils.core.JieGuaUtils;
@@ -34,8 +34,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 public class GuaResultActivity extends BaseResultActivity {

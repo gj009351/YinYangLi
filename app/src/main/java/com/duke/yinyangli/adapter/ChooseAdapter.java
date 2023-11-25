@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.duke.yinyangli.R;
 import com.duke.yinyangli.activity.BaZiResultActivity;
 import com.duke.yinyangli.activity.ChengGuActivity;
@@ -17,20 +20,13 @@ import com.duke.yinyangli.activity.XingZuoMingYunActivity;
 import com.duke.yinyangli.activity.XingZuoPeiDuiActivity;
 import com.duke.yinyangli.activity.ZhouGongJieMengActivity;
 import com.duke.yinyangli.activity.ZhuGeShenSuanActivity;
-import com.duke.yinyangli.bean.TimeCount;
 import com.duke.yinyangli.calendar.Solar;
-import com.duke.yinyangli.calendar.util.LunarUtil;
 import com.duke.yinyangli.constants.Constants;
-import com.duke.yinyangli.utils.StringUtils;
 import com.duke.yinyangli.utils.ToastUtil;
 import com.haibin.calendarview.library.Article;
-import com.tencent.mmkv.MMKV;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class ChooseAdapter extends RecyclerView.Adapter<ChooseAdapter.ViewHolder> {
 

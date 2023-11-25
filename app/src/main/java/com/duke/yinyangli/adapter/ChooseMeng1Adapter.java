@@ -4,29 +4,16 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.duke.yinyangli.R;
-import com.duke.yinyangli.activity.BaZiResultActivity;
-import com.duke.yinyangli.activity.ChengGuActivity;
-import com.duke.yinyangli.activity.GuaResultActivity;
-import com.duke.yinyangli.activity.ShengXiaoPeiDuiActivity;
-import com.duke.yinyangli.activity.XingMingDaFenActivity;
-import com.duke.yinyangli.activity.XingZuoMingYunActivity;
-import com.duke.yinyangli.activity.XingZuoPeiDuiActivity;
-import com.duke.yinyangli.activity.ZhouGongJieMengActivity;
-import com.duke.yinyangli.activity.ZhouGongJieMengChildActivity;
-import com.duke.yinyangli.activity.ZhuGeShenSuanActivity;
-import com.duke.yinyangli.constants.Constants;
-import com.duke.yinyangli.utils.ToastUtil;
 import com.haibin.calendarview.library.Article;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class ChooseMeng1Adapter extends RecyclerView.Adapter<ChooseMeng1Adapter.ViewHolder> {
 

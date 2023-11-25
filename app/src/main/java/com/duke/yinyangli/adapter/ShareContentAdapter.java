@@ -13,11 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.duke.yinyangli.R;
 import com.duke.yinyangli.bean.ChengGuItem;
 import com.duke.yinyangli.bean.JieGuaItem;
-import com.duke.yinyangli.bean.database.Rgnm;
-import com.duke.yinyangli.bean.database.Rysmn;
-import com.duke.yinyangli.bean.database.ShuXiang;
 import com.duke.yinyangli.calendar.Lunar;
-import com.duke.yinyangli.calendar.Solar;
 import com.duke.yinyangli.utils.StringUtils;
 import com.haibin.calendarview.library.Article;
 

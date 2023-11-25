@@ -9,9 +9,6 @@ import android.widget.TextView;
 
 import com.duke.yinyangli.R;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class HomeSettingAdapter extends BaseAdapter {
 
     private final Context mContext;

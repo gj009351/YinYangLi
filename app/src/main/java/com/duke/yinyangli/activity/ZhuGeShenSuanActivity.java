@@ -7,20 +7,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.duke.yinyangli.MyApplication;
 import com.duke.yinyangli.R;
 import com.duke.yinyangli.adapter.AllResultAdapter;
-import com.duke.yinyangli.base.BaseActivity;
 import com.duke.yinyangli.base.BaseResultActivity;
 import com.duke.yinyangli.bean.database.DaoSession;
 import com.duke.yinyangli.bean.database.Zhuge;
 import com.duke.yinyangli.bean.database.ZhugeDao;
 import com.duke.yinyangli.constants.Constants;
-import com.duke.yinyangli.dialog.SimpleDialog;
 import com.duke.yinyangli.utils.LimitInputTextWatcher;
 import com.duke.yinyangli.utils.ToastUtil;
 import com.duke.yinyangli.utils.core.mingzidafen.BhFTWxLib;
-import com.duke.yinyangli.view.share.ChengGuResultView;
 import com.duke.yinyangli.view.share.ZhuGeResultView;
 import com.haibin.calendarview.library.Article;
 import com.luhuiguo.chinese.ChineseUtils;
@@ -28,10 +28,7 @@ import com.luhuiguo.chinese.ChineseUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
-import butterknife.OnClick;
 
 public class ZhuGeShenSuanActivity extends BaseResultActivity {
 

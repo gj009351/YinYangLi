@@ -2,23 +2,19 @@ package com.duke.yinyangli.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.view.View;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.duke.yinyangli.R;
-import com.duke.yinyangli.adapter.AllResultAdapter;
-import com.duke.yinyangli.adapter.ChooseAdapter;
 import com.duke.yinyangli.adapter.ChooseMeng1Adapter;
 import com.duke.yinyangli.base.BaseActivity;
-import com.duke.yinyangli.base.BaseResultActivity;
 import com.duke.yinyangli.constants.Constants;
-import com.duke.yinyangli.dialog.SimpleDialog;
 import com.haibin.calendarview.library.Article;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 public class ZhouGongJieMengActivity extends BaseActivity {
