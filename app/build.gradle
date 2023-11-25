@@ -7,8 +7,8 @@ android {
     defaultConfig {
         applicationId "com.duke.yinyangli"
         minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 7
+        targetSdkVersion 33
+        versionCode 8
         versionName "1.0.0"
 //        1d116b92c3f969af8a5e60da344755d6
 
@@ -22,9 +22,10 @@ android {
     }
     signingConfigs {
         keystore {
+            //隐私协议：https://sites.google.com/view/yigua/%E9%A6%96%E9%A1%B5
             storeFile file("yinyangli.jks") //签名文件路径
             storePassword "gjwxy1314"
-            keyAlias "duke"
+            keyAlias "yinyangli"
             keyPassword "gjwxy1314"
             v1SigningEnabled true
             v2SigningEnabled true
@@ -79,9 +80,6 @@ greendao {
     // 生成的数据库文件默认目录为：build/generated/source/greendao
     // 自定义生成数据库文件的目录，可以将生成的文件放到java目录中，而不是build中，这样就不用额外的设置资源目录了
     targetGenDir 'src/main/java'
-}
-ext {
-    parseVersion = "3.0.0"
 }
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
