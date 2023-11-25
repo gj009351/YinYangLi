@@ -12,11 +12,6 @@ import com.duke.yinyangli.BuildConfig;
 import com.duke.yinyangli.R;
 import com.duke.yinyangli.base.BaseActivity;
 import com.duke.yinyangli.calendar.Lunar;
-import com.duke.yinyangli.utils.AdmobUtils;
-import com.duke.yinyangli.utils.ChooseCostUtils;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 import butterknife.BindView;
 
@@ -40,10 +35,6 @@ public class StartActivity extends BaseActivity {
     @Override
     public void initView() {
         super.initView();
-        if (!isTaskRoot()) {
-            finish();
-            return;
-        }
         mHandler = new MyHandler(this);
         mHandler.postDelayed(new Runnable() {
             @Override
@@ -68,14 +59,5 @@ public class StartActivity extends BaseActivity {
         Lunar lunar = new Lunar();
         currentTime.setText(lunar.getTimeZhiContent());
         version.setText("V" + BuildConfig.VERSION_NAME);
-        if (!ChooseCostUtils.getInstance().isVIP()) {
-            MobileAds.initialize(this, new OnInitializationCompleteListener() {
-                @Override
-                public void onInitializationComplete(InitializationStatus initializationStatus) {
-                    AdmobUtils.setHasInit(true);
-                }
-            });
-        }
     }
-
 }

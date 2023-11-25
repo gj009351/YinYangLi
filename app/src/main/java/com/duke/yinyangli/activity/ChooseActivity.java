@@ -3,15 +3,14 @@ package com.duke.yinyangli.activity;
 import android.content.Context;
 import android.content.Intent;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.duke.yinyangli.R;
 import com.duke.yinyangli.adapter.ChooseAdapter;
 import com.duke.yinyangli.base.BaseActivity;
 import com.duke.yinyangli.utils.LogUtils;
 import com.haibin.calendarview.library.Article;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 public class ChooseActivity extends BaseActivity {

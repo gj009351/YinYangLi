@@ -12,11 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.duke.yinyangli.R;
 import com.duke.yinyangli.adapter.AllResultAdapter;
-import com.duke.yinyangli.base.BaseActivity;
 import com.duke.yinyangli.base.BaseResultActivity;
 import com.duke.yinyangli.constants.Constants;
 import com.duke.yinyangli.dialog.DialogUtils;
-import com.duke.yinyangli.dialog.SimpleDialog;
 import com.duke.yinyangli.utils.core.ChengguUtils;
 import com.duke.yinyangli.view.share.ChengGuResultView;
 import com.haibin.calendarview.library.Article;
@@ -82,7 +80,6 @@ public class ChengGuActivity extends BaseResultActivity {
                                         () -> {
                                             if (isSafe()) {
                                                 mAdapter.setResult(calendar, result, chengGuItem);
-                                                addTestCount(mArticle);
                                                 dismissProgressDialog();
                                             }
                                         }

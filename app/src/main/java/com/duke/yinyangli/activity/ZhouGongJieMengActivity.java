@@ -73,7 +73,6 @@ public class ZhouGongJieMengActivity extends BaseActivity {
         mAdapter.setOnItemClickListener(new ChooseMeng1Adapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position, Article article) {
-                addTestCount(mArticle);
                 ZhouGongJieMengChildActivity.start(ZhouGongJieMengActivity.this, article);
             }
         });

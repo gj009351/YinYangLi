@@ -110,6 +110,7 @@ public class XingZuoMingYunActivity extends BaseResultActivity {
         return getString(R.string.tip_xingzuomingyun);
     }
 
+    @Override
     public void onClick(View view) {
         if (view.getId() == R.id.submit) {
             if (TextUtils.isEmpty(mXingZuo)) {
@@ -142,7 +143,6 @@ public class XingZuoMingYunActivity extends BaseResultActivity {
                             mXueXingSpinner.setEnabled(false);
                             mSubmit.setVisibility(View.GONE);
                             ImageUtil.setXingZuoImage(mImage, mXingZuo);
-                            addTestCount(mArticle);
                             dismissProgressDialog();
                         }
                     });

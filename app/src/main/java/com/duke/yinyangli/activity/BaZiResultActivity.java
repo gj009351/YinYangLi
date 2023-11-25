@@ -124,7 +124,6 @@ public class BaZiResultActivity extends BaseResultActivity {
                                     public void run() {
                                         if (isSafe()) {
                                             mAdapter.setResult(mRgnm, mMonth, mDay, mTime, mShuXiang, mLunar, mSolar);
-                                            addTestCount(mArticle);
                                             dismissProgressDialog();
                                         }
                                     }
@@ -146,6 +145,7 @@ public class BaZiResultActivity extends BaseResultActivity {
         });
     }
 
+    @Override
     public String getAboutDialogContent() {
         return getString(R.string.tip_baguasuanming);
     }

@@ -212,7 +212,6 @@ public class GuaResultActivity extends BaseResultActivity {
                                 if (isSafe() && jieGuaItem != null) {
                                     resultMaster.setText("主卦：" + jieGuaItem.getName());
                                     mAllAdapter.setResult(jieGuaItem);
-                                    addTestCount(mArticle);
                                 }
                             }
                         });

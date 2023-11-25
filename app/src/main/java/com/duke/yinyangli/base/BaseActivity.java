@@ -26,7 +26,6 @@ import com.duke.yinyangli.calendar.Solar;
 import com.duke.yinyangli.constants.Event;
 import com.duke.yinyangli.dialog.DialogUtils;
 import com.duke.yinyangli.dialog.SimpleDialog;
-import com.duke.yinyangli.utils.AdmobUtils;
 import com.duke.yinyangli.utils.AppUtils;
 import com.duke.yinyangli.utils.FileUtils;
 import com.duke.yinyangli.utils.LogUtils;
@@ -34,8 +33,6 @@ import com.duke.yinyangli.utils.ToastUtil;
 import com.duke.yinyangli.utils.generateImage.GeneratePictureManager;
 import com.duke.yinyangli.utils.generateImage.OnSharePicListener;
 import com.duke.yinyangli.utils.generateImage.SharePicModel;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.gyf.immersionbar.ImmersionBar;
 import com.haibin.calendarview.library.Article;
 
@@ -63,7 +60,6 @@ public abstract class BaseActivity extends AppCompatActivity implements OnShareP
     private SimpleDialog mDialog;
     private Dialog progressDialog;
     private Solar mSolar;
-    private AdView mBannerAdView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -88,11 +84,6 @@ public abstract class BaseActivity extends AppCompatActivity implements OnShareP
         left = findViewById(R.id.left);
         if (left != null) {
             left.setOnClickListener(this);
-        }
-        mBannerAdView = findViewById(R.id.adView);
-        if (mBannerAdView != null && AdmobUtils.isInit()) {
-            AdRequest adRequest = new AdRequest.Builder().build();
-            mBannerAdView.loadAd(adRequest);
         }
     }
 
@@ -164,14 +155,6 @@ public abstract class BaseActivity extends AppCompatActivity implements OnShareP
         return !isDestroyed() && !isFinishing();
     }
 
-    /**
-     * 测算后调用，记录每天次数+1
-     * @param article
-     */
-    public void addTestCount(Article article) {
-        ChooseCostUtils.getInstance().addCount();
-    }
-
     public void startShare() {
         showProgressDialog();
         SharePicModel sharePicModel = new SharePicModel((ViewGroup) getWindow().getDecorView());
@@ -181,6 +164,7 @@ public abstract class BaseActivity extends AppCompatActivity implements OnShareP
         GeneratePictureManager.getInstance().generate(sharePicModel, this);
     }
 
+    @Override
     public void onGenerateFinished(Throwable throwable, String savePath, Bitmap bitmap) {
         if (throwable != null || bitmap == null) {
             dismissProgressDialog();

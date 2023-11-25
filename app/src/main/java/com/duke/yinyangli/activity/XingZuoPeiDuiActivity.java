@@ -89,6 +89,7 @@ public class XingZuoPeiDuiActivity extends BaseResultActivity {
         return getString(R.string.tip_xingzuopeidui);
     }
 
+    @Override
     public void onClick(View view) {
         if (view.getId() == R.id.submit) {
             mXingzuoNv = (String) mSpinner1.getSelectedItem();
@@ -122,7 +123,6 @@ public class XingZuoPeiDuiActivity extends BaseResultActivity {
                             ImageUtil.setXingZuoImage(mLeftImage, mXingzuoNv);
                             ImageUtil.setXingZuoImage(mRightImage, mXingzuoNan);
                             mCenterImage.setVisibility(View.VISIBLE);
-                            addTestCount(mArticle);
                             dismissProgressDialog();
                         }
                     });

@@ -87,6 +87,7 @@ public class ShengXiaoPeiDuiActivity extends BaseResultActivity {
         return getString(R.string.tip_shengxiaopeidui);
     }
 
+    @Override
     public void onClick(View view) {
         if (view.getId() == R.id.submit) {
             mShengxiaoNv = (String) mSpinner1.getSelectedItem();
@@ -123,7 +124,6 @@ public class ShengXiaoPeiDuiActivity extends BaseResultActivity {
                             ImageUtil.setShuXiangImage(mLeftImage, mShengxiaoNv);
                             ImageUtil.setShuXiangImage(mRightImage, mShengxiaoNan);
                             mCenterImage.setVisibility(View.VISIBLE);
-                            addTestCount(mArticle);
                             dismissProgressDialog();
                         }
                     });

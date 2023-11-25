@@ -86,6 +86,7 @@ public class ZhuGeShenSuanActivity extends BaseResultActivity {
         return getString(R.string.tips_zhugeshensuan);
     }
 
+    @Override
     public void onClick(View view) {
         if (view.getId() == R.id.submit) {
             if (TextUtils.isEmpty(mEditText.getText())
@@ -130,7 +131,6 @@ public class ZhuGeShenSuanActivity extends BaseResultActivity {
                         mEditText.setEnabled(false);
                         mSubmit.setVisibility(View.GONE);
                         mDivider.setBackgroundColor(mEditText.getCurrentTextColor());
-                        addTestCount(mArticle);
                         dismissProgressDialog();
                     }
                 });

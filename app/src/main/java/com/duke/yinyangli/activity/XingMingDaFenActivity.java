@@ -89,6 +89,7 @@ public class XingMingDaFenActivity extends BaseResultActivity {
         return getString(R.string.tip_xingmingpingfen);
     }
 
+    @Override
     public void onClick(View view) {
         if (view.getId() == R.id.submit) {
             if (!TextUtils.isEmpty(editName.getText())
@@ -148,7 +149,6 @@ public class XingMingDaFenActivity extends BaseResultActivity {
                                 editName.setEnabled(false);
                                 submit.setVisibility(View.GONE);
                                 divider.setBackgroundColor(editName.getCurrentTextColor());
-                                addTestCount(mArticle);
                                 dismissProgressDialog();
                             }
                         });
