@@ -85,11 +85,23 @@ public class ChooseAdapter extends RecyclerView.Adapter<ChooseAdapter.ViewHolder
         Article article = mData.get(position);
         holder.imageView.setImageResource(article.getLogoRes());
         holder.titleView.setText(article.getTitle());
+//        holder.descView.setText("（限时免费）");
+        if (ChooseCostUtils.getInstance().isVIP()) {
+            holder.descView.setText("免费");
+        } else {
+            int count = ChooseCostUtils.getInstance().getTodayCount(article);
+            if (count > 0) {
+                StringUtils.setTextTwoLast(mContext, holder.descView
+                        , "（今日剩余免费次数：", Integer.toString(count), "次）", R.color.red_D81B60);
+            } else {
+                holder.descView.setText("（今日免费次数已用光）");
+            }
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (ChooseCostUtils.getInstance().isVIP()
-                        || ChooseCostUtils.getInstance().getTodayCount() > 0) {
+                        || ChooseCostUtils.getInstance().getTodayCount(article) > 0) {
                     switch (article.getType()) {
                         case Constants.TYPE.TYPE_CAO:
                         case Constants.TYPE.TYPE_QIAN:
@@ -133,7 +145,9 @@ public class ChooseAdapter extends RecyclerView.Adapter<ChooseAdapter.ViewHolder
                             break;
                     }
                 } else {
-                    EventBus.getDefault().post(new BaseEvent(Event.CODE_PAY_OR_AD));
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(Constants.INTENT_KEY.KEY_MODEL, article);
+                    EventBus.getDefault().post(new BaseEvent(Event.CODE_PAY_OR_AD).setBundle(bundle));
                 }
 
             }

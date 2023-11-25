@@ -12,9 +12,9 @@ import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 
-import androidx.appcompat.widget.AppCompatImageView;
-
 import com.duke.yinyangli.R;
+
+import androidx.appcompat.widget.AppCompatImageView;
 
 public class MyProgressBar extends AppCompatImageView {
     private RotateAnimation mRotateAnimation;
