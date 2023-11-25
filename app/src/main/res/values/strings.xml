@@ -173,24 +173,5 @@
         \b诸葛神数与六十四卦384爻像对应，共有384签，我们生活中最常见的签辞是下文中的签解一，古诗签辞，句子长短不一，个中启示全靠自己理解。签辞解释与原文若即若离，有的甚至看似毫无关联，其实却暗藏玄机，机缘到时方领略其妙处。同时大家也应注意，世事无常，人行五行中难免遭遇困惑，签辞为我们提供了一种启示，是指路的方向，但大家不可以太过依赖/迷信，这样反而产生副作用。得到指点以后就应该穿过迷惘，昂首挺胸，大步向前，不要沉溺于此。
     </string>
     <string name="tip_zhougongjiemeng">周公，姬姓，名旦，周文王姬昌第四子，周武王姬发之弟，曾辅佐周武王伐纣，建立周朝，并制作礼乐，被儒家奉为先圣，尊称周公。 周公解梦的典故：孔子常言梦见周公，故做梦经常被称为“梦见周公”。孔子以“吾不复梦见周公矣“，表达对儒教礼乐难以兴盛的失落感。所以周公并不曾著述解梦之说，只是借以名之而已。 卜易居·周公解梦，包含原版周公解梦，梦兆吉凶解，此二章皆采自古代文献。现代周公解梦大全，则根据时人的研究，分类编著而成，供朋友们解梦时查询，解梦结果仅供参考。</string>
-    <string name="admob_banner_test_unit_id">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="admob_app_id">ca-app-pub-9923626397118153~8202845924</string>
-
-
-
-
-    <!--  =============================  debug  ==========================       -->
-    <string name="admob_reward_unit_id">ca-app-pub-3940256099942544/5224354917</string>
-    <string name="admob_interstitial_unit_id">ca-app-pub-3940256099942544/1033173712</string>
-    <string name="admob_banner_main_unit_id">@string/admob_banner_test_unit_id</string>
-    <string name="admob_banner_choose_unit_id">@string/admob_banner_test_unit_id</string>
-    <string name="admob_banner_result_unit_id">@string/admob_banner_test_unit_id</string>
-
-    <!--  =============================  release  ==========================       -->
-<!--    <string name="admob_reward_unit_id">ca-app-pub-9923626397118153/6215617469</string>-->
-<!--    <string name="admob_interstitial_unit_id">ca-app-pub-9923626397118153/4463552092</string>-->
-<!--    <string name="admob_banner_main_unit_id">ca-app-pub-9923626397118153/1777038370</string>-->
-<!--    <string name="admob_banner_choose_unit_id">ca-app-pub-9923626397118153/6379456347</string>-->
-<!--    <string name="admob_banner_result_unit_id">ca-app-pub-9923626397118153/8814047990</string>-->
 
 </resources>

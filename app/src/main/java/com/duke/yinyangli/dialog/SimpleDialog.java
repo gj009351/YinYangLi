@@ -8,12 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-
 import com.duke.yinyangli.R;
+import com.duke.yinyangli.utils.LogUtils;
+
+import androidx.annotation.NonNull;
 
 public class SimpleDialog extends Dialog {
 
@@ -118,7 +121,15 @@ public class SimpleDialog extends Dialog {
     }
 
     public static SimpleDialog init(Context context, String title, String content, OnClickListener listener) {
-        return new SimpleDialog(context, title, content, listener);
+        SimpleDialog dialog = new SimpleDialog(context, title, content, listener);
+        dialog.show();
+        return dialog;
+    }
+
+    public static SimpleDialog show(Context context, String title, String content, OnClickListener listener) {
+        SimpleDialog dialog = new SimpleDialog(context, title, content, listener);
+        dialog.show();
+        return dialog;
     }
 
     public interface OnClickListener{

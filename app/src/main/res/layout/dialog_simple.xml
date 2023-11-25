@@ -54,7 +54,7 @@
         android:textSize="16sp"
         android:textColor="@color/red_F83B80"
         android:layout_toStartOf="@+id/update"
-        android:layout_below="@+id/scrollView"
+        android:layout_below="@+id/content"
         android:padding="16dp"
         android:text="@string/cancel"/>
 

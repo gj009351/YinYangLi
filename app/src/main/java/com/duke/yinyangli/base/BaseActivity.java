@@ -28,7 +28,6 @@ import com.duke.yinyangli.dialog.DialogUtils;
 import com.duke.yinyangli.dialog.SimpleDialog;
 import com.duke.yinyangli.utils.AdmobUtils;
 import com.duke.yinyangli.utils.AppUtils;
-import com.duke.yinyangli.utils.ChooseCostUtils;
 import com.duke.yinyangli.utils.FileUtils;
 import com.duke.yinyangli.utils.LogUtils;
 import com.duke.yinyangli.utils.ToastUtil;
