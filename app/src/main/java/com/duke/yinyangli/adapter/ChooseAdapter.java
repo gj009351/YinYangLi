@@ -24,7 +24,6 @@ import com.duke.yinyangli.calendar.Solar;
 import com.duke.yinyangli.calendar.util.LunarUtil;
 import com.duke.yinyangli.constants.Constants;
 import com.duke.yinyangli.constants.Event;
-import com.duke.yinyangli.utils.ChooseCostUtils;
 import com.duke.yinyangli.utils.StringUtils;
 import com.duke.yinyangli.utils.ToastUtil;
 import com.haibin.calendarview.library.Article;
@@ -52,25 +51,25 @@ public class ChooseAdapter extends RecyclerView.Adapter<ChooseAdapter.ViewHolder
 
     private void loadRes() {
         mData.add(Article.create("蓍草占卜", "", R.mipmap.zhanbushicao, R.mipmap.cao_black)
-                .setType(Constants.TYPE.TYPE_CAO));
+                .setType(Constants.TYPE.TYPE_CAO).setCount(10).setPrice(1));
         mData.add(Article.create("掷钱占卜", "", R.mipmap.qian, R.mipmap.qian_black)
-                .setType(Constants.TYPE.TYPE_QIAN));
+                .setType(Constants.TYPE.TYPE_QIAN).setCount(10).setPrice(1));
         mData.add(Article.create("称骨算命", "", R.mipmap.chenggu, R.mipmap.chenggu_black)
-                .setType(Constants.TYPE.TYPE_CHENGGU));
+                .setType(Constants.TYPE.TYPE_CHENGGU).setCount(10).setPrice(1));
         mData.add(Article.create("生辰八字", "", R.mipmap.bazipan, R.mipmap.bazi)
-                .setType(Constants.TYPE.TYPE_BAZI));
+                .setType(Constants.TYPE.TYPE_BAZI).setCount(3).setPrice(1f));
         mData.add(Article.create("姓名打分", "", R.mipmap.dafen, R.mipmap.dafen)
-                .setType(Constants.TYPE.TYPE_XINGMING));
+                .setType(Constants.TYPE.TYPE_XINGMING).setCount(10).setPrice(1));
         mData.add(Article.create("星座命运", "", R.mipmap.xingzuoyunshi, R.mipmap.xingzuoyunshi)
-                .setType(Constants.TYPE.TYPE_XINGZUOMINGYUN));
+                .setType(Constants.TYPE.TYPE_XINGZUOMINGYUN).setCount(3).setPrice(1));
         mData.add(Article.create("星座配对", "", R.mipmap.xingzuopeidui, R.mipmap.xingzuopeidui)
-                .setType(Constants.TYPE.TYPE_XINGZUOPEIDUI));
+                .setType(Constants.TYPE.TYPE_XINGZUOPEIDUI).setCount(10).setPrice(1));
         mData.add(Article.create("生肖配对", "", R.mipmap.shengxiaopeidui, R.mipmap.shengxiaopeidui)
-                .setType(Constants.TYPE.TYPE_SHENGXIAOPEIDUI));
+                .setType(Constants.TYPE.TYPE_SHENGXIAOPEIDUI).setCount(10).setPrice(1));
         mData.add(Article.create("诸葛神算", "", R.mipmap.zhugeshensuan, R.mipmap.zhugeshensuan)
-                .setType(Constants.TYPE.TYPE_ZHUGESHENSUAN));
+                .setType(Constants.TYPE.TYPE_ZHUGESHENSUAN).setCount(10).setPrice(1));
         mData.add(Article.create("周公解梦", "", R.mipmap.zhougongjiemeng, R.mipmap.zhougongjiemeng)
-                .setType(Constants.TYPE.TYPE_ZHOUGONGJIEMENG));
+                .setType(Constants.TYPE.TYPE_ZHOUGONGJIEMENG).setCount(10).setPrice(1));
         notifyDataSetChanged();
     }
 
