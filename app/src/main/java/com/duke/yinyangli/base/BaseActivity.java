@@ -30,8 +30,10 @@ import com.duke.yinyangli.utils.AppUtils;
 import com.duke.yinyangli.utils.FileUtils;
 import com.duke.yinyangli.utils.LogUtils;
 import com.duke.yinyangli.utils.ToastUtil;
+import com.duke.yinyangli.utils.generateImage.GenerateModel;
 import com.duke.yinyangli.utils.generateImage.GeneratePictureManager;
 import com.duke.yinyangli.utils.generateImage.OnSharePicListener;
+import com.duke.yinyangli.utils.generateImage.ShareLunarModel;
 import com.duke.yinyangli.utils.generateImage.SharePicModel;
 import com.gyf.immersionbar.ImmersionBar;
 import com.haibin.calendarview.library.Article;
@@ -157,11 +159,7 @@ public abstract class BaseActivity extends AppCompatActivity implements OnShareP
 
     public void startShare() {
         showProgressDialog();
-        SharePicModel sharePicModel = new SharePicModel((ViewGroup) getWindow().getDecorView());
-        sharePicModel.setSharePicListener(this);
-        sharePicModel.setShareXingZuo(getShareXingZuo());
-        sharePicModel.setShareType(getShareType());
-        GeneratePictureManager.getInstance().generate(sharePicModel, this);
+        GeneratePictureManager.getInstance().generate(getShareLunarModel(), this);
     }
 
     @Override
@@ -203,7 +201,9 @@ public abstract class BaseActivity extends AppCompatActivity implements OnShareP
 
     public void share(String filePath) {
         File shareFile = new File(filePath);
-        if (!shareFile.exists()) return;
+        if (!shareFile.exists()) {
+            return;
+        }
         Intent intent = new Intent(Intent.ACTION_SEND);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Uri contentUri = FileProvider.getUriForFile(MyApplication.getInstance().getApplicationContext()
@@ -218,6 +218,14 @@ public abstract class BaseActivity extends AppCompatActivity implements OnShareP
         if(intent.resolveActivity(getPackageManager()) != null){
             startActivity(chooser);
         }
+    }
+
+    public GenerateModel getShareLunarModel() {
+        SharePicModel sharePicModel = new SharePicModel((ViewGroup) getWindow().getDecorView());
+        sharePicModel.setSharePicListener(this);
+        sharePicModel.setShareXingZuo(getShareXingZuo());
+        sharePicModel.setShareType(getShareType());
+        return sharePicModel;
     }
 
     @Override
