@@ -4,6 +4,9 @@
     <external-path
         name="files_root"
         path="Android/data/com.duke.yinyangli/" />
+    <external-path
+        name="files_root"
+        path="Android/data/com.duke.yinyangli.free/" />
 
     //代表的目录即为：Environment.getExternalStorageDirectory()
     <external-path

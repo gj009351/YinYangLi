@@ -210,7 +210,7 @@ public abstract class BaseActivity extends AppCompatActivity implements OnShareP
                     , getPackageName()+".fileprovider", shareFile);
             intent.putExtra(Intent.EXTRA_STREAM, contentUri);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        }else {
+        } else {
             intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(shareFile));
         }
         intent.setType("image/*");
