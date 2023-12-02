@@ -1,28 +1,30 @@
-package com.duke.yinyangli.bean;
+package com.duke.yinyangli.base;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.tencent.mmkv.MMKV;
 
-public class SettingItem implements MultiItemEntity{
+public abstract class BaseSettingItem<T> implements MultiItemEntity{
 
     private int type;
     private String id;
     private String text;
-    private String value;
+    private T value;
 
-    public SettingItem(int type, String id, String text, String value) {
+    public BaseSettingItem(int type, String id, String text, T value) {
         this.type = type;
         this.id = id;
         this.text = text;
-        this.value = MMKV.defaultMMKV().decodeString(id, value);
+        this.value = decode(id, value);
     }
 
-    public SettingItem(int type, String text) {
+    public abstract T decode(String id, T value);
+
+    public BaseSettingItem(int type, String text) {
         this.type = type;
         this.text = text;
     }
 
-    public SettingItem(int type) {
+    public BaseSettingItem(int type) {
         this.type = type;
     }
 
@@ -42,11 +44,11 @@ public class SettingItem implements MultiItemEntity{
         this.text = text;
     }
 
-    public String getValue() {
+    public T getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(T value) {
         this.value = value;
     }
 

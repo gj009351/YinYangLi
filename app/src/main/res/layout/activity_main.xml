@@ -11,8 +11,49 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="com.duke.yinyangli.fragment.CalendarFragment"/>
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:id="@+id/tab_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_view_height"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:layout_alignParentBottom="true">
+
+        <ImageView
+            android:id="@+id/tab_main"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@mipmap/tab_calendar"
+            android:scaleType="center"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:id="@+id/tab_choose"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@mipmap/tab_choose"
+            android:scaleType="center"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:id="@+id/tab_book"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@mipmap/tab_book"
+            android:scaleType="center"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:id="@+id/tab_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@mipmap/tab_setting"
+            android:scaleType="center"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
 
     <com.duke.yinyangli.view.FloatViewBall
         android:id="@+id/float_view"

@@ -29,7 +29,7 @@ public class ChooseActivity extends BaseActivity {
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_choose;
+        return R.layout.fragment_choose;
     }
 
     @Override

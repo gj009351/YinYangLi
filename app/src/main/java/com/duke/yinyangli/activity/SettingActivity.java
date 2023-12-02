@@ -14,7 +14,8 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.duke.yinyangli.R;
 import com.duke.yinyangli.adapter.SettingAdapter;
 import com.duke.yinyangli.base.BaseActivity;
-import com.duke.yinyangli.bean.SettingItem;
+import com.duke.yinyangli.base.BaseSettingItem;
+import com.duke.yinyangli.bean.StringSettingItem;
 import com.duke.yinyangli.constants.Constants;
 import com.duke.yinyangli.dialog.DialogUtils;
 import com.duke.yinyangli.dialog.EditNameDialog;
@@ -34,7 +35,6 @@ public class SettingActivity extends BaseActivity implements OnItemClickListener
     RecyclerView recyclerView;
 
     private SettingAdapter mAdapter;
-    private SettingItem mSelectItem;
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, SettingActivity.class));
@@ -57,14 +57,17 @@ public class SettingActivity extends BaseActivity implements OnItemClickListener
 
     @Override
     public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-        mSelectItem = mAdapter.getItem(position);
-        if (mSelectItem == null) {
+        BaseSettingItem selectItem = mAdapter.getItem(position);
+        if (selectItem == null) {
             return;
         }
-        if (Constants.SP_KEY.USER_INFO_AVATAR.equals(mSelectItem.getId())) {
-            showAvatarPicker();
-        } else {
-            showNameDialog(mSelectItem.getValue());
+        if (selectItem instanceof StringSettingItem) {
+            StringSettingItem item = (StringSettingItem) selectItem;
+            if (Constants.SP_KEY.USER_INFO_AVATAR.equals(item.getId())) {
+                showAvatarPicker();
+            } else if (Constants.SP_KEY.USER_INFO_NAME.equals(item.getId())) {
+                showNameDialog(item.getValue());
+            }
         }
     }
 
@@ -106,7 +109,7 @@ public class SettingActivity extends BaseActivity implements OnItemClickListener
         DialogUtils.showNameDialog(this, text, new EditNameDialog.OnClickListener() {
             @Override
             public void onConfirm(String name) {
-                mAdapter.loadSetting();
+                mAdapter.reloadName();
             }
         });
     }
@@ -119,7 +122,7 @@ public class SettingActivity extends BaseActivity implements OnItemClickListener
             List<String> pathList = data.getStringArrayListExtra("result");
             if (pathList != null && pathList.size() > 0) {
                 MMKV.defaultMMKV().encode(Constants.SP_KEY.USER_INFO_AVATAR, pathList.get(0));
-                mAdapter.loadSetting();
+                mAdapter.reloadAvatar();
             }
         }
     }

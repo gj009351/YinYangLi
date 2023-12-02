@@ -9,10 +9,14 @@ import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.duke.yinyangli.R;
 import com.duke.yinyangli.base.BaseEvent;
-import com.duke.yinyangli.bean.SettingItem;
+import com.duke.yinyangli.base.BaseSettingItem;
+import com.duke.yinyangli.bean.BooleanSettingItem;
+import com.duke.yinyangli.bean.DefaultSettingItem;
+import com.duke.yinyangli.bean.StringSettingItem;
 import com.duke.yinyangli.constants.Constants;
 import com.duke.yinyangli.constants.Event;
 import com.duke.yinyangli.utils.NameUtils;
+import com.duke.yinyangli.utils.SettingUtil;
 import com.suke.widget.SwitchButton;
 import com.tencent.mmkv.MMKV;
 
@@ -22,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SettingAdapter extends BaseMultiItemQuickAdapter<SettingItem, BaseViewHolder> {
+public class SettingAdapter extends BaseMultiItemQuickAdapter<BaseSettingItem, BaseViewHolder> {
 
     private static final int ITEM_TYPE_TITLE = 0;
     private static final int ITEM_TYPE_NORMAL = 1;
@@ -39,21 +43,27 @@ public class SettingAdapter extends BaseMultiItemQuickAdapter<SettingItem, BaseV
     }
 
     public void loadSetting() {
-        List<SettingItem> list = new ArrayList<>();
-        list.add(new SettingItem(ITEM_TYPE_TITLE, "个人信息（仅用于分享图片）"));
-        list.add(new SettingItem(ITEM_TYPE_PICTURE, Constants.SP_KEY.USER_INFO_AVATAR, "头像", ""));
-        list.add(new SettingItem(ITEM_TYPE_DIVIDER));
-        list.add(new SettingItem(ITEM_TYPE_NORMAL, Constants.SP_KEY.USER_INFO_NAME, "昵称", NameUtils.getRandomName()));
-        list.add(new SettingItem(ITEM_TYPE_TITLE, "首页显示开关"));
-        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_JRYJ, "今日宜忌", Constants.STATUS.NORMAL_SHOW));
-        list.add(new SettingItem(ITEM_TYPE_DIVIDER));
-        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_SCYJ, "时辰宜忌", Constants.STATUS.NORMAL_SHOW));
-        list.add(new SettingItem(ITEM_TYPE_DIVIDER));
-        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_JSXS, "吉神凶煞", Constants.STATUS.NORMAL_SHOW));
-        list.add(new SettingItem(ITEM_TYPE_DIVIDER));
-        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_XXJX, "星宿吉凶", Constants.STATUS.NORMAL_SHOW));
-        list.add(new SettingItem(ITEM_TYPE_DIVIDER));
-        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_PZBJ, "彭祖百忌", Constants.STATUS.NORMAL_SHOW));
+        List<BaseSettingItem> list = new ArrayList<>();
+        list.add(new StringSettingItem(ITEM_TYPE_TITLE, "个人信息（仅用于分享图片）"));
+        list.add(new StringSettingItem(ITEM_TYPE_PICTURE, Constants.SP_KEY.USER_INFO_AVATAR, "头像", ""));
+        list.add(new DefaultSettingItem(ITEM_TYPE_DIVIDER));
+        list.add(new StringSettingItem(ITEM_TYPE_NORMAL, Constants.SP_KEY.USER_INFO_NAME, "昵称", NameUtils.getRandomName()));
+        list.add(new StringSettingItem(ITEM_TYPE_TITLE, "底部TAB显示开关"));
+        list.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_TAB_CHOOSE, "显示选择", SettingUtil.getDefaultTabShow()));
+        list.add(new DefaultSettingItem(ITEM_TYPE_DIVIDER));
+        list.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_TAB_BOOK, "显示书籍", SettingUtil.getDefaultTabShow()));
+        list.add(new DefaultSettingItem(ITEM_TYPE_DIVIDER));
+        list.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_TAB_SETTING, "显示设置", SettingUtil.getDefaultTabShow()));
+        list.add(new StringSettingItem(ITEM_TYPE_TITLE, "首页显示开关"));
+        list.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_JRYJ, "今日宜忌", SettingUtil.getDefaultMainItemShow()));
+        list.add(new DefaultSettingItem(ITEM_TYPE_DIVIDER));
+        list.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_SCYJ, "时辰宜忌", SettingUtil.getDefaultMainItemShow()));
+        list.add(new DefaultSettingItem(ITEM_TYPE_DIVIDER));
+        list.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_JSXS, "吉神凶煞", SettingUtil.getDefaultMainItemShow()));
+        list.add(new DefaultSettingItem(ITEM_TYPE_DIVIDER));
+        list.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_XXJX, "星宿吉凶", SettingUtil.getDefaultMainItemShow()));
+        list.add(new DefaultSettingItem(ITEM_TYPE_DIVIDER));
+        list.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_PZBJ, "彭祖百忌", SettingUtil.getDefaultMainItemShow()));
 //        list.add(new SettingItem(ITEM_TYPE_TITLE, "桌面插件"));
 //        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_TIME, "当前时辰", true));
 //        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_JRYJ, "今日宜忌", true));
@@ -65,13 +75,21 @@ public class SettingAdapter extends BaseMultiItemQuickAdapter<SettingItem, BaseV
         setNewInstance(list);
     }
 
+    public void reloadAvatar() {
+        notifyItemChanged(1);
+    }
+
+    public void reloadName() {
+        notifyItemChanged(3);
+    }
+
     @Override
     public int getItemViewType(int position) {
         return getItem(position).getItemType();
     }
 
     @Override
-    protected void convert(@NotNull BaseViewHolder holder, SettingItem settingItem) {
+    protected void convert(@NotNull BaseViewHolder holder, BaseSettingItem settingItem) {
         switch (getItemViewType(holder.getAdapterPosition())) {
             case ITEM_TYPE_TITLE:
                 holder.setText(R.id.text, settingItem.getText());
@@ -79,12 +97,12 @@ public class SettingAdapter extends BaseMultiItemQuickAdapter<SettingItem, BaseV
             case ITEM_TYPE_PICTURE:
                 holder.setText(R.id.key, settingItem.getText());
                 ImageView imageView = holder.getView(R.id.icon);
-                Glide.with(imageView.getContext()).load(settingItem.getValue()).placeholder(R.mipmap.usericon).into(imageView);
+                Glide.with(imageView.getContext()).load(((StringSettingItem) settingItem).getValue()).placeholder(R.mipmap.usericon).into(imageView);
                 break;
             case ITEM_TYPE_NORMAL:
                 holder.setText(R.id.key, settingItem.getText());
                 if (Constants.SP_KEY.USER_INFO_NAME.equals(settingItem.getId())) {
-                    holder.setText(R.id.value, settingItem.getValue());
+                    holder.setText(R.id.value, ((StringSettingItem) settingItem).getValue());
                 }
                 break;
             case ITEM_TYPE_TOGGLE:
@@ -92,7 +110,8 @@ public class SettingAdapter extends BaseMultiItemQuickAdapter<SettingItem, BaseV
                 SwitchButton toggle = holder.getView(R.id.toggle);
                 if (!TextUtils.isEmpty(settingItem.getId())) {
                     toggle.setVisibility(View.VISIBLE);
-                    toggle.setChecked(Constants.STATUS.NORMAL_SHOW.equals(settingItem.getValue()));
+                    BooleanSettingItem item = (BooleanSettingItem) settingItem;
+                    toggle.setChecked(item.getValue());
                     toggle.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(SwitchButton view, boolean isChecked) {

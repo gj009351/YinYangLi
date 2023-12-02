@@ -6,6 +6,12 @@ public class Constants {
     public static final String PACKAGE_NAME = "com.duke.yinyangli";
     public static final String APP_NAME = "yinyangli";
 
+    public interface DEFAULTVALUE {
+        Boolean TAB_SHOW = false;
+        Boolean FAB_SHOW = true;
+        Boolean MAIN_ITEM_SHOW = true;
+    }
+
     public interface INTENT_KEY {
         String KEY_ID = "KEY_ID";
         String KEY_MODEL = "KEY_MODEL";
@@ -28,7 +34,12 @@ public class Constants {
         String MAIN_SHOW_XXJX = "MAIN_SHOW_XXJX";
         String MAIN_SHOW_PZBJ = "MAIN_SHOW_PZBJ";
 
+        String MAIN_SHOW_TAB_CHOOSE = "CHOOSE";
+        String MAIN_SHOW_TAB_BOOK = "BOOK";
+        String MAIN_SHOW_TAB_SETTING = "SETTING";
+
         String VIP = "VIP";
+        String FAB_CHOOSE_SHOW = "FAB_CHOOSE_SHOW";
 
         String WIDGET_SHOW_TIME = "WIDGET_SHOW_TIME";
         String WIDGET_SHOW_JRYJ = "WIDGET_SHOW_JRYJ";
@@ -55,5 +66,12 @@ public class Constants {
     public interface STATUS {
         String NORMAL_SHOW = "1";
         String DELETE_HIDE = "0";
+    }
+
+    public interface FRAGMENT {
+        String TAG_MAIN = "MAIN";
+        String TAG_CHOOSE = "CHOOSE";
+        String TAG_BOOK = "BOOK";
+        String TAG_SETTING = "SETTING";
     }
 }
