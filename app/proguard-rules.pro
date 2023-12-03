@@ -58,3 +58,5 @@ public static java.lang.String TABLENAME;
 -dontwarn rx.**
 -dontwarn com.lxj.xpopup.widget.**
 -keep class com.lxj.xpopup.widget.**{*;}
+
+-keep class com.luck.picture.lib.** { *; }

@@ -33,6 +33,7 @@ public class SettingAdapter extends BaseMultiItemQuickAdapter<BaseSettingItem, B
     private static final int ITEM_TYPE_TOGGLE = 2;
     private static final int ITEM_TYPE_PICTURE = 3;
     private static final int ITEM_TYPE_DIVIDER = 4;
+    private ArrayList<BaseSettingItem> mData = new ArrayList<>();
 
     public SettingAdapter() {
         addItemType(ITEM_TYPE_TITLE, R.layout.item_setting_list_title);
@@ -43,43 +44,49 @@ public class SettingAdapter extends BaseMultiItemQuickAdapter<BaseSettingItem, B
     }
 
     public void loadSetting() {
-        List<BaseSettingItem> list = new ArrayList<>();
-        list.add(new StringSettingItem(ITEM_TYPE_TITLE, "个人信息（仅用于分享图片）"));
-        list.add(new StringSettingItem(ITEM_TYPE_PICTURE, Constants.SP_KEY.USER_INFO_AVATAR, "头像", ""));
-        list.add(new DefaultSettingItem(ITEM_TYPE_DIVIDER));
-        list.add(new StringSettingItem(ITEM_TYPE_NORMAL, Constants.SP_KEY.USER_INFO_NAME, "昵称", NameUtils.getRandomName()));
-        list.add(new StringSettingItem(ITEM_TYPE_TITLE, "底部TAB显示开关"));
-        list.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_TAB_CHOOSE, "显示选择", SettingUtil.getDefaultTabShow()));
-        list.add(new DefaultSettingItem(ITEM_TYPE_DIVIDER));
-        list.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_TAB_BOOK, "显示书籍", SettingUtil.getDefaultTabShow()));
-        list.add(new DefaultSettingItem(ITEM_TYPE_DIVIDER));
-        list.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_TAB_SETTING, "显示设置", SettingUtil.getDefaultTabShow()));
-        list.add(new StringSettingItem(ITEM_TYPE_TITLE, "首页显示开关"));
-        list.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_JRYJ, "今日宜忌", SettingUtil.getDefaultMainItemShow()));
-        list.add(new DefaultSettingItem(ITEM_TYPE_DIVIDER));
-        list.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_SCYJ, "时辰宜忌", SettingUtil.getDefaultMainItemShow()));
-        list.add(new DefaultSettingItem(ITEM_TYPE_DIVIDER));
-        list.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_JSXS, "吉神凶煞", SettingUtil.getDefaultMainItemShow()));
-        list.add(new DefaultSettingItem(ITEM_TYPE_DIVIDER));
-        list.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_XXJX, "星宿吉凶", SettingUtil.getDefaultMainItemShow()));
-        list.add(new DefaultSettingItem(ITEM_TYPE_DIVIDER));
-        list.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_PZBJ, "彭祖百忌", SettingUtil.getDefaultMainItemShow()));
-//        list.add(new SettingItem(ITEM_TYPE_TITLE, "桌面插件"));
-//        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_TIME, "当前时辰", true));
-//        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_JRYJ, "今日宜忌", true));
-//        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_SCYJ, "时辰宜忌", true));
-//        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_JSXS, "吉神凶煞", true));
-//        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_XXJX, "星宿吉凶", true));
-//        list.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_PZBJ, "彭祖百忌", true));
-//        list.add(new SettingItem(ITEM_TYPE_TOGGLE, "", "   ", false));
-        setNewInstance(list);
+        if (mData == null) {
+            mData = new ArrayList<>();
+        } else {
+            mData.clear();
+        }
+        mData.add(new StringSettingItem(ITEM_TYPE_TITLE, "个人信息（仅用于分享图片）"));
+        mData.add(new StringSettingItem(ITEM_TYPE_PICTURE, Constants.SP_KEY.USER_INFO_AVATAR, "头像", ""));
+        mData.add(new DefaultSettingItem(ITEM_TYPE_DIVIDER));
+        mData.add(new StringSettingItem(ITEM_TYPE_NORMAL, Constants.SP_KEY.USER_INFO_NAME, "昵称", NameUtils.getRandomName()));
+        mData.add(new StringSettingItem(ITEM_TYPE_TITLE, "底部TAB显示开关"));
+        mData.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_TAB_CHOOSE, "显示选择", SettingUtil.getDefaultTabShow()));
+        mData.add(new DefaultSettingItem(ITEM_TYPE_DIVIDER));
+        mData.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_TAB_BOOK, "显示书籍", SettingUtil.getDefaultTabShow()));
+        mData.add(new DefaultSettingItem(ITEM_TYPE_DIVIDER));
+        mData.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_TAB_SETTING, "显示设置", SettingUtil.getDefaultTabShow()));
+        mData.add(new StringSettingItem(ITEM_TYPE_TITLE, "首页显示开关"));
+        mData.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_JRYJ, "今日宜忌", SettingUtil.getDefaultMainItemShow()));
+        mData.add(new DefaultSettingItem(ITEM_TYPE_DIVIDER));
+        mData.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_SCYJ, "时辰宜忌", SettingUtil.getDefaultMainItemShow()));
+        mData.add(new DefaultSettingItem(ITEM_TYPE_DIVIDER));
+        mData.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_JSXS, "吉神凶煞", SettingUtil.getDefaultMainItemShow()));
+        mData.add(new DefaultSettingItem(ITEM_TYPE_DIVIDER));
+        mData.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_XXJX, "星宿吉凶", SettingUtil.getDefaultMainItemShow()));
+        mData.add(new DefaultSettingItem(ITEM_TYPE_DIVIDER));
+        mData.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_PZBJ, "彭祖百忌", SettingUtil.getDefaultMainItemShow()));
+//        mData.add(new SettingItem(ITEM_TYPE_TITLE, "桌面插件"));
+//        mData.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_TIME, "当前时辰", true));
+//        mData.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_JRYJ, "今日宜忌", true));
+//        mData.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_SCYJ, "时辰宜忌", true));
+//        mData.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_JSXS, "吉神凶煞", true));
+//        mData.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_XXJX, "星宿吉凶", true));
+//        mData.add(new SettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.WIDGET_SHOW_PZBJ, "彭祖百忌", true));
+//        mData.add(new SettingItem(ITEM_TYPE_TOGGLE, "", "   ", false));
+        setNewInstance(mData);
     }
 
     public void reloadAvatar() {
+        mData.set(1, new StringSettingItem(ITEM_TYPE_PICTURE, Constants.SP_KEY.USER_INFO_AVATAR, "头像", ""));
         notifyItemChanged(1);
     }
 
     public void reloadName() {
+        mData.set(3, new StringSettingItem(ITEM_TYPE_NORMAL, Constants.SP_KEY.USER_INFO_NAME, "昵称", NameUtils.getRandomName()));
         notifyItemChanged(3);
     }
 

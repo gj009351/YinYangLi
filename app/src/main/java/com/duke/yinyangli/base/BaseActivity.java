@@ -185,13 +185,13 @@ public abstract class BaseActivity extends AppCompatActivity implements OnShareP
                         }
 
                         @Override
-                        public void onSuccess(File file) {
+                        public void onSuccess(int index, File compressFile) {
                             dismissProgressDialog();
-                            share(file.getAbsolutePath());
+                            share(compressFile.getAbsolutePath());
                         }
 
                         @Override
-                        public void onError(Throwable e) {
+                        public void onError(int index, Throwable e) {
                             dismissProgressDialog();
                             showToast("操作失败");
                         }
