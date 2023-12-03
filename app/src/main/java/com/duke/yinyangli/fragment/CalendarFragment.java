@@ -21,6 +21,7 @@ import com.duke.yinyangli.base.BaseActivity;
 import com.duke.yinyangli.base.BaseEvent;
 import com.duke.yinyangli.base.BaseFragment;
 import com.duke.yinyangli.calendar.Lunar;
+import com.duke.yinyangli.constants.Constants;
 import com.duke.yinyangli.constants.Event;
 import com.duke.yinyangli.dialog.DialogUtils;
 import com.duke.yinyangli.utils.generateImage.GeneratePictureManager;
@@ -278,6 +279,11 @@ public class CalendarFragment extends BaseFragment implements
             shareLunarModel.setLunar(mCurrentLunar);
             GeneratePictureManager.getInstance().generate(shareLunarModel, (BaseActivity)getActivity());
         }
+    }
+
+    @Override
+    public long getFragmentId() {
+        return Constants.FRAGMENT.ID_CALENDAR;
     }
 
 }

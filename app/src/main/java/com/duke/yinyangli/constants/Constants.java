@@ -73,5 +73,10 @@ public class Constants {
         String TAG_CHOOSE = "CHOOSE";
         String TAG_BOOK = "BOOK";
         String TAG_SETTING = "SETTING";
+        long ID_CALENDAR = 1001;
+        long ID_CHOOSE = 1002;
+        long ID_BOOK = 1003;
+        long ID_SETTING = 1004;
+
     }
 }

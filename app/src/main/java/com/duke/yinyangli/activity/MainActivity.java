@@ -12,14 +12,18 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.duke.yinyangli.R;
+import com.duke.yinyangli.adapter.MainPagerAdapter;
 import com.duke.yinyangli.base.BaseActivity;
 import com.duke.yinyangli.base.BaseEvent;
 import com.duke.yinyangli.constants.Constants;
 import com.duke.yinyangli.constants.Event;
 import com.duke.yinyangli.fragment.CalendarFragment;
 import com.duke.yinyangli.fragment.ChooseFragment;
+import com.duke.yinyangli.fragment.SettingFragment;
 import com.duke.yinyangli.utils.LogUtils;
 import com.duke.yinyangli.utils.SettingUtil;
 import com.duke.yinyangli.view.FloatViewBall;
@@ -45,6 +49,8 @@ public class MainActivity extends BaseActivity implements
     FloatViewBall floatViewBall;
     @BindView(R.id.fab)
     ImageView fab;
+    @BindView(R.id.fragment_pager)
+    ViewPager2 viewPager;
     @BindView(R.id.tab_container)
     View tabContainer;
     @BindView(R.id.tab_main)
@@ -56,10 +62,11 @@ public class MainActivity extends BaseActivity implements
     @BindView(R.id.tab_setting)
     View tabSetting;
 
-    private FragmentTransaction mTransaction;
     private String mCurrentTab;
     private CalendarFragment mCalendarFragment;
     private ChooseFragment mChooseFragment;
+    private SettingFragment mSettingFragment;
+    private MainPagerAdapter mPageAdapter;
 
     public static void show(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
@@ -81,8 +88,9 @@ public class MainActivity extends BaseActivity implements
 
         mCurrentTab = Constants.FRAGMENT.TAG_MAIN;
         initBall();
-        initFragment();
         initTab();
+        viewPager.setUserInputEnabled(false);
+        viewPager.setAdapter(mPageAdapter = new MainPagerAdapter(this));
     }
 
     @Override
@@ -154,16 +162,16 @@ public class MainActivity extends BaseActivity implements
                 ChooseActivity.start(this);
                 break;
             case R.id.tab_main:
-                showFragment(Constants.FRAGMENT.TAG_MAIN);
+                viewPager.setCurrentItem(mPageAdapter.getPositionByTag(Constants.FRAGMENT.TAG_MAIN));
                 break;
             case R.id.tab_choose:
-                showFragment(Constants.FRAGMENT.TAG_CHOOSE);
+                viewPager.setCurrentItem(mPageAdapter.getPositionByTag(Constants.FRAGMENT.TAG_CHOOSE));
                 break;
             case R.id.tab_book:
-                showFragment(Constants.FRAGMENT.TAG_BOOK);
+                viewPager.setCurrentItem(mPageAdapter.getPositionByTag(Constants.FRAGMENT.TAG_BOOK));
                 break;
             case R.id.tab_setting:
-                showFragment(Constants.FRAGMENT.TAG_SETTING);
+                viewPager.setCurrentItem(mPageAdapter.getPositionByTag(Constants.FRAGMENT.TAG_SETTING));
                 break;
             default:
                 break;
@@ -177,79 +185,28 @@ public class MainActivity extends BaseActivity implements
         ButterKnife.bind(this);
     }
 
-    private void initFragment() {
-        mTransaction = getSupportFragmentManager().beginTransaction();
-        if (mCalendarFragment == null) {
-            mCalendarFragment = new CalendarFragment();
-        }
-        mTransaction.add(R.id.fragment_container, mCalendarFragment);
-        if (SettingUtil.hasFabChoose()) {
-            if (mChooseFragment == null) {
-                mChooseFragment = new ChooseFragment();
-            }
-            mTransaction.add(R.id.fragment_container, mChooseFragment);
-        }
-        mTransaction.commit();
-        showFragment(mCurrentTab);
-    }
-
-    private void hideFragment(String tag) {
-        if (!TextUtils.isEmpty(tag)) {
-            if (!tag.equals(Constants.FRAGMENT.TAG_MAIN)) {
-                mTransaction.hide(mCalendarFragment);
-            }
-            if (!tag.equals(Constants.FRAGMENT.TAG_CHOOSE)) {
-                mTransaction.hide(mChooseFragment);
-            }
-        }
-    }
-
-    private void showFragment(String tag) {
-        if (!TextUtils.isEmpty(tag)) {
-            mTransaction = getSupportFragmentManager().beginTransaction();
-            hideFragment(tag);
-            Fragment fragment = null;
-            if (tag.equals(Constants.FRAGMENT.TAG_MAIN)) {
-                if (mCalendarFragment == null) {
-                    mCalendarFragment = new CalendarFragment();
-                }
-                fragment = mCalendarFragment;
-            }
-            if (tag.equals(Constants.FRAGMENT.TAG_CHOOSE)) {
-                if (mChooseFragment == null) {
-                    mChooseFragment = new ChooseFragment();
-                }
-                fragment = mChooseFragment;
-            }
-            if (fragment != null) {
-                mTransaction.show(fragment);
-            }
-            mTransaction.commit();
-        }
-    }
-
     @Subscribe(threadMode = ThreadMode.MAIN)
     @Override
     public void onReceiveEvent(BaseEvent event) {
         if (event.getCode() == Event.CODE_CHANGE_SETTING_MAIN) {
-            if (SettingUtil.hasTabChoose()) {
-                if (mChooseFragment == null) {
-                    mTransaction = getSupportFragmentManager().beginTransaction();
-                    mChooseFragment = new ChooseFragment();
-                    mTransaction.add(R.id.fragment_container, mChooseFragment);
-                    mTransaction.commit();
-                }
-                tabChoose.setVisibility(View.VISIBLE);
-            } else {
-                if (Constants.FRAGMENT.TAG_CHOOSE.equals(mCurrentTab)) {
-                    showFragment(Constants.FRAGMENT.TAG_MAIN);
-                }
-                tabChoose.setVisibility(View.GONE);
-            }
+            mPageAdapter.loadFragment();
+            checkTabFragment(SettingUtil.hasTabChoose(), Constants.FRAGMENT.TAG_CHOOSE, mChooseFragment, tabChoose);
+            checkTabFragment(SettingUtil.hasTabSetting(), Constants.FRAGMENT.TAG_SETTING, mSettingFragment, tabSetting);
             tabContainer.setVisibility(SettingUtil.hasTabChoose() || SettingUtil.hasTabBook()
                     || SettingUtil.hasTabSetting() ? View.VISIBLE : View.GONE);
         } else {
             super.onReceiveEvent(event);
+        }
+    }
+
+    private void checkTabFragment(boolean hasTab, String tag, Fragment fragment, View tab) {
+        if (hasTab) {
+            tab.setVisibility(View.VISIBLE);
+        } else {
+            tab.setVisibility(View.GONE);
+            if (tag.equals(mCurrentTab)) {
+                viewPager.setCurrentItem(0);
+            }
         }
     }
 

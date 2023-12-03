@@ -4,6 +4,7 @@ import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.duke.yinyangli.MyApplication;
 import com.duke.yinyangli.constants.Config;
 
 import org.json.JSONObject;
@@ -35,7 +36,8 @@ public class LogUtils {
 
 
     //SD卡中的根目录
-    public static final String ROOT = Environment.getExternalStorageDirectory().getPath() + "/com.duke.yinyangli/";
+    public static final String ROOT = Environment.getExternalStorageDirectory().getPath() + "/"
+            + MyApplication.getInstance().getPackageName() + "/";
     private static final String PATH_LOG_INFO = ROOT + "log/";
 
     private LogUtils() {

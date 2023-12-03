@@ -14,6 +14,7 @@ import com.duke.yinyangli.R;
 import com.duke.yinyangli.activity.ChooseActivity;
 import com.duke.yinyangli.adapter.ChooseAdapter;
 import com.duke.yinyangli.base.BaseFragment;
+import com.duke.yinyangli.constants.Constants;
 import com.duke.yinyangli.utils.LogUtils;
 
 import butterknife.BindView;
@@ -24,11 +25,7 @@ public class ChooseFragment extends BaseFragment {
 
     @Override
     public void initView(View view) {
-        TextView title = view.findViewById(R.id.title);
-        View left = view.findViewById(R.id.left);
-        if (left != null) {
-            left.setVisibility(GONE);
-        }
+        super.initView(view);
         title.setText(R.string.select);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(new ChooseAdapter(getActivity()));
@@ -50,6 +47,11 @@ public class ChooseFragment extends BaseFragment {
     @Override
     public int getLayoutId() {
         return R.layout.fragment_choose;
+    }
+
+    @Override
+    public long getFragmentId() {
+        return Constants.FRAGMENT.ID_CHOOSE;
     }
 
 }

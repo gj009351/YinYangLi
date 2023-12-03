@@ -1,9 +1,12 @@
 package com.duke.yinyangli.base;
 
+import static android.view.View.GONE;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +31,8 @@ import butterknife.Unbinder;
 public abstract class BaseFragment extends Fragment implements View.OnClickListener {
 
     private Unbinder unbinder;
+    public TextView title;
+    public View left;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,9 +78,16 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     }
 
     public abstract int getLayoutId();
-    public abstract void initView(View view);
+    public abstract long getFragmentId();
     public abstract void initData();
 
+    public void initView(View view) {
+        title = view.findViewById(R.id.title);
+        left = view.findViewById(R.id.left);
+        if (left != null) {
+            left.setVisibility(GONE);
+        }
+    }
     public boolean requestButterKnife() {
         return true;
     }
