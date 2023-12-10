@@ -45,6 +45,7 @@ public class ZhouGongJieMengResultActivity extends BaseResultActivity {
         title.setText("周公解梦");
         mTipsTitle.setText("梦的类型：" + mArticle.getTitle());
         mContent.setText("解梦：" + StringUtils.getString(mArticle.getContent()).replace("·", ""));
+        mOkToShare = true;
     }
 
     @Override

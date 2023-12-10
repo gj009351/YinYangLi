@@ -79,6 +79,7 @@ public class ChengGuActivity extends BaseResultActivity {
                                 , (json, chengGuItem) -> runOnUiThread(
                                         () -> {
                                             if (isSafe()) {
+                                                mOkToShare = true;
                                                 mAdapter.setResult(calendar, result, chengGuItem);
                                                 dismissProgressDialog();
                                             }

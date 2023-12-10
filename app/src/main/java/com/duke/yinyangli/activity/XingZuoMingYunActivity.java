@@ -136,6 +136,7 @@ public class XingZuoMingYunActivity extends BaseResultActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            mOkToShare = true;
                             mAdapter.setResult(articles);
                             mXingZuoSpinner.setEnabled(false);
                             mXueXingSpinner.setEnabled(false);

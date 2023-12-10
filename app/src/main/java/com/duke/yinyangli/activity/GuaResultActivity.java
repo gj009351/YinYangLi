@@ -218,6 +218,7 @@ public class GuaResultActivity extends BaseResultActivity {
                             @Override
                             public void onLoad(String json, JieGuaItem jieGuaItem) {
                                 if (isSafe() && jieGuaItem != null) {
+                                    mOkToShare = true;
                                     resultChanged.setText("变卦：" + jieGuaItem.getName());
                                 }
                             }

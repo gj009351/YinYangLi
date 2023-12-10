@@ -11,6 +11,7 @@ public abstract class BaseResultActivity extends BaseActivity {
     private View share;
 
     public Article mArticle;
+    public boolean mOkToShare;
 
     @Override
     public void initView() {
@@ -29,7 +30,9 @@ public abstract class BaseResultActivity extends BaseActivity {
         if (v.getId() == R.id.about) {
             DialogUtils.showAbountGuaDialog(this, getAboutDialogTitle(), getAboutDialogContent());
         } else if (v.getId() == R.id.share) {
-            startShare();
+            if (mOkToShare) {
+                startShare();
+            }
         } else {
             super.onClick(v);
         }
@@ -45,4 +48,5 @@ public abstract class BaseResultActivity extends BaseActivity {
     }
 
     public abstract String getAboutDialogContent();
+
 }

@@ -124,6 +124,7 @@ public class ZhuGeShenSuanActivity extends BaseResultActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        mOkToShare = true;
                         mAdapter.setResult(list);
                         mEditText.setEnabled(false);
                         mSubmit.setVisibility(View.GONE);

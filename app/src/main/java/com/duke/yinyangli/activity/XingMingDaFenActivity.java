@@ -145,6 +145,7 @@ public class XingMingDaFenActivity extends BaseResultActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                mOkToShare = true;
                                 mAdapter.setResult(list);
                                 editName.setEnabled(false);
                                 submit.setVisibility(View.GONE);

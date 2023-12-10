@@ -118,6 +118,7 @@ public class BaZiResultActivity extends BaseResultActivity {
                                     @Override
                                     public void run() {
                                         if (isSafe()) {
+                                            mOkToShare = true;
                                             mAdapter.setResult(mRgnm, mMonth, mDay, mTime, mShuXiang, mLunar, mSolar);
                                             dismissProgressDialog();
                                         }

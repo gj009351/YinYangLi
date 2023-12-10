@@ -44,6 +44,14 @@ public class SimpleDialog extends Dialog {
                 WindowManager.LayoutParams params = window.getAttributes();
                 if (params != null) {
                     params.gravity = Gravity.CENTER;
+                    if (contentText.length() <= 50) {
+                    } else if (contentText.length() < 100) {
+                        params.height = 300;
+                    } else if (contentText.length() < 300) {
+                        params.height = 600;
+                    } else {
+                        params.height = 1200;
+                    }
                     window.setAttributes(params);
                 }
             }
@@ -75,17 +83,6 @@ public class SimpleDialog extends Dialog {
         });
 
         scrollView = findViewById(R.id.scrollView);
-        scrollView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-            @Override
-            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop,
-                                       int oldRight, int oldBottom) {
-                ViewGroup.LayoutParams params = scrollView.getLayoutParams();
-                if (scrollView.getHeight() > 600) {
-                    params.height = 600;
-                    scrollView.setLayoutParams(params);
-                }
-            }
-        });
     }
 
     public SimpleDialog showCancel(boolean show) {

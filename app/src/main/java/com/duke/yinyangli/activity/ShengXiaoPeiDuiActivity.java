@@ -117,6 +117,7 @@ public class ShengXiaoPeiDuiActivity extends BaseResultActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            mOkToShare = true;
                             mAdapter.setResult(articles);
                             mSpinner1.setEnabled(false);
                             mSpinner2.setEnabled(false);
