@@ -165,7 +165,7 @@ public class FileUtils {
     }
 
     public static File getPhotoDirectory(Context context) {
-        return new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), PACKAGE_PHOTO);
+        return new File(context.getFilesDir(), PACKAGE_PHOTO);
     }
 
     public static String getPhotoDirectoryString(Context context) {

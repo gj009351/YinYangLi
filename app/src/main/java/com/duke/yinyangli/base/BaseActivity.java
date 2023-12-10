@@ -33,10 +33,8 @@ import com.duke.yinyangli.utils.ToastUtil;
 import com.duke.yinyangli.utils.generateImage.GenerateModel;
 import com.duke.yinyangli.utils.generateImage.GeneratePictureManager;
 import com.duke.yinyangli.utils.generateImage.OnSharePicListener;
-import com.duke.yinyangli.utils.generateImage.ShareLunarModel;
 import com.duke.yinyangli.utils.generateImage.SharePicModel;
 import com.gyf.immersionbar.ImmersionBar;
-import com.haibin.calendarview.library.Article;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -185,16 +183,17 @@ public abstract class BaseActivity extends AppCompatActivity implements OnShareP
                         }
 
                         @Override
-                        public void onSuccess(int index, File compressFile) {
+                        public void onSuccess(File file) {
                             dismissProgressDialog();
-                            share(compressFile.getAbsolutePath());
+                            share(file.getAbsolutePath());
                         }
 
                         @Override
-                        public void onError(int index, Throwable e) {
+                        public void onError(Throwable e) {
                             dismissProgressDialog();
                             showToast("操作失败");
                         }
+
                     }).launch();
         }
     }

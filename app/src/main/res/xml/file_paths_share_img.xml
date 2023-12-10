@@ -8,12 +8,18 @@
         name="files_root"
         path="Android/data/com.duke.yinyangli.free/" />
 
-    //代表的目录即为：Environment.getExternalStorageDirectory()
+    <root-path
+        name="root_path"
+        path="." />
+
+    <data-path
+        name="data_path"
+        path="data/data/com.duke.yinyangli.free/" />
+
     <external-path
         name="external_storage_root"
         path="." />
 
-    //代表的目录即为：Environment.getExternalStorageDirectory()/pics
     <external-path
         name="external"
         path="pics" />

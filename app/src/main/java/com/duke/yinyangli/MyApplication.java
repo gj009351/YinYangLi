@@ -60,9 +60,6 @@ public class MyApplication extends Application {
         String rootDir = MMKV.initialize(this);
         System.out.println("mmkv root: " + rootDir);
 
-        // 自定义图片加载器
-//        ISNav.getInstance().init((ImageLoader) (context, path, imageView) -> Glide.with(context).load(path).into(imageView));
-
         XPopup.setPrimaryColor(getResources().getColor(R.color.colorPrimary));
         XPopup.setAnimationDuration(200);
 

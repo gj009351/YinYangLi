@@ -52,7 +52,6 @@ public class DrawLongPictureUtil extends LinearLayout {
     private LinearLayout llContent;
     private LinearLayout llBottomView;
 
-    private ImageView imgUserIcon;
     private TextView tvUserName;
     private TextView tvUserDes;
     private TextView tvContent;
@@ -114,7 +113,6 @@ public class DrawLongPictureUtil extends LinearLayout {
         llContent = rootView.findViewById(R.id.llContent);
         llBottomView = rootView.findViewById(R.id.llBottomView);
 
-        imgUserIcon = rootView.findViewById(R.id.imgUserIcon);
         tvUserName = rootView.findViewById(R.id.tvUserName);
         tvUserDes = rootView.findViewById(R.id.tvUserDes);
         tvContent = rootView.findViewById(R.id.tvUserDes);

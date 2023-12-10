@@ -72,9 +72,6 @@ public class SharePicModel extends GenerateModel {
             mSharePicView.setBackgroundColor(getColor(R.color.white));
         }
 
-        ImageView userIcon = mSharePicView.findViewById(R.id.imgUserIcon);
-        Glide.with(MyApplication.getInstance().getApplicationContext()).load(UserInfo.getUserIcon()).placeholder(R.mipmap.usericon).into(userIcon);
-
         TextView name = mSharePicView.findViewById(R.id.tvUserName);
         name.setText(UserInfo.getUserName());
 

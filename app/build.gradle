@@ -8,7 +8,7 @@ android {
         applicationId "com.duke.yinyangli"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 9
+        versionCode 10
         versionName "1.0.0"
 //        1d116b92c3f969af8a5e60da344755d6
 
@@ -113,16 +113,9 @@ dependencies {
     implementation 'pub.devrel:easypermissions:3.0.0'
     implementation 'com.daimajia.easing:library:2.0@aar'
     implementation 'com.daimajia.androidanimations:library:2.3@aar'
-    //圆形头像
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
     implementation 'com.github.arcadefire:nice-spinner:1.4.4'
     implementation 'com.github.li-xiaojun:XPopup:2.7.6'
+    implementation 'top.zibin:Luban:1.1.8'
 
-    // PictureSelector 基础 (必须)
-    implementation 'io.github.lucksiege:pictureselector:v3.11.1'
-    // image compress library (Not necessary)
-    implementation 'io.github.lucksiege:compress:v3.11.1'
-    // 图片裁剪 (按需引入)
-    implementation 'io.github.lucksiege:ucrop:v3.11.1'
 }

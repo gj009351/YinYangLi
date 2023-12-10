@@ -32,7 +32,7 @@ public class LogUtils {
     //是否允许打印日志，默认是true，设置为false则不打印
     public static boolean ALLOW_LOG = Config.SHOW_LOG;
     // 是否把保存日志到SD卡中
-    private static final boolean IS_SAVE_LOG = true;
+    private static final boolean IS_SAVE_LOG = false;
 
 
     //SD卡中的根目录
@@ -337,9 +337,9 @@ public class LogUtils {
     }
 
     public static boolean isSDAva() {
-        if (Environment.getExternalStorageState().equals(
+        if (Environment.getDataDirectory().equals(
                 Environment.MEDIA_MOUNTED)
-                || Environment.getExternalStorageDirectory().exists()) {
+                || Environment.getDataDirectory().exists()) {
             return true;
         } else {
             return false;

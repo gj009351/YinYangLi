@@ -31,15 +31,13 @@ public class SettingAdapter extends BaseMultiItemQuickAdapter<BaseSettingItem, B
     private static final int ITEM_TYPE_TITLE = 0;
     private static final int ITEM_TYPE_NORMAL = 1;
     private static final int ITEM_TYPE_TOGGLE = 2;
-    private static final int ITEM_TYPE_PICTURE = 3;
-    private static final int ITEM_TYPE_DIVIDER = 4;
+    private static final int ITEM_TYPE_DIVIDER = 3;
     private ArrayList<BaseSettingItem> mData = new ArrayList<>();
 
     public SettingAdapter() {
         addItemType(ITEM_TYPE_TITLE, R.layout.item_setting_list_title);
         addItemType(ITEM_TYPE_NORMAL, R.layout.item_setting_list_normal);
         addItemType(ITEM_TYPE_TOGGLE, R.layout.item_setting_list_toggle);
-        addItemType(ITEM_TYPE_PICTURE, R.layout.item_setting_list_picture);
         addItemType(ITEM_TYPE_DIVIDER, R.layout.item_setting_list_divider);
     }
 
@@ -49,8 +47,7 @@ public class SettingAdapter extends BaseMultiItemQuickAdapter<BaseSettingItem, B
         } else {
             mData.clear();
         }
-        mData.add(new StringSettingItem(ITEM_TYPE_TITLE, "个人信息（仅用于分享图片）"));
-        mData.add(new StringSettingItem(ITEM_TYPE_PICTURE, Constants.SP_KEY.USER_INFO_AVATAR, "头像", ""));
+        mData.add(new StringSettingItem(ITEM_TYPE_TITLE, "个人信息（仅用于分享占卜结果时生成图片）"));
         mData.add(new DefaultSettingItem(ITEM_TYPE_DIVIDER));
         mData.add(new StringSettingItem(ITEM_TYPE_NORMAL, Constants.SP_KEY.USER_INFO_NAME, "昵称", NameUtils.getRandomName()));
         mData.add(new StringSettingItem(ITEM_TYPE_TITLE, "底部TAB显示开关"));
@@ -80,14 +77,9 @@ public class SettingAdapter extends BaseMultiItemQuickAdapter<BaseSettingItem, B
         setNewInstance(mData);
     }
 
-    public void reloadAvatar() {
-        mData.set(1, new StringSettingItem(ITEM_TYPE_PICTURE, Constants.SP_KEY.USER_INFO_AVATAR, "头像", ""));
-        notifyItemChanged(1);
-    }
-
     public void reloadName() {
         mData.set(3, new StringSettingItem(ITEM_TYPE_NORMAL, Constants.SP_KEY.USER_INFO_NAME, "昵称", NameUtils.getRandomName()));
-        notifyItemChanged(3);
+        notifyItemChanged(2);
     }
 
     @Override
@@ -100,11 +92,6 @@ public class SettingAdapter extends BaseMultiItemQuickAdapter<BaseSettingItem, B
         switch (getItemViewType(holder.getAdapterPosition())) {
             case ITEM_TYPE_TITLE:
                 holder.setText(R.id.text, settingItem.getText());
-                break;
-            case ITEM_TYPE_PICTURE:
-                holder.setText(R.id.key, settingItem.getText());
-                ImageView imageView = holder.getView(R.id.icon);
-                Glide.with(imageView.getContext()).load(((StringSettingItem) settingItem).getValue()).placeholder(R.mipmap.usericon).into(imageView);
                 break;
             case ITEM_TYPE_NORMAL:
                 holder.setText(R.id.key, settingItem.getText());

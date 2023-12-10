@@ -15,6 +15,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.duke.yinyangli.MyApplication;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -207,7 +209,7 @@ public class ImageUtils {
     }
 
     public static String saveBitmapBackPath(Bitmap bm) throws IOException {
-        String path = Environment.getExternalStorageDirectory() + "/ShareLongPicture/.temp/";
+        String path = MyApplication.getInstance().getFilesDir() + "/ShareLongPicture/.temp/";
         File targetDir = new File(path);
         if (!targetDir.exists()) {
             try {
