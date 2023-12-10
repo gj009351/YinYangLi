@@ -141,17 +141,21 @@ public class MainActivity extends BaseActivity implements
     }
 
     private void initBall() {
-        floatViewBall.setVisibility(View.VISIBLE);
-        int left = MMKV.defaultMMKV().decodeInt(Constants.SP_KEY.MAIN_LEFT, 0);
-        int top = MMKV.defaultMMKV().decodeInt(Constants.SP_KEY.MAIN_TOP, 0);
-        int right = MMKV.defaultMMKV().decodeInt(Constants.SP_KEY.MAIN_RIGHT, 0);
-        int bottom = MMKV.defaultMMKV().decodeInt(Constants.SP_KEY.MAIN_BOTTOM, 0);
-        LogUtils.e("ball margin:" + left + ", " + top + ", " + right + ", " + bottom);
-        fab.setLeft(left);
-        fab.setTop(top);
-        fab.setRight(right);
-        fab.setBottom(bottom);
-        floatViewBall.bringToFront();
+        if (!SettingUtil.hasTabChoose()) {
+            floatViewBall.setVisibility(View.VISIBLE);
+            int left = MMKV.defaultMMKV().decodeInt(Constants.SP_KEY.MAIN_LEFT, 0);
+            int top = MMKV.defaultMMKV().decodeInt(Constants.SP_KEY.MAIN_TOP, 0);
+            int right = MMKV.defaultMMKV().decodeInt(Constants.SP_KEY.MAIN_RIGHT, 0);
+            int bottom = MMKV.defaultMMKV().decodeInt(Constants.SP_KEY.MAIN_BOTTOM, 0);
+            LogUtils.e("ball margin:" + left + ", " + top + ", " + right + ", " + bottom);
+            fab.setLeft(left);
+            fab.setTop(top);
+            fab.setRight(right);
+            fab.setBottom(bottom);
+            floatViewBall.bringToFront();
+        } else {
+            floatViewBall.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -190,6 +194,7 @@ public class MainActivity extends BaseActivity implements
     public void onReceiveEvent(BaseEvent event) {
         if (event.getCode() == Event.CODE_CHANGE_SETTING_MAIN) {
             mPageAdapter.loadFragment();
+            initBall();
             checkTabFragment(SettingUtil.hasTabChoose(), Constants.FRAGMENT.TAG_CHOOSE, mChooseFragment, tabChoose);
             checkTabFragment(SettingUtil.hasTabSetting(), Constants.FRAGMENT.TAG_SETTING, mSettingFragment, tabSetting);
             tabContainer.setVisibility(SettingUtil.hasTabChoose() || SettingUtil.hasTabBook()

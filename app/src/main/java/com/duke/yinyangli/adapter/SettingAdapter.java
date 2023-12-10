@@ -53,8 +53,8 @@ public class SettingAdapter extends BaseMultiItemQuickAdapter<BaseSettingItem, B
         mData.add(new StringSettingItem(ITEM_TYPE_TITLE, "底部TAB显示开关"));
         mData.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_TAB_CHOOSE, "显示选择", SettingUtil.getDefaultTabShow()));
         mData.add(new DefaultSettingItem(ITEM_TYPE_DIVIDER));
-        mData.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_TAB_BOOK, "显示书籍", SettingUtil.getDefaultTabShow()));
-        mData.add(new DefaultSettingItem(ITEM_TYPE_DIVIDER));
+//        mData.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_TAB_BOOK, "显示书籍", SettingUtil.getDefaultTabShow()));
+//        mData.add(new DefaultSettingItem(ITEM_TYPE_DIVIDER));
         mData.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_TAB_SETTING, "显示设置", SettingUtil.getDefaultTabShow()));
         mData.add(new StringSettingItem(ITEM_TYPE_TITLE, "首页显示开关"));
         mData.add(new BooleanSettingItem(ITEM_TYPE_TOGGLE, Constants.SP_KEY.MAIN_SHOW_JRYJ, "今日宜忌", SettingUtil.getDefaultMainItemShow()));
