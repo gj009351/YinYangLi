@@ -76,3 +76,27 @@ public static java.lang.String TABLENAME;
 -keep class com.lxj.xpopup.widget.**{*;}
 
 -keep class com.luck.picture.lib.** { *; }
+
+-keep class com.daimajia.easing.** { *; }
+-keep interface com.daimajia.easing.** { *; }
+
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context);
+}
+-keep class com.haibin.calendarview.library.MonthView {
+    public <init>(android.content.Context);
+}
+-keep class com.haibin.calendarview.library.WeekBar {
+    public <init>(android.content.Context);
+}
+-keep class com.haibin.calendarview.library.WeekView {
+    public <init>(android.content.Context);
+}
+-keep class com.haibin.calendarview.library.YearView {
+    public <init>(android.content.Context);
+}
+
+-keep class com.duke.yinyangli.adapter.** { *; }
+-keep class com.duke.yinyangli.utils.** { *; }
+-keep class com.duke.yinyangli.bean.** { *; }
+-keep class com.duke.yinyangli.** { *; }

@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.duke.yinyangli.MyApplication;
-import com.duke.yinyangli.constants.Config;
 
 import org.json.JSONObject;
 
@@ -30,7 +29,7 @@ public class LogUtils {
     // 自定义Tag的前缀
     public static String TAG_PREFIX = "yinyangli";
     //是否允许打印日志，默认是true，设置为false则不打印
-    public static boolean ALLOW_LOG = Config.SHOW_LOG;
+    public static boolean ALLOW_LOG = true;
     // 是否把保存日志到SD卡中
     private static final boolean IS_SAVE_LOG = false;
 

@@ -199,17 +199,26 @@ public class GuaResultActivity extends BaseResultActivity {
                 mHandler.removeMessages(0);
                 Collections.reverse(list);
 //                testNewGua();
-
-                mOriginAdapter.refreshData(ZhanBuUtils.getGua(list, 1));
-                mMasterAdapter.refreshData(ZhanBuUtils.getGua(list, 2));
-                mChangedAdapter.refreshData(ZhanBuUtils.getGua(list, 3));
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mOriginAdapter.refreshData(ZhanBuUtils.getGua(list, 1));
+                        mMasterAdapter.refreshData(ZhanBuUtils.getGua(list, 2));
+                        mChangedAdapter.refreshData(ZhanBuUtils.getGua(list, 3));
+                    }
+                });
                 JieGuaUtils.getInstance().getGuaJson(this, ZhanBuUtils.getCode(list, false)
                         , new OnLoadListener<JieGuaItem>() {
                             @Override
                             public void onLoad(String json, JieGuaItem jieGuaItem) {
                                 if (isSafe() && jieGuaItem != null) {
-                                    resultMaster.setText("主卦：" + jieGuaItem.getName());
-                                    mAllAdapter.setResult(jieGuaItem);
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            resultMaster.setText("主卦：" + jieGuaItem.getName());
+                                            mAllAdapter.setResult(jieGuaItem);
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -218,8 +227,13 @@ public class GuaResultActivity extends BaseResultActivity {
                             @Override
                             public void onLoad(String json, JieGuaItem jieGuaItem) {
                                 if (isSafe() && jieGuaItem != null) {
-                                    mOkToShare = true;
-                                    resultChanged.setText("变卦：" + jieGuaItem.getName());
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            mOkToShare = true;
+                                            resultChanged.setText("变卦：" + jieGuaItem.getName());
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -227,7 +241,14 @@ public class GuaResultActivity extends BaseResultActivity {
                 int result = mArticle.getType() == Constants.TYPE.TYPE_CAO ? ZhanBuUtils.getResultCao()
                         : ZhanBuUtils.getResultQian();
                 list.add(result);
-                mOriginAdapter.refreshData(ZhanBuUtils.getGua(list, 0));
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mOriginAdapter.refreshData(ZhanBuUtils.getGua(list, 0));
+                    }
+                });
+
                 mHandler.sendEmptyMessageDelayed(0, DURATION_DALEY_NRXT);
             }
         }
