@@ -34,6 +34,11 @@ public class MainPagerAdapter extends FragmentStateAdapter {
         return fragment.getFragmentId();
     }
 
+    @Override
+    public boolean containsItem(long itemId) {
+        return itemId > -1 && itemId < mFragments.size();
+    }
+
     @NonNull
     @Override
     public BaseFragment createFragment(int position) {

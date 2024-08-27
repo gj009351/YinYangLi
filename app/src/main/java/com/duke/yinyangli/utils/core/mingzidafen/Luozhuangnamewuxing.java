@@ -68,14 +68,16 @@ public class Luozhuangnamewuxing {
      * @return
      */
     public int getnameWX(int name) {
-        ArrayList<MetaLibItem> libs = myBhWxLib.getLibs();
- 
         int returnorder = -1;
- 
-        returnorder = libs.get(name).getWx_indx();
- 
+        try {
+            ArrayList<MetaLibItem> libs = myBhWxLib.getLibs();
+            if (libs != null && name > -1 && name < libs.size()) {
+                returnorder = libs.get(name).getWx_indx();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return returnorder;
- 
     }
  
     /**
@@ -103,7 +105,6 @@ public class Luozhuangnamewuxing {
         int[] returnarray = new int[name.length];
         for (int i = 0; i < name.length; i++) {
             returnarray[i] = getnameWX(name[i]);
- 
         }
         return returnarray;
  
